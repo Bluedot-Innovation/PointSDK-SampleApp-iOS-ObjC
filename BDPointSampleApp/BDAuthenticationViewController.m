@@ -159,8 +159,8 @@ BDAuthenticationViewControllerAltAction;
         default:
         case BDAuthenticationViewControllerAltActionRegister:
             title              = @"See Bluedot Point in action",
-            message            = @"Register for a free account, and you can start triggering your own location-based "
-                                 "actions within minutes, using this example Application.";
+            message            = @"Register for a free account and you can start triggering your own location-based "
+                                 "actions within minutes using this example Application.";
             cancelButtonTitle  = @"No thanks";
             acceptButtonTitles = @[@"Register now"];
             break;
