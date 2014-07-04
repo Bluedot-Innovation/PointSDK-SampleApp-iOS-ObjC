@@ -12,7 +12,7 @@
 
 #define BDActionURLRegister          @"http://www.bluedot.com.au"
 #define BDActionURLIntegrateMoreInfo @"http://www.bluedot.com.au"
-#define BDActionURLIntegrateCode     @"https://github.com/Bluedot-Innovation"
+#define BDActionURLIntegrateCode     @"https://github.com/Bluedot-Innovation/PointSDK-SampleApp-iOS"
 
 typedef enum _BDAuthenticationViewControllerAltAction
 {
