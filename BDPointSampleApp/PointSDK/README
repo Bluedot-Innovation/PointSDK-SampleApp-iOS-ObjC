@@ -1,0 +1,5 @@
+To use this Bluedot Point SDK Sample project, you need to place the
+PointSDK binary library .a file and /include/*.h header files in this folder.
+
+You can obtain these files by signing-up for a free account at
+www.bluedot.com and downloading the iOS SDK ZIP file.
