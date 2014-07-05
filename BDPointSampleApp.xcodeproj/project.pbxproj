@@ -24,6 +24,7 @@
 		838DD2F5194BF316003B5942 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F4194BF316003B5942 /* main.m */; };
 		838DD2F9194BF316003B5942 /* BDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F8194BF316003B5942 /* BDAppDelegate.m */; };
 		838DD2FB194BF316003B5942 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838DD2FA194BF316003B5942 /* Images.xcassets */; };
+		83C959151967895600EA5BE4 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 83C959141967895600EA5BE4 /* README */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		838DD37E194C152A003B5942 /* BDZoneInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDZoneInfo.h; sourceTree = "<group>"; };
 		838DD389194C1D67003B5942 /* BDPNamedDescribed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPNamedDescribed.h; sourceTree = "<group>"; };
 		838DD38A194C1D75003B5942 /* BDPDeepCopy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPDeepCopy.h; sourceTree = "<group>"; };
+		83C959141967895600EA5BE4 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 		838DD318194BF339003B5942 /* PointSDK */ = {
 			isa = PBXGroup;
 			children = (
+				83C959141967895600EA5BE4 /* README */,
 				838DD35D194C0FA8003B5942 /* include */,
 				3E126F091C63AB2681C3CC10 /* libBDPointSDK.a */,
 			);
@@ -301,6 +304,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83C959151967895600EA5BE4 /* README in Resources */,
 				838DD2F3194BF316003B5942 /* InfoPlist.strings in Resources */,
 				838DD2FB194BF316003B5942 /* Images.xcassets in Resources */,
 				3E12658AB765C20C4A630F8E /* BDAuthenticationView.xib in Resources */,
