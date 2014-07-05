@@ -160,7 +160,7 @@
     fenceRenderer.fillColor   = fenceColor;
     fenceRenderer.strokeColor = fenceColor;
     
-    [self.mapView setNeedsDisplay];
+    //[self.mapView setNeedsDisplay];
 }
 
 @end
