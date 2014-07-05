@@ -1,11 +1,10 @@
 
-To use this sample project, you need to obtain the PointSDK
-binary library and header files, and place them in this folder.
+To use this sample project, you need the PointSDK binary library and header files.
 
-You can obtain these files by registering for a free account at:
+You can obtain these by registering for a free account at:
 
 https://www.pointaccess.bluedot.com.au
 
-Download the iOS SDK ZIP file, either when prompted or from 'Downloads' area of your
-account dashboard.  Then unzip the contents into this folder - you will then be
+Download the iOS SDK zip file, either when prompted or from 'Downloads' area of your
+account dashboard.  After unzipping the contents into this folder you will be
 able to build the project.
