@@ -26,6 +26,8 @@
     *viewControllersNotRequiringZoneInfo,
     *viewControllersRequiringZoneInfo;
 
+@property (nonatomic) UIAlertView* locationDeniedDialog;
+
 @end
 
 
@@ -189,8 +191,26 @@
 {
     NSLog(@"Authentication with Point service failed, with reason: %@", error.localizedDescription);
 
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Authentication Failed"
-                                                        message:error.localizedDescription
+    NSString
+        *title,
+        *message;
+
+    // BDResponseError will be more conveniently exposed in the next version
+    BOOL isConnectionError = error.userInfo[@"BDResponseErrorInfoKeyName"]==NSURLErrorDomain;
+    
+    if(isConnectionError)
+    {
+        title   = @"No data connection?";
+        message = @"Sorry, but there was a problem connecting to Bluedot servers.\nPlease check you have a data connection, and that flight mode is disabled, and try again.";
+    }
+    else
+    {
+        title   = @"Authentication Failed";
+        message = error.localizedDescription;
+    }
+    
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
                                                        delegate:NULL
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:NULL];
@@ -237,6 +257,25 @@
 
     [_zoneChecklistViewController didCheckIntoFence:fence
                                              inZone:zone];
+}
+
+- (void)userDeniedLocationServices
+{
+    if(!_locationDeniedDialog)
+    {
+        NSString
+            *appName = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"],
+            *title   = @"Location Services Required",
+            *message = [NSString stringWithFormat:@"You have disabled Location Services for this App.  For full functionality, enable this in:\nSettings → Privacy →\nLocation Settings →\n%@ ✓",appName];
+
+        _locationDeniedDialog = [[UIAlertView alloc] initWithTitle:title
+                                                           message:message
+                                                          delegate:nil
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+
+        [_locationDeniedDialog show];
+    }
 }
 
 #pragma mark BDPointDelegate implementation end
