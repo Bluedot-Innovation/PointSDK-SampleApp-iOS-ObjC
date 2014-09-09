@@ -10,29 +10,29 @@
 	<string>BDPointSampleApp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>07BF670F-D604-4C0F-BF82-782F98B92123</key>
+		<key>FF64E07F64036214F52F29FF49DC84E56EAE3E1E</key>
 		<string>ssh://github.com/Bluedot-Innovation/PointSDK-SampleApp-iOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>BDPointSampleApp.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>07BF670F-D604-4C0F-BF82-782F98B92123</key>
+		<key>FF64E07F64036214F52F29FF49DC84E56EAE3E1E</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/Bluedot-Innovation/PointSDK-SampleApp-iOS.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>07BF670F-D604-4C0F-BF82-782F98B92123</string>
+	<string>FF64E07F64036214F52F29FF49DC84E56EAE3E1E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>07BF670F-D604-4C0F-BF82-782F98B92123</string>
+			<string>FF64E07F64036214F52F29FF49DC84E56EAE3E1E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>BDPointSampleApp</string>
 		</dict>

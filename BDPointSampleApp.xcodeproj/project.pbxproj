@@ -14,7 +14,6 @@
 		3E12636A113A6BBA9D18480A /* BDZoneChecklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E126073531824567865A6E4 /* BDZoneChecklistViewController.m */; };
 		3E12658AB765C20C4A630F8E /* BDAuthenticationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E126FEC48B4BE801C9F6541 /* BDAuthenticationView.xib */; };
 		3E1265D3221F4C717DCD6165 /* BDStyles.h in Resources */ = {isa = PBXBuildFile; fileRef = 3E126130CA255C267FD74252 /* BDStyles.h */; };
-		3E126683EE1D9BC76D35A316 /* libBDPointSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E126F091C63AB2681C3CC10 /* libBDPointSDK.a */; };
 		3E12698A1CD986562C3CE339 /* BDZoneMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1266BE722C20AA53C1F641 /* BDZoneMapViewController.m */; };
 		3E126DF1390BAA3EB0BB7249 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E12632BFE3EC769CE0D1D43 /* CoreMotion.framework */; };
 		832D483B19515A6C00DC29A9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832D483A19515A6C00DC29A9 /* MapKit.framework */; };
@@ -35,21 +34,13 @@
 		3E12632BFE3EC769CE0D1D43 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		3E1263B9B2D55BF007404889 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3E1266BE722C20AA53C1F641 /* BDZoneMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDZoneMapViewController.m; sourceTree = "<group>"; };
-		3E1266E408DA07BEA2716441 /* BDPointSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPointSDK.h; sourceTree = "<group>"; };
-		3E12675333A787D89023DEEA /* NSObject+BDKVOBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BDKVOBlocks.h"; sourceTree = "<group>"; };
 		3E1267A1F79D673ADC5C0FA3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3E126813957BD9D267057570 /* BDZoneMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDZoneMapViewController.h; sourceTree = "<group>"; };
 		3E126861E2AC77B0D4BF44E3 /* BDDefaultCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDDefaultCredentials.h; sourceTree = "<group>"; };
 		3E12688077B7E3004A46836A /* BDZoneChecklistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDZoneChecklistViewController.h; sourceTree = "<group>"; };
-		3E1268B6687E5A9A0B626B32 /* BDFence+MKOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BDFence+MKOverlay.h"; sourceTree = "<group>"; };
-		3E126A4576367C8F52ADFB24 /* MKMapView+BDPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+BDPoint.h"; sourceTree = "<group>"; };
 		3E126C2714E706A16D9FDE8C /* BDAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAuthenticationViewController.m; sourceTree = "<group>"; };
-		3E126CCCA31746E15E99566C /* BDFenceOverlayRendererFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDFenceOverlayRendererFactory.h; sourceTree = "<group>"; };
-		3E126E0D3A2B5F25BB48F713 /* NSString+BDURLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BDURLEncoding.h"; sourceTree = "<group>"; };
-		3E126E2CD119126852773E42 /* BDManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDManagedObject.h; sourceTree = "<group>"; };
 		3E126E7C4A5B6B3BB09D809C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3E126EE9955E8345DBEE3ECD /* BDAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAuthenticationViewController.h; sourceTree = "<group>"; };
-		3E126F091C63AB2681C3CC10 /* libBDPointSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBDPointSDK.a; sourceTree = "<group>"; };
 		3E126FEC48B4BE801C9F6541 /* BDAuthenticationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BDAuthenticationView.xib; sourceTree = "<group>"; };
 		832D483A19515A6C00DC29A9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		838DD2E5194BF316003B5942 /* BDPointSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDPointSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,23 +55,6 @@
 		838DD2F8194BF316003B5942 /* BDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDAppDelegate.m; sourceTree = "<group>"; };
 		838DD2FA194BF316003B5942 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		838DD301194BF316003B5942 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		838DD35E194C0FA8003B5942 /* BDAuthenticationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAuthenticationState.h; sourceTree = "<group>"; };
-		838DD35F194C0FA8003B5942 /* BDBoundingBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBoundingBox.h; sourceTree = "<group>"; };
-		838DD360194C0FA8003B5942 /* BDCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDCircle.h; sourceTree = "<group>"; };
-		838DD361194C0FA8003B5942 /* BDFence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDFence.h; sourceTree = "<group>"; };
-		838DD362194C0FA8003B5942 /* BDGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDGeometry.h; sourceTree = "<group>"; };
-		838DD363194C0FA8003B5942 /* BDLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDLocationManager.h; sourceTree = "<group>"; };
-		838DD364194C0FA8003B5942 /* BDMotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMotionManager.h; sourceTree = "<group>"; };
-		838DD365194C0FA8003B5942 /* BDPLocationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPLocationDelegate.h; sourceTree = "<group>"; };
-		838DD366194C0FA8003B5942 /* BDPMKShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPMKShape.h; sourceTree = "<group>"; };
-		838DD367194C0FA8003B5942 /* BDPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPoint.h; sourceTree = "<group>"; };
-		838DD368194C0FA8003B5942 /* BDPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPolygon.h; sourceTree = "<group>"; };
-		838DD369194C0FA8003B5942 /* BDPSpatialObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPSpatialObject.h; sourceTree = "<group>"; };
-		838DD37A194C1069003B5942 /* BDPointDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPointDelegate.h; sourceTree = "<group>"; };
-		838DD37C194C1219003B5942 /* BDPAuthenticationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPAuthenticationDelegate.h; sourceTree = "<group>"; };
-		838DD37E194C152A003B5942 /* BDZoneInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDZoneInfo.h; sourceTree = "<group>"; };
-		838DD389194C1D67003B5942 /* BDPNamedDescribed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPNamedDescribed.h; sourceTree = "<group>"; };
-		838DD38A194C1D75003B5942 /* BDPDeepCopy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPDeepCopy.h; sourceTree = "<group>"; };
 		83C959141967895600EA5BE4 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,7 +70,6 @@
 				3E12602E16A46BB9C173A90F /* CoreLocation.framework in Frameworks */,
 				3E126DF1390BAA3EB0BB7249 /* CoreMotion.framework in Frameworks */,
 				3E1260BB62CA2AD2E96C2B96 /* SystemConfiguration.framework in Frameworks */,
-				3E126683EE1D9BC76D35A316 /* libBDPointSDK.a in Frameworks */,
 				3E12600A978753FBADC9934F /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,41 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				83C959141967895600EA5BE4 /* README */,
-				838DD35D194C0FA8003B5942 /* include */,
-				3E126F091C63AB2681C3CC10 /* libBDPointSDK.a */,
 			);
 			path = PointSDK;
-			sourceTree = "<group>";
-		};
-		838DD35D194C0FA8003B5942 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				838DD38A194C1D75003B5942 /* BDPDeepCopy.h */,
-				838DD389194C1D67003B5942 /* BDPNamedDescribed.h */,
-				838DD37E194C152A003B5942 /* BDZoneInfo.h */,
-				838DD37C194C1219003B5942 /* BDPAuthenticationDelegate.h */,
-				838DD37A194C1069003B5942 /* BDPointDelegate.h */,
-				838DD35E194C0FA8003B5942 /* BDAuthenticationState.h */,
-				838DD35F194C0FA8003B5942 /* BDBoundingBox.h */,
-				838DD360194C0FA8003B5942 /* BDCircle.h */,
-				838DD361194C0FA8003B5942 /* BDFence.h */,
-				838DD362194C0FA8003B5942 /* BDGeometry.h */,
-				838DD363194C0FA8003B5942 /* BDLocationManager.h */,
-				838DD364194C0FA8003B5942 /* BDMotionManager.h */,
-				838DD365194C0FA8003B5942 /* BDPLocationDelegate.h */,
-				838DD366194C0FA8003B5942 /* BDPMKShape.h */,
-				838DD367194C0FA8003B5942 /* BDPoint.h */,
-				838DD368194C0FA8003B5942 /* BDPolygon.h */,
-				838DD369194C0FA8003B5942 /* BDPSpatialObject.h */,
-				3E126E2CD119126852773E42 /* BDManagedObject.h */,
-				3E1266E408DA07BEA2716441 /* BDPointSDK.h */,
-				3E126CCCA31746E15E99566C /* BDFenceOverlayRendererFactory.h */,
-				3E126A4576367C8F52ADFB24 /* MKMapView+BDPoint.h */,
-				3E12675333A787D89023DEEA /* NSObject+BDKVOBlocks.h */,
-				3E1268B6687E5A9A0B626B32 /* BDFence+MKOverlay.h */,
-				3E126E0D3A2B5F25BB48F713 /* NSString+BDURLEncoding.h */,
-			);
-			path = include;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,6 +322,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -415,6 +356,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};
