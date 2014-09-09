@@ -43,7 +43,7 @@
     {
         self.title = @"Checklist";
 
-        _orderedZones          = [NSMapTable strongToStrongObjectsMapTable];
+        _orderedZones          = [NSMutableOrderedSet new];
         _orderedFencesByZone   = [NSMapTable strongToStrongObjectsMapTable];
         _checkedInFencesByZone = [NSMapTable strongToStrongObjectsMapTable];
         _fencesForButton       = [NSMapTable strongToStrongObjectsMapTable];
