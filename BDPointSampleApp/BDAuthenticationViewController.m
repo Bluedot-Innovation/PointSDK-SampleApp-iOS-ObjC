@@ -100,9 +100,9 @@ BDAuthenticationViewControllerAltAction;
     _customEndpointURL = endpointURL;
     
     NSString
-        *title   = @"Details Auto-filled",
-        *message = @"Your Application's details have been automatically entered into this form and remembered.\n\n"
-                    "When you have created one or more Zones in the Bluedot Point web interface, touch the 'Log In' button below, to test their behaviour.";
+        *title   = @"Details auto-filled",
+        *message = @"Your Application's details have been automatically entered and remembered.\n\n"
+                    "When you have created one or more Zones in the Bluedot Point web interface, touch the 'Log In' button below, to enter your Application scenario.";
 
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title
                                                         message:message
@@ -158,18 +158,16 @@ BDAuthenticationViewControllerAltAction;
     {
         default:
         case BDAuthenticationViewControllerAltActionRegister:
-            title              = @"See Bluedot Point in action",
-            message            = @"Register for a free account and you can start triggering your own location-based "
-                                 "actions within minutes using this example Application.";
+            title              = @"New user registration",
+            message            = @"Bluedot Point carries out actions based on a scenario which you define using the Bluedot web interface.\n\nTo uniquely and securely identify your scenario, free registration is required.";
             cancelButtonTitle  = @"No thanks";
             acceptButtonTitles = @[@"Register now"];
             break;
 
         case BDAuthenticationViewControllerAltActionIntegrate:
-            title              = @"Your own location-aware Apps",
-            message            = @"Get high-precision, low battery-drain location awareness in your own Apps by "
-                                 "integrating the Bluedot Point SDK.";
-            cancelButtonTitle  = @"No thanks";
+            title              = @"About the Bluedot Point SDK",
+            message            = @"This app was created using the Bluedot Point SDK, which enables high-precision, always-on location awareness without the battery drain.\n\nBluedot Point SDK is available for App Developers to integrate with their own Apps.";
+            cancelButtonTitle  = @"Close";
             acceptButtonTitles = @[@"Find out more",@"Show me the code!"];
             break;
     }
@@ -307,11 +305,11 @@ BDAuthenticationViewControllerAltAction;
                 break;
 
             case BDAuthenticationViewControllerAltActionRegister:
-                alternateActionTitle = @"Don't have an account yet?";
+                alternateActionTitle = @"Don't have an account?";
                 break;
 
             case BDAuthenticationViewControllerAltActionIntegrate:
-                alternateActionTitle = @"Ready to integrate?";
+                alternateActionTitle = @"About the Bluedot Point SDK";
                 break;
         }
 

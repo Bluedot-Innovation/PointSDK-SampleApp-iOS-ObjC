@@ -24,6 +24,7 @@
 		838DD2F5194BF316003B5942 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F4194BF316003B5942 /* main.m */; };
 		838DD2F9194BF316003B5942 /* BDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F8194BF316003B5942 /* BDAppDelegate.m */; };
 		838DD2FB194BF316003B5942 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838DD2FA194BF316003B5942 /* Images.xcassets */; };
+		83A5496419C109F6002657C9 /* libBDPointSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A5496319C109F6002657C9 /* libBDPointSDK.a */; };
 		83C959151967895600EA5BE4 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 83C959141967895600EA5BE4 /* README */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,38 @@
 		838DD2F8194BF316003B5942 /* BDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDAppDelegate.m; sourceTree = "<group>"; };
 		838DD2FA194BF316003B5942 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		838DD301194BF316003B5942 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		83A5496319C109F6002657C9 /* libBDPointSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBDPointSDK.a; sourceTree = "<group>"; };
+		83BB1ACC19BEF33500204D8B /* BDAuthenticationState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDAuthenticationState.h; sourceTree = "<group>"; };
+		83BB1ACD19BEF33500204D8B /* BDBoundingBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDBoundingBox.h; sourceTree = "<group>"; };
+		83BB1ACE19BEF33500204D8B /* BDCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDCircle.h; sourceTree = "<group>"; };
+		83BB1ACF19BEF33500204D8B /* BDFence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDFence.h; sourceTree = "<group>"; };
+		83BB1AD019BEF33500204D8B /* BDFence+MKOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BDFence+MKOverlay.h"; sourceTree = "<group>"; };
+		83BB1AD119BEF33500204D8B /* BDFenceOverlayRendererFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDFenceOverlayRendererFactory.h; sourceTree = "<group>"; };
+		83BB1AD219BEF33500204D8B /* BDGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDGeometry.h; sourceTree = "<group>"; };
+		83BB1AD319BEF33500204D8B /* BDLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDLocation.h; sourceTree = "<group>"; };
+		83BB1AD419BEF33500204D8B /* BDLocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDLocationManager.h; sourceTree = "<group>"; };
+		83BB1AD519BEF33500204D8B /* BDManagedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDManagedObject.h; sourceTree = "<group>"; };
+		83BB1AD619BEF33500204D8B /* BDMotionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMotionManager.h; sourceTree = "<group>"; };
+		83BB1AD719BEF33500204D8B /* BDOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDOrientation.h; sourceTree = "<group>"; };
+		83BB1AD819BEF33500204D8B /* BDPAuthenticationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPAuthenticationDelegate.h; sourceTree = "<group>"; };
+		83BB1AD919BEF33500204D8B /* BDPDatedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPDatedObject.h; sourceTree = "<group>"; };
+		83BB1ADA19BEF33500204D8B /* BDPDeepCopy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPDeepCopy.h; sourceTree = "<group>"; };
+		83BB1ADB19BEF33500204D8B /* BDPLocationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPLocationDelegate.h; sourceTree = "<group>"; };
+		83BB1ADC19BEF33500204D8B /* BDPManagedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPManagedObject.h; sourceTree = "<group>"; };
+		83BB1ADD19BEF33500204D8B /* BDPMKShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPMKShape.h; sourceTree = "<group>"; };
+		83BB1ADE19BEF33500204D8B /* BDPNamedDescribed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPNamedDescribed.h; sourceTree = "<group>"; };
+		83BB1ADF19BEF33500204D8B /* BDPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPoint.h; sourceTree = "<group>"; };
+		83BB1AE019BEF33500204D8B /* BDPointAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPointAppDelegate.h; sourceTree = "<group>"; };
+		83BB1AE119BEF33500204D8B /* BDPointDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPointDelegate.h; sourceTree = "<group>"; };
+		83BB1AE219BEF33500204D8B /* BDPointQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPointQueue.h; sourceTree = "<group>"; };
+		83BB1AE319BEF33500204D8B /* BDPointSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPointSDK.h; sourceTree = "<group>"; };
+		83BB1AE419BEF33500204D8B /* BDPolygon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPolygon.h; sourceTree = "<group>"; };
+		83BB1AE519BEF33500204D8B /* BDPSpatialObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPSpatialObject.h; sourceTree = "<group>"; };
+		83BB1AE619BEF33500204D8B /* BDPValidatable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPValidatable.h; sourceTree = "<group>"; };
+		83BB1AE719BEF33500204D8B /* BDZoneInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDZoneInfo.h; sourceTree = "<group>"; };
+		83BB1AE819BEF33500204D8B /* MKMapView+BDPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MKMapView+BDPoint.h"; sourceTree = "<group>"; };
+		83BB1AE919BEF33500204D8B /* NSObject+BDKVOBlocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+BDKVOBlocks.h"; sourceTree = "<group>"; };
+		83BB1AEA19BEF33500204D8B /* NSString+BDURLEncoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+BDURLEncoding.h"; sourceTree = "<group>"; };
 		83C959141967895600EA5BE4 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +100,7 @@
 				832D483B19515A6C00DC29A9 /* MapKit.framework in Frameworks */,
 				838DD2ED194BF316003B5942 /* UIKit.framework in Frameworks */,
 				838DD2E9194BF316003B5942 /* Foundation.framework in Frameworks */,
+				83A5496419C109F6002657C9 /* libBDPointSDK.a in Frameworks */,
 				3E12602E16A46BB9C173A90F /* CoreLocation.framework in Frameworks */,
 				3E126DF1390BAA3EB0BB7249 /* CoreMotion.framework in Frameworks */,
 				3E1260BB62CA2AD2E96C2B96 /* SystemConfiguration.framework in Frameworks */,
@@ -179,9 +213,49 @@
 		838DD318194BF339003B5942 /* PointSDK */ = {
 			isa = PBXGroup;
 			children = (
+				83A5496319C109F6002657C9 /* libBDPointSDK.a */,
+				83BB1AC919BEF07C00204D8B /* include */,
 				83C959141967895600EA5BE4 /* README */,
 			);
 			path = PointSDK;
+			sourceTree = "<group>";
+		};
+		83BB1AC919BEF07C00204D8B /* include */ = {
+			isa = PBXGroup;
+			children = (
+				83BB1ACC19BEF33500204D8B /* BDAuthenticationState.h */,
+				83BB1ACD19BEF33500204D8B /* BDBoundingBox.h */,
+				83BB1ACE19BEF33500204D8B /* BDCircle.h */,
+				83BB1ACF19BEF33500204D8B /* BDFence.h */,
+				83BB1AD019BEF33500204D8B /* BDFence+MKOverlay.h */,
+				83BB1AD119BEF33500204D8B /* BDFenceOverlayRendererFactory.h */,
+				83BB1AD219BEF33500204D8B /* BDGeometry.h */,
+				83BB1AD319BEF33500204D8B /* BDLocation.h */,
+				83BB1AD419BEF33500204D8B /* BDLocationManager.h */,
+				83BB1AD519BEF33500204D8B /* BDManagedObject.h */,
+				83BB1AD619BEF33500204D8B /* BDMotionManager.h */,
+				83BB1AD719BEF33500204D8B /* BDOrientation.h */,
+				83BB1AD819BEF33500204D8B /* BDPAuthenticationDelegate.h */,
+				83BB1AD919BEF33500204D8B /* BDPDatedObject.h */,
+				83BB1ADA19BEF33500204D8B /* BDPDeepCopy.h */,
+				83BB1ADB19BEF33500204D8B /* BDPLocationDelegate.h */,
+				83BB1ADC19BEF33500204D8B /* BDPManagedObject.h */,
+				83BB1ADD19BEF33500204D8B /* BDPMKShape.h */,
+				83BB1ADE19BEF33500204D8B /* BDPNamedDescribed.h */,
+				83BB1ADF19BEF33500204D8B /* BDPoint.h */,
+				83BB1AE019BEF33500204D8B /* BDPointAppDelegate.h */,
+				83BB1AE119BEF33500204D8B /* BDPointDelegate.h */,
+				83BB1AE219BEF33500204D8B /* BDPointQueue.h */,
+				83BB1AE319BEF33500204D8B /* BDPointSDK.h */,
+				83BB1AE419BEF33500204D8B /* BDPolygon.h */,
+				83BB1AE519BEF33500204D8B /* BDPSpatialObject.h */,
+				83BB1AE619BEF33500204D8B /* BDPValidatable.h */,
+				83BB1AE719BEF33500204D8B /* BDZoneInfo.h */,
+				83BB1AE819BEF33500204D8B /* MKMapView+BDPoint.h */,
+				83BB1AE919BEF33500204D8B /* NSObject+BDKVOBlocks.h */,
+				83BB1AEA19BEF33500204D8B /* NSString+BDURLEncoding.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,7 +289,7 @@
 				ORGANIZATIONNAME = Bluedot;
 				TargetAttributes = {
 					838DD2E4194BF316003B5942 = {
-						DevelopmentTeam = 52553KQC8E;
+						DevelopmentTeam = 9H7C75E224;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -302,7 +376,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Balendran Thavarajah (QWXCGL9LQE)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -342,7 +416,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Pocket Innovation Ltd (GKHT73H5U8)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -365,6 +439,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BDPointSampleApp/BDPointSampleApp-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -393,6 +469,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BDPointSampleApp/BDPointSampleApp-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

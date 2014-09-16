@@ -102,8 +102,8 @@
         [mutableOrderedFences sortUsingComparator:_nameComparator];
         [_orderedFencesByZone setObject:[mutableOrderedFences copy] forKey:zone];
     }
-
-    if(!self.isViewLoaded)
+    
+    if(self.isViewLoaded)
         [self.tableView reloadData];
 }
 
