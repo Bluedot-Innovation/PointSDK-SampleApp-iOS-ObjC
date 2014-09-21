@@ -1,6 +1,6 @@
 //
 //  BDAppDelegate.h
-//  BDPointSampleApp
+//  BDPointApp
 //
 //  Created by Christopher Hatton on 14/06/2014.
 //  Copyright (c) 2014 Bluedot. All rights reserved.

@@ -3,12 +3,16 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Background.png"
+      "filename" : "Map.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Background@2x.png"
+      "filename" : "Map@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

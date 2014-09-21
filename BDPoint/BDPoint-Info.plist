@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>au.com.bluedot.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>au.com.bluedot.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -24,10 +24,10 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.bluedot.BDPointSampleApp</string>
+			<string>com.bluedot.BDPointApp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>BDPointSampleApp</string>
+				<string>BDPointApp</string>
 			</array>
 		</dict>
 	</array>

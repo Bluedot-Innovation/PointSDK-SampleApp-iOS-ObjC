@@ -3,12 +3,16 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Authenticate.png"
+      "filename" : "Checklist.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Authenticate@2x.png"
+      "filename" : "Checklist@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

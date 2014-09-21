@@ -44,14 +44,14 @@
 		3E126EE9955E8345DBEE3ECD /* BDAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAuthenticationViewController.h; sourceTree = "<group>"; };
 		3E126FEC48B4BE801C9F6541 /* BDAuthenticationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BDAuthenticationView.xib; sourceTree = "<group>"; };
 		832D483A19515A6C00DC29A9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		838DD2E5194BF316003B5942 /* BDPointSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDPointSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		838DD2E5194BF316003B5942 /* BDPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838DD2E8194BF316003B5942 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		838DD2EA194BF316003B5942 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		838DD2EC194BF316003B5942 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		838DD2F0194BF316003B5942 /* BDPointSampleApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BDPointSampleApp-Info.plist"; sourceTree = "<group>"; };
+		838DD2F0194BF316003B5942 /* BDPoint-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BDPoint-Info.plist"; sourceTree = "<group>"; };
 		838DD2F2194BF316003B5942 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		838DD2F4194BF316003B5942 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		838DD2F6194BF316003B5942 /* BDPointSampleApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BDPointSampleApp-Prefix.pch"; sourceTree = "<group>"; };
+		838DD2F6194BF316003B5942 /* BDPoint-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BDPoint-Prefix.pch"; sourceTree = "<group>"; };
 		838DD2F7194BF316003B5942 /* BDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDAppDelegate.h; sourceTree = "<group>"; };
 		838DD2F8194BF316003B5942 /* BDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDAppDelegate.m; sourceTree = "<group>"; };
 		838DD2FA194BF316003B5942 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 				3E126130CA255C267FD74252 /* BDStyles.h */,
 			);
 			name = Controller;
-			path = BDPointSampleApp;
+			path = BDPoint;
 			sourceTree = SOURCE_ROOT;
 		};
 		3E126EDEDE72E1EA303742BF /* View */ = {
@@ -147,7 +147,7 @@
 		838DD2DC194BF316003B5942 = {
 			isa = PBXGroup;
 			children = (
-				838DD2EE194BF316003B5942 /* BDPointSampleApp */,
+				838DD2EE194BF316003B5942 /* BDPoint */,
 				838DD2E7194BF316003B5942 /* Frameworks */,
 				838DD2E6194BF316003B5942 /* Products */,
 			);
@@ -156,7 +156,7 @@
 		838DD2E6194BF316003B5942 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				838DD2E5194BF316003B5942 /* BDPointSampleApp.app */,
+				838DD2E5194BF316003B5942 /* BDPoint.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,7 +177,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		838DD2EE194BF316003B5942 /* BDPointSampleApp */ = {
+		838DD2EE194BF316003B5942 /* BDPoint */ = {
 			isa = PBXGroup;
 			children = (
 				838DD317194BF32E003B5942 /* Dependencies */,
@@ -188,16 +188,17 @@
 				3E126417CBC118A2940766B4 /* UI */,
 				3E126861E2AC77B0D4BF44E3 /* BDDefaultCredentials.h */,
 			);
-			path = BDPointSampleApp;
+			name = BDPoint;
+			path = BDPoint;
 			sourceTree = "<group>";
 		};
 		838DD2EF194BF316003B5942 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				838DD2F0194BF316003B5942 /* BDPointSampleApp-Info.plist */,
+				838DD2F0194BF316003B5942 /* BDPoint-Info.plist */,
 				838DD2F1194BF316003B5942 /* InfoPlist.strings */,
 				838DD2F4194BF316003B5942 /* main.m */,
-				838DD2F6194BF316003B5942 /* BDPointSampleApp-Prefix.pch */,
+				838DD2F6194BF316003B5942 /* BDPoint-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -261,9 +262,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		838DD2E4194BF316003B5942 /* BDPointSampleApp */ = {
+		838DD2E4194BF316003B5942 /* BDPoint */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 838DD311194BF316003B5942 /* Build configuration list for PBXNativeTarget "BDPointSampleApp" */;
+			buildConfigurationList = 838DD311194BF316003B5942 /* Build configuration list for PBXNativeTarget "BDPoint" */;
 			buildPhases = (
 				838DD2E1194BF316003B5942 /* Sources */,
 				838DD2E2194BF316003B5942 /* Frameworks */,
@@ -273,9 +274,9 @@
 			);
 			dependencies = (
 			);
-			name = BDPointSampleApp;
-			productName = BDPointSampleApp;
-			productReference = 838DD2E5194BF316003B5942 /* BDPointSampleApp.app */;
+			name = BDPoint;
+			productName = BDPoint;
+			productReference = 838DD2E5194BF316003B5942 /* BDPoint.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -301,7 +302,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 838DD2E0194BF316003B5942 /* Build configuration list for PBXProject "BDPointSampleApp" */;
+			buildConfigurationList = 838DD2E0194BF316003B5942 /* Build configuration list for PBXProject "BDPoint" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -313,7 +314,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				838DD2E4194BF316003B5942 /* BDPointSampleApp */,
+				838DD2E4194BF316003B5942 /* BDPoint */,
 			);
 		};
 /* End PBXProject section */
@@ -442,19 +443,19 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BDPointSampleApp/BDPointSampleApp-Prefix.pch";
+				GCC_PREFIX_HEADER = "BDPoint/BDPoint-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"${PROJECT_DIR}/BDPointSampleApp/PointSDK/include",
+					"${PROJECT_DIR}/BDPoint/PointSDK/include",
 				);
-				INFOPLIST_FILE = "BDPointSampleApp/BDPointSampleApp-Info.plist";
+				INFOPLIST_FILE = "BDPoint/BDPoint-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/BDPointSampleApp/PointSDK",
+					"$(PROJECT_DIR)/BDPoint/PointSDK",
 					"\"${PROJECT_DIR}/../../../../Library/Caches/appCode30/DerivedData/BDPointSDK-ea991ce8/Build/Products/Debug-iphoneos\"/**",
 					"\"${PROJECT_DIR}/../../../../Library/Caches/appCode30/DerivedData/BDPointSDK-ea991ce8/Build/Products/Debug-iphoneos\"/**",
-					"\"${PROJECT_DIR}/BDPointSampleApp/PointSDK\"/**",
+					"\"${PROJECT_DIR}/BDPoint/PointSDK\"/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -472,19 +473,19 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BDPointSampleApp/BDPointSampleApp-Prefix.pch";
+				GCC_PREFIX_HEADER = "BDPoint/BDPoint-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"${PROJECT_DIR}/BDPointSampleApp/PointSDK/include",
+					"${PROJECT_DIR}/BDPoint/PointSDK/include",
 				);
-				INFOPLIST_FILE = "BDPointSampleApp/BDPointSampleApp-Info.plist";
+				INFOPLIST_FILE = "BDPoint/BDPoint-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/BDPointSampleApp/PointSDK",
+					"$(PROJECT_DIR)/BDPoint/PointSDK",
 					"\"${PROJECT_DIR}/../../../../Library/Caches/appCode30/DerivedData/BDPointSDK-ea991ce8/Build/Products/Debug-iphoneos\"/**",
 					"\"${PROJECT_DIR}/../../../../Library/Caches/appCode30/DerivedData/BDPointSDK-ea991ce8/Build/Products/Debug-iphoneos\"/**",
-					"\"${PROJECT_DIR}/BDPointSampleApp/PointSDK\"/**",
+					"\"${PROJECT_DIR}/BDPoint/PointSDK\"/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -497,7 +498,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		838DD2E0194BF316003B5942 /* Build configuration list for PBXProject "BDPointSampleApp" */ = {
+		838DD2E0194BF316003B5942 /* Build configuration list for PBXProject "BDPoint" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				838DD30F194BF316003B5942 /* Debug */,
@@ -506,7 +507,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		838DD311194BF316003B5942 /* Build configuration list for PBXNativeTarget "BDPointSampleApp" */ = {
+		838DD311194BF316003B5942 /* Build configuration list for PBXNativeTarget "BDPoint" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				838DD312194BF316003B5942 /* Debug */,

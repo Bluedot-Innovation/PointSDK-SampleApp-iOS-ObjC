@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "838DD2E4194BF316003B5942"
-               BuildableName = "BDPointSampleApp.app"
-               BlueprintName = "BDPointSampleApp"
-               ReferencedContainer = "container:BDPointSampleApp.xcodeproj">
+               BuildableName = "BDPoint.app"
+               BlueprintName = "BDPoint"
+               ReferencedContainer = "container:BDPoint.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "838DD2FF194BF316003B5942"
                BuildableName = "BDPointSampleAppTests.xctest"
                BlueprintName = "BDPointSampleAppTests"
-               ReferencedContainer = "container:BDPointSampleApp.xcodeproj">
+               ReferencedContainer = "container:BDPoint.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "838DD2E4194BF316003B5942"
-            BuildableName = "BDPointSampleApp.app"
-            BlueprintName = "BDPointSampleApp"
-            ReferencedContainer = "container:BDPointSampleApp.xcodeproj">
+            BuildableName = "BDPoint.app"
+            BlueprintName = "BDPoint"
+            ReferencedContainer = "container:BDPoint.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "838DD2E4194BF316003B5942"
-            BuildableName = "BDPointSampleApp.app"
-            BlueprintName = "BDPointSampleApp"
-            ReferencedContainer = "container:BDPointSampleApp.xcodeproj">
+            BuildableName = "BDPoint.app"
+            BlueprintName = "BDPoint"
+            ReferencedContainer = "container:BDPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "838DD2E4194BF316003B5942"
-            BuildableName = "BDPointSampleApp.app"
-            BlueprintName = "BDPointSampleApp"
-            ReferencedContainer = "container:BDPointSampleApp.xcodeproj">
+            BuildableName = "BDPoint.app"
+            BlueprintName = "BDPoint"
+            ReferencedContainer = "container:BDPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
