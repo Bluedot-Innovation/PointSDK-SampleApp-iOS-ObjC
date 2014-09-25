@@ -1,6 +1,6 @@
 //
 //  BDAppDelegate.m
-//  BDPointSampleApp
+//  BDPoint
 //
 //  Copyright (c) 2014 Bluedot. All rights reserved.
 //
