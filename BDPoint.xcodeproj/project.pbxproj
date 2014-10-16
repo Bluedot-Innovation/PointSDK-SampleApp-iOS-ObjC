@@ -265,6 +265,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 838DD311194BF316003B5942 /* Build configuration list for PBXNativeTarget "BDPoint" */;
 			buildPhases = (
+				83E0621819EF63CB009BDF0D /* ShellScript */,
 				838DD2E1194BF316003B5942 /* Sources */,
 				838DD2E2194BF316003B5942 /* Frameworks */,
 				838DD2E3194BF316003B5942 /* Resources */,
@@ -332,6 +333,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		83E0621819EF63CB009BDF0D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Project directory:${PROJECT_DIR}\"\necho \"PointSDK header directory:${PROJECT_DIR}/BDPoint/PointSDK/\"\nls ${PROJECT_DIR}/BDPoint/PointSDK/";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		838DD2E1194BF316003B5942 /* Sources */ = {
