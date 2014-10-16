@@ -26,6 +26,7 @@
 		838DD2FB194BF316003B5942 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838DD2FA194BF316003B5942 /* Images.xcassets */; };
 		83A5496419C109F6002657C9 /* libBDPointSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A5496319C109F6002657C9 /* libBDPointSDK.a */; };
 		83C959151967895600EA5BE4 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 83C959141967895600EA5BE4 /* README */; };
+		83E0621A19EF6AB7009BDF0D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E0621919EF6AB7009BDF0D /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		83BB1AE919BEF33500204D8B /* NSObject+BDKVOBlocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+BDKVOBlocks.h"; sourceTree = "<group>"; };
 		83BB1AEA19BEF33500204D8B /* NSString+BDURLEncoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+BDURLEncoding.h"; sourceTree = "<group>"; };
 		83C959141967895600EA5BE4 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		83E0621919EF6AB7009BDF0D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83E0621A19EF6AB7009BDF0D /* AVFoundation.framework in Frameworks */,
 				838DD2EB194BF316003B5942 /* CoreGraphics.framework in Frameworks */,
 				832D483B19515A6C00DC29A9 /* MapKit.framework in Frameworks */,
 				838DD2ED194BF316003B5942 /* UIKit.framework in Frameworks */,
@@ -164,6 +167,7 @@
 		838DD2E7194BF316003B5942 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				83E0621919EF6AB7009BDF0D /* AVFoundation.framework */,
 				832D483A19515A6C00DC29A9 /* MapKit.framework */,
 				838DD2E8194BF316003B5942 /* Foundation.framework */,
 				838DD2EA194BF316003B5942 /* CoreGraphics.framework */,
