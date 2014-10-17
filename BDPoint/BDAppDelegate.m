@@ -95,6 +95,10 @@
 {
 }
 
+- (void)applicationSignificantTimeChange:(UIApplication *)application
+{
+}
+
 -(NSDictionary*)parseURLParameters:(NSString*)parameters
 {
     NSMutableDictionary* parameterDictionary = [NSMutableDictionary new];
