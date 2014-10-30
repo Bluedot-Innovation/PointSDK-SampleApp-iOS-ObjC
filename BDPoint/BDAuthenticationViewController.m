@@ -23,7 +23,7 @@ typedef enum _BDAuthenticationViewControllerAltAction
 BDAuthenticationViewControllerAltAction;
 
 
-@interface BDAuthenticationViewController () <UITextFieldDelegate, UIAlertViewDelegate>
+@interface BDAuthenticationViewController () <UITextFieldDelegate>
 
 @property (nonatomic) id authenticationStateObservation;
 @property (nonatomic,assign) BDAuthenticationViewControllerAltAction alternateAction;
@@ -152,34 +152,27 @@ BDAuthenticationViewControllerAltAction;
         *message,
         *cancelButtonTitle;
 
-    NSArray *acceptButtonTitles;
-
     switch(_alternateAction)
     {
         default:
         case BDAuthenticationViewControllerAltActionRegister:
             title              = @"New user registration",
-            message            = @"Bluedot Point carries out actions based on a scenario which you define using the Bluedot web interface.\n\nTo uniquely and securely identify your scenario, free registration is required.";
-            cancelButtonTitle  = @"No thanks";
-            acceptButtonTitles = @[@"Register now"];
+            message            = @"Bluedot Point carries out actions based on a scenario which you can define using the Bluedot web interface.\n\nFor more information, including account registration, visit\n\nhttp://bluedotinnovation.com/\n\nusing a Desktop browser.";
+            cancelButtonTitle  = @"OK";
             break;
 
         case BDAuthenticationViewControllerAltActionIntegrate:
             title              = @"About the Bluedot Point SDK",
-            message            = @"This app was created using the Bluedot Point SDK, which enables high-precision, always-on location awareness without the battery drain.\n\nBluedot Point SDK is available for App Developers to integrate with their own Apps.";
-            cancelButtonTitle  = @"Close";
-            acceptButtonTitles = @[@"Find out more",@"Show me the code!"];
+            message            = @"This app was created using the Bluedot Point SDK, which enables high-precision, always-on location awareness without the battery drain.\n\nBluedot Point SDK is available for App Developers to integrate with their own Apps.  For more information visit\n\nhttp://bluedotinnovation.com/\n\nusing a Desktop browser.";
+            cancelButtonTitle  = @"OK";
             break;
     }
 
     UIAlertView* alternateActionAlert = [[UIAlertView alloc] initWithTitle:title
                                                                    message:message
-                                                                  delegate:self
+                                                                  delegate:NULL
                                                          cancelButtonTitle:cancelButtonTitle
                                                          otherButtonTitles:NULL];
-
-    for(NSString* acceptButtonTitle in acceptButtonTitles)
-        [alternateActionAlert addButtonWithTitle:acceptButtonTitle];
 
     [alternateActionAlert show];
 }
@@ -401,52 +394,5 @@ BDAuthenticationViewControllerAltAction;
 }
 
 #pragma mark UITextFieldDelegate implementation end
-
-
-#pragma mark UIAlertViewDelegate implementation begin
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    NSString* actionURLString = NULL;
-
-    switch(_alternateAction)
-    {
-        case BDAuthenticationViewControllerAltActionNone:
-        default:
-        break;
-
-        case BDAuthenticationViewControllerAltActionRegister:
-        {
-            switch(buttonIndex)
-            {
-                case 0: default: break;
-                case 1: actionURLString = BDActionURLRegister; break;
-            }
-        }
-
-        case BDAuthenticationViewControllerAltActionIntegrate:
-        {
-            switch(buttonIndex)
-            {
-                case 0: default:                                        break;
-                case 1: actionURLString = BDActionURLIntegrateMoreInfo; break;
-                case 2: actionURLString = BDActionURLIntegrateCode;     break;
-            }
-        }
-        break;
-    }
-
-    if(actionURLString)
-    {
-        NSURL *actionURL = [[NSURL alloc] initWithString:actionURLString];
-
-        UIApplication *application = UIApplication.sharedApplication;
-
-        if ([application canOpenURL:actionURL])
-            [application openURL:actionURL];
-    }
-}
-
-#pragma mark UIAlertViewDelegate implementation end
 
 @end
