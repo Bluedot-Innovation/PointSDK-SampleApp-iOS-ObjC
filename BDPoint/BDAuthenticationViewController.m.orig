@@ -145,6 +145,41 @@ BDAuthenticationViewControllerAltAction;
     [self reset];
 }
 
+<<<<<<< HEAD
+- (IBAction)alternateActionButtonTouchUpInside
+{
+    NSString
+        *title,
+        *message,
+        *cancelButtonTitle;
+
+    switch(_alternateAction)
+    {
+        default:
+        case BDAuthenticationViewControllerAltActionRegister:
+            title              = @"New user registration",
+            message            = @"Bluedot Point carries out actions based on a scenario which you can define using the Bluedot web interface.\n\nFor more information, including account registration, visit\n\nhttp://bluedotinnovation.com/\n\nusing a Desktop browser.";
+            cancelButtonTitle  = @"OK";
+            break;
+
+        case BDAuthenticationViewControllerAltActionIntegrate:
+            title              = @"About the Bluedot Point SDK",
+            message            = @"This app was created using the Bluedot Point SDK, which enables high-precision, always-on location awareness without the battery drain.\n\nBluedot Point SDK is available for App Developers to integrate with their own Apps.  For more information visit\n\nhttp://bluedotinnovation.com/\n\nusing a Desktop browser.";
+            cancelButtonTitle  = @"OK";
+            break;
+    }
+
+    UIAlertView* alternateActionAlert = [[UIAlertView alloc] initWithTitle:title
+                                                                   message:message
+                                                                  delegate:NULL
+                                                         cancelButtonTitle:cancelButtonTitle
+                                                         otherButtonTitles:NULL];
+
+    [alternateActionAlert show];
+}
+
+=======
+>>>>>>> 3adde72... Moved registration link altogether
 #pragma mark IBAction handlers end
 
 -(void)reset
