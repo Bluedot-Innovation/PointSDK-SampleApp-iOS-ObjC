@@ -1,4 +1,4 @@
-To use this sample project, you first need to obtain the PointSDK
+To use this sample project, you first need to obtain the Point SDK
 binary library and header files.
 
 You can obtain these files by registering for a free account at:
