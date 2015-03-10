@@ -36,7 +36,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     BDLocationManager* locationManager = [BDLocationManager sharedLocationManager];
-    locationManager.pointDelegate = self;
+    locationManager.locationDelegate = self;
+    locationManager.authenticationDelegate = self;
 
     [self initializeUserInterface];
 
@@ -60,9 +61,8 @@
 
     if(isURLValid)
     {
-        NSString* encodedEndpointURLString = parameters[BDPointEndpointKey];
-
-        NSURL* customEndpointURL = [encodedEndpointURLString urlDecode];
+        NSString* endpointURLString = parameters[BDPointEndpointKey];
+        NSURL* customEndpointURL = [[NSURL alloc] initWithString:endpointURLString];
 
         [_authenticationViewController didReceiveRegistrationWithUsername:username
                                                                    apiKey:apiKey
@@ -122,7 +122,7 @@
         if(![scanner scanUpToCharactersFromSet:controlCharacters intoString:&paramValue])
             break;
 
-        parameterDictionary[paramName] = paramValue;
+        parameterDictionary[paramName] = [paramValue urlDecode];
     }
 
     return [NSDictionary dictionaryWithDictionary:parameterDictionary];

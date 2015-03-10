@@ -16,6 +16,7 @@
 		3E12698A1CD986562C3CE339 /* BDZoneMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1266BE722C20AA53C1F641 /* BDZoneMapViewController.m */; };
 		3E126DF1390BAA3EB0BB7249 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E12632BFE3EC769CE0D1D43 /* CoreMotion.framework */; };
 		832D483B19515A6C00DC29A9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832D483A19515A6C00DC29A9 /* MapKit.framework */; };
+		836D099C1AA9835900470824 /* libBDPointSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A5496319C109F6002657C9 /* libBDPointSDK.a */; };
 		838DD2E9194BF316003B5942 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2E8194BF316003B5942 /* Foundation.framework */; };
 		838DD2EB194BF316003B5942 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2EA194BF316003B5942 /* CoreGraphics.framework */; };
 		838DD2ED194BF316003B5942 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2EC194BF316003B5942 /* UIKit.framework */; };
@@ -23,7 +24,6 @@
 		838DD2F5194BF316003B5942 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F4194BF316003B5942 /* main.m */; };
 		838DD2F9194BF316003B5942 /* BDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F8194BF316003B5942 /* BDAppDelegate.m */; };
 		838DD2FB194BF316003B5942 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838DD2FA194BF316003B5942 /* Images.xcassets */; };
-		83A5496419C109F6002657C9 /* libBDPointSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A5496319C109F6002657C9 /* libBDPointSDK.a */; };
 		83E0621A19EF6AB7009BDF0D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E0621919EF6AB7009BDF0D /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +42,10 @@
 		3E126E7C4A5B6B3BB09D809C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3E126EE9955E8345DBEE3ECD /* BDAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAuthenticationViewController.h; sourceTree = "<group>"; };
 		3E126FEC48B4BE801C9F6541 /* BDAuthenticationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BDAuthenticationView.xib; sourceTree = "<group>"; };
+		5A4165A85589A490872A3C3D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		5A41693B39B3B4D3086FBF82 /* BDLocationManager+BDPointSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BDLocationManager+BDPointSDK.h"; sourceTree = "<group>"; };
+		5A416AF6EB694215FFCBB152 /* BDPGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPGeometry.h; sourceTree = "<group>"; };
+		5A416C19CE54915E2737C771 /* BDPPolygonal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDPPolygonal.h; sourceTree = "<group>"; };
 		832D483A19515A6C00DC29A9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		838DD2E5194BF316003B5942 /* BDPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838DD2E8194BF316003B5942 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -69,7 +73,6 @@
 		83BB1AD619BEF33500204D8B /* BDMotionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMotionManager.h; sourceTree = "<group>"; };
 		83BB1AD719BEF33500204D8B /* BDOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDOrientation.h; sourceTree = "<group>"; };
 		83BB1AD819BEF33500204D8B /* BDPAuthenticationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPAuthenticationDelegate.h; sourceTree = "<group>"; };
-		83BB1AD919BEF33500204D8B /* BDPDatedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPDatedObject.h; sourceTree = "<group>"; };
 		83BB1ADA19BEF33500204D8B /* BDPDeepCopy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPDeepCopy.h; sourceTree = "<group>"; };
 		83BB1ADB19BEF33500204D8B /* BDPLocationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPLocationDelegate.h; sourceTree = "<group>"; };
 		83BB1ADC19BEF33500204D8B /* BDPManagedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDPManagedObject.h; sourceTree = "<group>"; };
@@ -96,12 +99,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				836D099C1AA9835900470824 /* libBDPointSDK.a in Frameworks */,
 				83E0621A19EF6AB7009BDF0D /* AVFoundation.framework in Frameworks */,
 				838DD2EB194BF316003B5942 /* CoreGraphics.framework in Frameworks */,
 				832D483B19515A6C00DC29A9 /* MapKit.framework in Frameworks */,
 				838DD2ED194BF316003B5942 /* UIKit.framework in Frameworks */,
 				838DD2E9194BF316003B5942 /* Foundation.framework in Frameworks */,
-				83A5496419C109F6002657C9 /* libBDPointSDK.a in Frameworks */,
 				3E12602E16A46BB9C173A90F /* CoreLocation.framework in Frameworks */,
 				3E126DF1390BAA3EB0BB7249 /* CoreMotion.framework in Frameworks */,
 				3E1260BB62CA2AD2E96C2B96 /* SystemConfiguration.framework in Frameworks */,
@@ -238,7 +241,6 @@
 				83BB1AD619BEF33500204D8B /* BDMotionManager.h */,
 				83BB1AD719BEF33500204D8B /* BDOrientation.h */,
 				83BB1AD819BEF33500204D8B /* BDPAuthenticationDelegate.h */,
-				83BB1AD919BEF33500204D8B /* BDPDatedObject.h */,
 				83BB1ADA19BEF33500204D8B /* BDPDeepCopy.h */,
 				83BB1ADB19BEF33500204D8B /* BDPLocationDelegate.h */,
 				83BB1ADC19BEF33500204D8B /* BDPManagedObject.h */,
@@ -256,6 +258,10 @@
 				83BB1AE819BEF33500204D8B /* MKMapView+BDPoint.h */,
 				83BB1AE919BEF33500204D8B /* NSObject+BDKVOBlocks.h */,
 				83BB1AEA19BEF33500204D8B /* NSString+BDURLEncoding.h */,
+				5A416C19CE54915E2737C771 /* BDPPolygonal.h */,
+				5A4165A85589A490872A3C3D /* Reachability.h */,
+				5A416AF6EB694215FFCBB152 /* BDPGeometry.h */,
+				5A41693B39B3B4D3086FBF82 /* BDLocationManager+BDPointSDK.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -440,6 +446,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BDPoint/BDPoint-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -465,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BDPoint/BDPoint-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
