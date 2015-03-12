@@ -154,8 +154,12 @@ BDAuthenticationViewControllerAltAction;
     self.usernameTextField.text = [defaults objectForKey:BDPointUsernameKey   ] ?: @"";
     self.apiKeyTextField.text   = [defaults objectForKey:BDPointAPIKeyKey     ] ?: @"";
     self.packageTextField.text  = [defaults objectForKey:BDPointPackageNameKey] ?: @"";
-    
-    _customEndpointURL          = [[defaults objectForKey:BDPointEndpointKey] urlDecode];
+
+    NSString
+        *encodedEndpointURLString = [defaults objectForKey:BDPointEndpointKey],
+        *endpointURLString        = [encodedEndpointURLString urlDecode];
+
+    _customEndpointURL          = endpointURLString ? [[NSURL alloc] initWithString:endpointURLString] : nil;
 }
 
 -(void)setInputFieldsEnabled:(BOOL)enabled
