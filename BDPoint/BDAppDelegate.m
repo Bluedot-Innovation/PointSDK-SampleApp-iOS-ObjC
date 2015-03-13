@@ -244,9 +244,13 @@
     NSArray* viewControllers;
 
     if(zones && zones.count>0)
+    {
         viewControllers = [_viewControllersNotRequiringZoneInfo arrayByAddingObjectsFromArray:_viewControllersRequiringZoneInfo];
+    }
     else
+    {
         viewControllers = _viewControllersNotRequiringZoneInfo;
+    }
 
     [_tabBarController setViewControllers:viewControllers
                                  animated:YES];
