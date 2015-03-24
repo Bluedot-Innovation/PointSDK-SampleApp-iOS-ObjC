@@ -4,3 +4,5 @@
 BDPointSampleApp.xcodeproj/xcuserdata/Chris.xcuserdatad/xcdebugger
 BDPointSampleApp.xcodeproj/project.xcworkspace/xcuserdata/Chris.xcuserdatad
 *.xcuserstate
+PointSDK/include
+*.a

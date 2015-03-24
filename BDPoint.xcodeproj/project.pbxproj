@@ -16,6 +16,7 @@
 		3E12698A1CD986562C3CE339 /* BDZoneMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1266BE722C20AA53C1F641 /* BDZoneMapViewController.m */; };
 		3E126DF1390BAA3EB0BB7249 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E12632BFE3EC769CE0D1D43 /* CoreMotion.framework */; };
 		832D483B19515A6C00DC29A9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832D483A19515A6C00DC29A9 /* MapKit.framework */; };
+		8363BF0E1AC0DF17005CC098 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 8363BF0B1AC0DF17005CC098 /* README */; };
 		838DD2E9194BF316003B5942 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2E8194BF316003B5942 /* Foundation.framework */; };
 		838DD2EB194BF316003B5942 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2EA194BF316003B5942 /* CoreGraphics.framework */; };
 		838DD2ED194BF316003B5942 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2EC194BF316003B5942 /* UIKit.framework */; };
@@ -42,6 +43,7 @@
 		3E126EE9955E8345DBEE3ECD /* BDAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAuthenticationViewController.h; sourceTree = "<group>"; };
 		3E126FEC48B4BE801C9F6541 /* BDAuthenticationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BDAuthenticationView.xib; sourceTree = "<group>"; };
 		832D483A19515A6C00DC29A9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8363BF0B1AC0DF17005CC098 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		838DD2E5194BF316003B5942 /* BDPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838DD2E8194BF316003B5942 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		838DD2EA194BF316003B5942 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -54,7 +56,6 @@
 		838DD2F8194BF316003B5942 /* BDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDAppDelegate.m; sourceTree = "<group>"; };
 		838DD2FA194BF316003B5942 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		838DD301194BF316003B5942 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		83C959141967895600EA5BE4 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		83E0621919EF6AB7009BDF0D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -111,9 +112,26 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		8363BEE51AC0DF0C005CC098 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				8363BEE61AC0DF17005CC098 /* PointSDK */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		8363BEE61AC0DF17005CC098 /* PointSDK */ = {
+			isa = PBXGroup;
+			children = (
+				8363BF0B1AC0DF17005CC098 /* README */,
+			);
+			path = PointSDK;
+			sourceTree = "<group>";
+		};
 		838DD2DC194BF316003B5942 = {
 			isa = PBXGroup;
 			children = (
+				8363BEE51AC0DF0C005CC098 /* Dependencies */,
 				838DD2EE194BF316003B5942 /* BDPoint */,
 				838DD2E7194BF316003B5942 /* Frameworks */,
 				838DD2E6194BF316003B5942 /* Products */,
@@ -148,7 +166,6 @@
 		838DD2EE194BF316003B5942 /* BDPoint */ = {
 			isa = PBXGroup;
 			children = (
-				838DD317194BF32E003B5942 /* Dependencies */,
 				838DD2F7194BF316003B5942 /* BDAppDelegate.h */,
 				838DD2F8194BF316003B5942 /* BDAppDelegate.m */,
 				838DD2FA194BF316003B5942 /* Images.xcassets */,
@@ -168,22 +185,6 @@
 				838DD2F6194BF316003B5942 /* BDPoint-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		838DD317194BF32E003B5942 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				838DD318194BF339003B5942 /* PointSDK */,
-			);
-			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		838DD318194BF339003B5942 /* PointSDK */ = {
-			isa = PBXGroup;
-			children = (
-				83C959141967895600EA5BE4 /* README */,
-			);
-			path = PointSDK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8363BF0E1AC0DF17005CC098 /* README in Resources */,
 				838DD2F3194BF316003B5942 /* InfoPlist.strings in Resources */,
 				838DD2FB194BF316003B5942 /* Images.xcassets in Resources */,
 				3E12658AB765C20C4A630F8E /* BDAuthenticationView.xib in Resources */,
@@ -376,7 +378,7 @@
 				INFOPLIST_FILE = "BDPoint/BDPoint-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/BDPoint/PointSDK/**",
+					"$(PROJECT_DIR)/PointSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-lBDPointSDK-${PLATFORM_NAME}",
@@ -385,7 +387,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/BDPoint/PointSDK/include/**";
+				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/PointSDK/include/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -406,7 +408,7 @@
 				INFOPLIST_FILE = "BDPoint/BDPoint-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/BDPoint/PointSDK/**",
+					"$(PROJECT_DIR)/PointSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-lBDPointSDK-${PLATFORM_NAME}",
@@ -415,7 +417,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/BDPoint/PointSDK/include/**";
+				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/PointSDK/include/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
