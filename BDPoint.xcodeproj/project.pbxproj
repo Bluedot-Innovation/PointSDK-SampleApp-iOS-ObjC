@@ -16,7 +16,6 @@
 		3E12698A1CD986562C3CE339 /* BDZoneMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1266BE722C20AA53C1F641 /* BDZoneMapViewController.m */; };
 		3E126DF1390BAA3EB0BB7249 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E12632BFE3EC769CE0D1D43 /* CoreMotion.framework */; };
 		832D483B19515A6C00DC29A9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832D483A19515A6C00DC29A9 /* MapKit.framework */; };
-		8363BF0E1AC0DF17005CC098 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 8363BF0B1AC0DF17005CC098 /* README */; };
 		838DD2E9194BF316003B5942 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2E8194BF316003B5942 /* Foundation.framework */; };
 		838DD2EB194BF316003B5942 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2EA194BF316003B5942 /* CoreGraphics.framework */; };
 		838DD2ED194BF316003B5942 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2EC194BF316003B5942 /* UIKit.framework */; };
@@ -250,7 +249,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8363BF0E1AC0DF17005CC098 /* README in Resources */,
 				838DD2F3194BF316003B5942 /* InfoPlist.strings in Resources */,
 				838DD2FB194BF316003B5942 /* Images.xcassets in Resources */,
 				3E12658AB765C20C4A630F8E /* BDAuthenticationView.xib in Resources */,
