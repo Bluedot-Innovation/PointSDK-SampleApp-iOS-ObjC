@@ -5,15 +5,14 @@
 //  Copyright (c) 2014 Bluedot. All rights reserved.
 //
 
-#import "BDAppDelegate.h"
+#import <BDPointSDK/BDPointSDK.h>
 
-#import <BDPointSDK.h>
+#import "BDAppDelegate.h"
 
 #import "BDZoneMapViewController.h"
 #import "BDZoneChecklistViewController.h"
 #import "BDAuthenticationViewController.h"
 #import "BDFocusFencesNotification.h"
-#import "NSString+BDURLEncoding.h"
 
 @interface BDAppDelegate() <BDPointDelegate, UITabBarControllerDelegate>
 

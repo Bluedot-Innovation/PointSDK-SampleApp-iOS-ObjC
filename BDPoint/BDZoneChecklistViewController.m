@@ -6,16 +6,18 @@
 //  Copyright (c) 2014 Bluedot. All rights reserved.
 //
 
+#import <BDPointSDK/BDPointSDK.h>
+
 #import "BDZoneChecklistViewController.h"
-#import "NSObject+BDKVOBlocks.h"
 #import "BDFocusFencesNotification.h"
 #import "BDStyles.h"
-#import <BDPointSDK.h>
+
 
 #define BDFenceCellReuseIdentifier @"BDFenceCellReuseIdentifier"
 
 #define BDRowHeight 48.0f
 #define BDShowOnMapButtonTitlePadding 6.0f
+
 
 @interface BDZoneChecklistViewController () <UITableViewDataSource, UITableViewDelegate>
 

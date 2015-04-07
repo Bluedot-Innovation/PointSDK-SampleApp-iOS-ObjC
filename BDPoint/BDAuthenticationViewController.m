@@ -3,12 +3,12 @@
 // Copyright (c) 2014 Chris Hatton. All rights reserved.
 //
 
+#import <BDPointSDK/BDPointSDK.h>
+
 #import "BDAuthenticationViewController.h"
-#import "NSObject+BDKVOBlocks.h"
 #import "BDDefaultCredentials.h"
 #import "BDStyles.h"
-#import "NSString+BDURLEncoding.h"
-#import <BDPointSDK.h>
+
 
 #define BDActionURLRegister          @"http://www.bluedot.com.au"
 #define BDActionURLIntegrateMoreInfo @"http://www.bluedot.com.au"

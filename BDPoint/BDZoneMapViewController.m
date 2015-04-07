@@ -6,15 +6,18 @@
 //  Copyright (c) 2014 Bluedot. All rights reserved.
 //
 
+#import <BDPointSDK/BDPointSDK.h>
+
 #import "BDZoneMapViewController.h"
-#import "MKMapView+BDPoint.h"
 #import "BDFocusFencesNotification.h"
+
 
 #define BDFenceColorDefault       UIColor.grayColor
 #define BDFenceColorCheckedIn     UIColor.cyanColor
 #define BDFenceColorCheckedInLast UIColor.greenColor
 
 #define BDFenceMapInset 10.0f
+
 
 @interface BDZoneMapViewController () <MKMapViewDelegate>
 
