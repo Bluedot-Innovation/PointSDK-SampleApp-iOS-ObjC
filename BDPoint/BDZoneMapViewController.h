@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <BDPointSDK/BDPointSDK.h>
+#import <BDPointSDK.h>
 
 
 @interface BDZoneMapViewController : UIViewController

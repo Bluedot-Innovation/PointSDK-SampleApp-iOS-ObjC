@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Bluedot. All rights reserved.
 //
 
-#import <BDPointSDK/BDPointSDK.h>
+#import <BDPointSDK.h>
 
 #import "BDZoneMapViewController.h"
 #import "BDFocusFencesNotification.h"

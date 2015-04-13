@@ -3,7 +3,7 @@
 // Copyright (c) 2014 Chris Hatton. All rights reserved.
 //
 
-#import <BDPointSDK/BDPointSDK.h>
+#import <BDPointSDK.h>
 
 #import "BDAuthenticationViewController.h"
 #import "BDDefaultCredentials.h"
