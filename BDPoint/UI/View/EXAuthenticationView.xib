@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6249" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BDAuthenticationViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EXAuthenticationViewController">
             <connections>
                 <outlet property="apiKeyTextField" destination="yNs-ec-Trk" id="4hs-UA-EUn"/>
                 <outlet property="interfacePanel" destination="SL5-8E-6d9" id="GPJ-70-LLC"/>
@@ -25,27 +24,21 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="zuJ-Lb-Ohi" userLabel="backgroundImage">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="zuJ-Lb-Ohi" secondAttribute="height" multiplier="40:71" id="3rL-Dq-IK2"/>
-                    </constraints>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                    </accessibility>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pw0-jh-9hC" userLabel="titlePanel">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bluedot" translatesAutoresizingMaskIntoConstraints="NO" id="vJ4-cs-QHb" userLabel="bluedotLogoImage">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Bluedot" translatesAutoresizingMaskIntoConstraints="NO" id="vJ4-cs-QHb" userLabel="bluedotLogoImage">
                             <rect key="frame" x="20" y="30" width="165" height="40"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="165" id="1NQ-z4-Jow"/>
-                                <constraint firstAttribute="height" constant="40" id="H2j-U4-YSz"/>
-                            </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="vJ4-cs-QHb" secondAttribute="bottom" constant="10" id="Rqy-5n-8go"/>
-                        <constraint firstItem="vJ4-cs-QHb" firstAttribute="leading" secondItem="Pw0-jh-9hC" secondAttribute="leading" constant="20" id="r4g-s8-Vhc"/>
-                        <constraint firstAttribute="height" constant="80" id="wwa-LD-MoB"/>
+                        <constraint firstAttribute="height" constant="80" id="wOe-Bm-sxo"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
@@ -59,8 +52,8 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SL5-8E-6d9" userLabel="interfacePanel">
-                    <rect key="frame" x="20" y="143" width="280" height="313"/>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SL5-8E-6d9" userLabel="interfacePanel">
+                    <rect key="frame" x="20" y="110" width="280" height="313"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="API key" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yNs-ec-Trk" userLabel="apiKeyTextField">
                             <rect key="frame" x="20" y="51" width="240" height="30"/>
@@ -157,6 +150,10 @@
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="6YS-b8-qlv"/>
+                        <constraint firstAttribute="height" constant="313" id="jwo-yr-Ujs"/>
+                    </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
                             <integer key="value" value="3"/>
@@ -172,17 +169,18 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Pw0-jh-9hC" firstAttribute="top" secondItem="1" secondAttribute="top" id="0Rc-fs-M8A"/>
-                <constraint firstAttribute="centerX" secondItem="SL5-8E-6d9" secondAttribute="centerX" id="HFR-o0-yTP"/>
-                <constraint firstItem="zuJ-Lb-Ohi" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Hdt-3v-F1d"/>
-                <constraint firstItem="zuJ-Lb-Ohi" firstAttribute="top" secondItem="1" secondAttribute="top" id="WVv-st-Z2D"/>
-                <constraint firstAttribute="centerY" secondItem="SL5-8E-6d9" secondAttribute="centerY" constant="-15.5" id="jiX-2K-csl"/>
-                <constraint firstItem="Pw0-jh-9hC" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="jll-f4-XEK"/>
-                <constraint firstAttribute="trailing" secondItem="Pw0-jh-9hC" secondAttribute="trailing" id="ks6-s9-G9N"/>
-                <constraint firstAttribute="trailing" secondItem="zuJ-Lb-Ohi" secondAttribute="trailing" id="ldT-qS-vly"/>
-                <constraint firstAttribute="bottom" secondItem="zuJ-Lb-Ohi" secondAttribute="bottom" id="weY-et-gSw"/>
+                <constraint firstItem="Pw0-jh-9hC" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="09G-hS-ZW3"/>
+                <constraint firstAttribute="trailing" secondItem="Pw0-jh-9hC" secondAttribute="trailing" id="E7w-Xv-CBc"/>
+                <constraint firstAttribute="centerX" secondItem="SL5-8E-6d9" secondAttribute="centerX" id="EaJ-kp-tRq"/>
+                <constraint firstAttribute="trailing" secondItem="zuJ-Lb-Ohi" secondAttribute="trailing" id="LOt-mU-Rih"/>
+                <constraint firstItem="Pw0-jh-9hC" firstAttribute="top" secondItem="1" secondAttribute="top" id="UwK-jB-un0"/>
+                <constraint firstAttribute="bottom" secondItem="zuJ-Lb-Ohi" secondAttribute="bottom" id="ViR-Xf-95L"/>
+                <constraint firstItem="zuJ-Lb-Ohi" firstAttribute="top" secondItem="1" secondAttribute="top" id="m3V-hK-OWh"/>
+                <constraint firstAttribute="centerY" secondItem="SL5-8E-6d9" secondAttribute="centerY" id="t1S-k6-soS"/>
+                <constraint firstItem="zuJ-Lb-Ohi" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="tE3-cg-g2p"/>
             </constraints>
             <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+            <point key="canvasLocation" x="461" y="236"/>
         </view>
     </objects>
     <resources>

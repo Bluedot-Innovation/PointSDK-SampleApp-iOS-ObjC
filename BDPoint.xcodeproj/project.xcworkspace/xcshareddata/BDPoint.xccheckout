@@ -10,78 +10,18 @@
 	<string>BDPoint</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>0D680488AA08A5382896CDC3BB66CD73AB638911</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Core/BDCore-Persist.git</string>
-		<key>254848FDB6A8A514675B06E34791FBBA75B8E9C2</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Core/BDSensors.git</string>
-		<key>2F53C139FE16773CDC9C4D594D08983EDF40BF27</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/BDForm.git</string>
-		<key>33BFD8C1FA60007C79B4EAE4E74E108BE0D294EE</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Telegraph/BDTelegraph-JSON.git</string>
-		<key>44C443FFFEF7458FA7CED66995F2FBC42B7C7478</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Core/BDCore-Persist-SQLite.git</string>
-		<key>477D9FC71451666D5459588AFC2902F7FBD10449</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Semaphore/BDSemaphore.git</string>
-		<key>7441B068FD3F73FBC881EFA6FB2EDC410AF880D8</key>
-		<string>http://git.internal.bluedot.com.au/r/Common/BDClassMaps.git</string>
-		<key>93D1348F074FF4A2006C5B07D9A488D0A3A03118</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Bluedot/BDApplicationModel.git</string>
-		<key>9A93D1DB81B9FAB5C15571D783BA7DCEBD4D245B</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Bluedot/BDPointSDK.git</string>
-		<key>9EAAFA489DC147093A3C0F1604E994E7713B7065</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Semaphore/BDSemaphore-Model.git</string>
-		<key>B192D4DA8AAA21737285BF04F3AEC1E108DBB171</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Core/BDCore.git</string>
-		<key>B6767795AA256FE4FDAB7E4B0E5C561E2B6803DB</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Telegraph/BDTelegraph.git</string>
-		<key>C2FD152CDA81A817B55D1F1EC0068D06BD6DFA2B</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Core/BDRuleEngine.git</string>
-		<key>F40EFB3F284E46F5DF2C5E547389E8A40E00168C</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Core/BDSchedule.git</string>
-		<key>FD76D0963D1B0A022B367F7E8D2DABB1A916A3FD</key>
-		<string>http://git.internal.bluedot.com.au/r/ObjC/Bluedot/BDGeospatialModel.git</string>
 		<key>FF64E07F64036214F52F29FF49DC84E56EAE3E1E</key>
-		<string>github.com:Bluedot-Innovation/PointSDK-SampleApp-iOS.git</string>
+		<string>https://github.com/Bluedot-Innovation/PointSDK-SampleApp-iOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>BDPoint.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>0D680488AA08A5382896CDC3BB66CD73AB638911</key>
-		<string>../../../BDCore-Persist</string>
-		<key>254848FDB6A8A514675B06E34791FBBA75B8E9C2</key>
-		<string>../../../BDSensors</string>
-		<key>2F53C139FE16773CDC9C4D594D08983EDF40BF27</key>
-		<string>../../../BDForm</string>
-		<key>33BFD8C1FA60007C79B4EAE4E74E108BE0D294EE</key>
-		<string>../../../BDTelegraph-JSON</string>
-		<key>44C443FFFEF7458FA7CED66995F2FBC42B7C7478</key>
-		<string>../../../BDCore-Persist-SQLite</string>
-		<key>477D9FC71451666D5459588AFC2902F7FBD10449</key>
-		<string>../../../BDSemaphore</string>
-		<key>7441B068FD3F73FBC881EFA6FB2EDC410AF880D8</key>
-		<string>../../../BDClassMaps</string>
-		<key>93D1348F074FF4A2006C5B07D9A488D0A3A03118</key>
-		<string>../../../BDApplicationModel</string>
-		<key>9A93D1DB81B9FAB5C15571D783BA7DCEBD4D245B</key>
-		<string>../../../BDPointSDK</string>
-		<key>9EAAFA489DC147093A3C0F1604E994E7713B7065</key>
-		<string>../../../BDSemaphore-Model</string>
-		<key>B192D4DA8AAA21737285BF04F3AEC1E108DBB171</key>
-		<string>../../../BDCore</string>
-		<key>B6767795AA256FE4FDAB7E4B0E5C561E2B6803DB</key>
-		<string>../../../BDTelegraph</string>
-		<key>C2FD152CDA81A817B55D1F1EC0068D06BD6DFA2B</key>
-		<string>../../../BDRuleEngine</string>
-		<key>F40EFB3F284E46F5DF2C5E547389E8A40E00168C</key>
-		<string>../../../BDSchedule</string>
-		<key>FD76D0963D1B0A022B367F7E8D2DABB1A916A3FD</key>
-		<string>../../../BDGeospatialModel</string>
 		<key>FF64E07F64036214F52F29FF49DC84E56EAE3E1E</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:Bluedot-Innovation/PointSDK-SampleApp-iOS.git</string>
+	<string>https://github.com/Bluedot-Innovation/PointSDK-SampleApp-iOS.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
@@ -92,129 +32,9 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>93D1348F074FF4A2006C5B07D9A488D0A3A03118</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDApplicationModel</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7441B068FD3F73FBC881EFA6FB2EDC410AF880D8</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDClassMaps</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B192D4DA8AAA21737285BF04F3AEC1E108DBB171</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDCore</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>0D680488AA08A5382896CDC3BB66CD73AB638911</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDCore-Persist</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>44C443FFFEF7458FA7CED66995F2FBC42B7C7478</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDCore-Persist-SQLite</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2F53C139FE16773CDC9C4D594D08983EDF40BF27</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDForm</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FD76D0963D1B0A022B367F7E8D2DABB1A916A3FD</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDGeospatialModel</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>FF64E07F64036214F52F29FF49DC84E56EAE3E1E</string>
 			<key>IDESourceControlWCCName</key>
-			<string>BDPointSampleApp</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9A93D1DB81B9FAB5C15571D783BA7DCEBD4D245B</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDPointSDK</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>C2FD152CDA81A817B55D1F1EC0068D06BD6DFA2B</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDRuleEngine</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>F40EFB3F284E46F5DF2C5E547389E8A40E00168C</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDSchedule</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>477D9FC71451666D5459588AFC2902F7FBD10449</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDSemaphore</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9EAAFA489DC147093A3C0F1604E994E7713B7065</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDSemaphore-Model</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>254848FDB6A8A514675B06E34791FBBA75B8E9C2</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDSensors</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B6767795AA256FE4FDAB7E4B0E5C561E2B6803DB</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDTelegraph</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>33BFD8C1FA60007C79B4EAE4E74E108BE0D294EE</string>
-			<key>IDESourceControlWCCName</key>
-			<string>BDTelegraph-JSON</string>
+			<string>PointSDK-SampleApp-iOS</string>
 		</dict>
 	</array>
 </dict>

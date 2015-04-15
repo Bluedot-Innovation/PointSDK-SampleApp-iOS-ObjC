@@ -1,2 +1,0 @@
-
-#define BDShowFencesOnMapNotification @"BDShowFencesOnMapNotification"

@@ -10,10 +10,10 @@
 		3E12600A978753FBADC9934F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1263B9B2D55BF007404889 /* AudioToolbox.framework */; };
 		3E12602E16A46BB9C173A90F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1267A1F79D673ADC5C0FA3 /* CoreLocation.framework */; };
 		3E1260BB62CA2AD2E96C2B96 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E126E7C4A5B6B3BB09D809C /* SystemConfiguration.framework */; };
-		3E12635CBB8C138F23481872 /* BDAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E126C2714E706A16D9FDE8C /* BDAuthenticationViewController.m */; };
-		3E12636A113A6BBA9D18480A /* BDZoneChecklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E126073531824567865A6E4 /* BDZoneChecklistViewController.m */; };
-		3E12658AB765C20C4A630F8E /* BDAuthenticationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E126FEC48B4BE801C9F6541 /* BDAuthenticationView.xib */; };
-		3E12698A1CD986562C3CE339 /* BDZoneMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1266BE722C20AA53C1F641 /* BDZoneMapViewController.m */; };
+		3E12635CBB8C138F23481872 /* EXAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E126C2714E706A16D9FDE8C /* EXAuthenticationViewController.m */; };
+		3E12636A113A6BBA9D18480A /* EXZoneChecklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E126073531824567865A6E4 /* EXZoneChecklistViewController.m */; };
+		3E12658AB765C20C4A630F8E /* EXAuthenticationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E126FEC48B4BE801C9F6541 /* EXAuthenticationView.xib */; };
+		3E12698A1CD986562C3CE339 /* EXZoneMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1266BE722C20AA53C1F641 /* EXZoneMapViewController.m */; };
 		3E126DF1390BAA3EB0BB7249 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E12632BFE3EC769CE0D1D43 /* CoreMotion.framework */; };
 		832D483B19515A6C00DC29A9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832D483A19515A6C00DC29A9 /* MapKit.framework */; };
 		838DD2E9194BF316003B5942 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2E8194BF316003B5942 /* Foundation.framework */; };
@@ -21,26 +21,25 @@
 		838DD2ED194BF316003B5942 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2EC194BF316003B5942 /* UIKit.framework */; };
 		838DD2F3194BF316003B5942 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 838DD2F1194BF316003B5942 /* InfoPlist.strings */; };
 		838DD2F5194BF316003B5942 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F4194BF316003B5942 /* main.m */; };
-		838DD2F9194BF316003B5942 /* BDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F8194BF316003B5942 /* BDAppDelegate.m */; };
+		838DD2F9194BF316003B5942 /* EXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F8194BF316003B5942 /* EXAppDelegate.m */; };
 		838DD2FB194BF316003B5942 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838DD2FA194BF316003B5942 /* Images.xcassets */; };
 		83E0621A19EF6AB7009BDF0D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E0621919EF6AB7009BDF0D /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3E126073531824567865A6E4 /* BDZoneChecklistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDZoneChecklistViewController.m; sourceTree = "<group>"; };
+		3E126073531824567865A6E4 /* EXZoneChecklistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXZoneChecklistViewController.m; sourceTree = "<group>"; };
 		3E126130CA255C267FD74252 /* BDStyles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDStyles.h; sourceTree = "<group>"; };
-		3E126202E37AB4EB9190EA47 /* BDFocusFencesNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDFocusFencesNotification.h; sourceTree = "<group>"; };
+		3E126202E37AB4EB9190EA47 /* EXNotificationStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXNotificationStrings.h; sourceTree = "<group>"; };
 		3E12632BFE3EC769CE0D1D43 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		3E1263B9B2D55BF007404889 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		3E1266BE722C20AA53C1F641 /* BDZoneMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDZoneMapViewController.m; sourceTree = "<group>"; };
+		3E1266BE722C20AA53C1F641 /* EXZoneMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXZoneMapViewController.m; sourceTree = "<group>"; };
 		3E1267A1F79D673ADC5C0FA3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		3E126813957BD9D267057570 /* BDZoneMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDZoneMapViewController.h; sourceTree = "<group>"; };
-		3E126861E2AC77B0D4BF44E3 /* BDDefaultCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDDefaultCredentials.h; sourceTree = "<group>"; };
-		3E12688077B7E3004A46836A /* BDZoneChecklistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDZoneChecklistViewController.h; sourceTree = "<group>"; };
-		3E126C2714E706A16D9FDE8C /* BDAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAuthenticationViewController.m; sourceTree = "<group>"; };
+		3E126813957BD9D267057570 /* EXZoneMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXZoneMapViewController.h; sourceTree = "<group>"; };
+		3E12688077B7E3004A46836A /* EXZoneChecklistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXZoneChecklistViewController.h; sourceTree = "<group>"; };
+		3E126C2714E706A16D9FDE8C /* EXAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXAuthenticationViewController.m; sourceTree = "<group>"; };
 		3E126E7C4A5B6B3BB09D809C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		3E126EE9955E8345DBEE3ECD /* BDAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAuthenticationViewController.h; sourceTree = "<group>"; };
-		3E126FEC48B4BE801C9F6541 /* BDAuthenticationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BDAuthenticationView.xib; sourceTree = "<group>"; };
+		3E126EE9955E8345DBEE3ECD /* EXAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXAuthenticationViewController.h; sourceTree = "<group>"; };
+		3E126FEC48B4BE801C9F6541 /* EXAuthenticationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EXAuthenticationView.xib; sourceTree = "<group>"; };
 		832D483A19515A6C00DC29A9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8363BF0B1AC0DF17005CC098 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		838DD2E5194BF316003B5942 /* BDPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,8 +50,8 @@
 		838DD2F2194BF316003B5942 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		838DD2F4194BF316003B5942 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		838DD2F6194BF316003B5942 /* BDPoint-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BDPoint-Prefix.pch"; sourceTree = "<group>"; };
-		838DD2F7194BF316003B5942 /* BDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDAppDelegate.h; sourceTree = "<group>"; };
-		838DD2F8194BF316003B5942 /* BDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDAppDelegate.m; sourceTree = "<group>"; };
+		838DD2F7194BF316003B5942 /* EXAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EXAppDelegate.h; sourceTree = "<group>"; };
+		838DD2F8194BF316003B5942 /* EXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EXAppDelegate.m; sourceTree = "<group>"; };
 		838DD2FA194BF316003B5942 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		83E0621919EF6AB7009BDF0D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -89,13 +88,13 @@
 		3E126ABE52AA5B1EB6B09A06 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3E12688077B7E3004A46836A /* BDZoneChecklistViewController.h */,
-				3E126073531824567865A6E4 /* BDZoneChecklistViewController.m */,
-				3E126813957BD9D267057570 /* BDZoneMapViewController.h */,
-				3E1266BE722C20AA53C1F641 /* BDZoneMapViewController.m */,
-				3E126C2714E706A16D9FDE8C /* BDAuthenticationViewController.m */,
-				3E126EE9955E8345DBEE3ECD /* BDAuthenticationViewController.h */,
-				3E126202E37AB4EB9190EA47 /* BDFocusFencesNotification.h */,
+				3E12688077B7E3004A46836A /* EXZoneChecklistViewController.h */,
+				3E126073531824567865A6E4 /* EXZoneChecklistViewController.m */,
+				3E126813957BD9D267057570 /* EXZoneMapViewController.h */,
+				3E1266BE722C20AA53C1F641 /* EXZoneMapViewController.m */,
+				3E126C2714E706A16D9FDE8C /* EXAuthenticationViewController.m */,
+				3E126EE9955E8345DBEE3ECD /* EXAuthenticationViewController.h */,
+				3E126202E37AB4EB9190EA47 /* EXNotificationStrings.h */,
 				3E126130CA255C267FD74252 /* BDStyles.h */,
 			);
 			name = Controller;
@@ -105,7 +104,7 @@
 		3E126EDEDE72E1EA303742BF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3E126FEC48B4BE801C9F6541 /* BDAuthenticationView.xib */,
+				3E126FEC48B4BE801C9F6541 /* EXAuthenticationView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -163,12 +162,11 @@
 		838DD2EE194BF316003B5942 /* BDPoint */ = {
 			isa = PBXGroup;
 			children = (
-				838DD2F7194BF316003B5942 /* BDAppDelegate.h */,
-				838DD2F8194BF316003B5942 /* BDAppDelegate.m */,
+				838DD2F7194BF316003B5942 /* EXAppDelegate.h */,
+				838DD2F8194BF316003B5942 /* EXAppDelegate.m */,
 				838DD2FA194BF316003B5942 /* Images.xcassets */,
 				838DD2EF194BF316003B5942 /* Supporting Files */,
 				3E126417CBC118A2940766B4 /* UI */,
-				3E126861E2AC77B0D4BF44E3 /* BDDefaultCredentials.h */,
 			);
 			path = BDPoint;
 			sourceTree = "<group>";
@@ -251,7 +249,7 @@
 			files = (
 				838DD2F3194BF316003B5942 /* InfoPlist.strings in Resources */,
 				838DD2FB194BF316003B5942 /* Images.xcassets in Resources */,
-				3E12658AB765C20C4A630F8E /* BDAuthenticationView.xib in Resources */,
+				3E12658AB765C20C4A630F8E /* EXAuthenticationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,11 +260,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				838DD2F9194BF316003B5942 /* BDAppDelegate.m in Sources */,
+				838DD2F9194BF316003B5942 /* EXAppDelegate.m in Sources */,
 				838DD2F5194BF316003B5942 /* main.m in Sources */,
-				3E12636A113A6BBA9D18480A /* BDZoneChecklistViewController.m in Sources */,
-				3E12698A1CD986562C3CE339 /* BDZoneMapViewController.m in Sources */,
-				3E12635CBB8C138F23481872 /* BDAuthenticationViewController.m in Sources */,
+				3E12636A113A6BBA9D18480A /* EXZoneChecklistViewController.m in Sources */,
+				3E12698A1CD986562C3CE339 /* EXZoneMapViewController.m in Sources */,
+				3E12635CBB8C138F23481872 /* EXAuthenticationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Bluedot. All rights reserved.
 //
 
-#import "BDAppDelegate.h"
+#import "EXAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool
     {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([BDAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([EXAppDelegate class]));
     }
 }
