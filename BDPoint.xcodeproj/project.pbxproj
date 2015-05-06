@@ -10,7 +10,7 @@
 		3E12600A978753FBADC9934F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1263B9B2D55BF007404889 /* AudioToolbox.framework */; };
 		3E12602E16A46BB9C173A90F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1267A1F79D673ADC5C0FA3 /* CoreLocation.framework */; };
 		3E1260BB62CA2AD2E96C2B96 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E126E7C4A5B6B3BB09D809C /* SystemConfiguration.framework */; };
-		3E12635CBB8C138F23481872 /* EXAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E126C2714E706A16D9FDE8C /* EXAuthenticationViewController.m */; };
+		3E12635CBB8C138F23481872 /* ExAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E126C2714E706A16D9FDE8C /* ExAuthenticationViewController.m */; };
 		3E12636A113A6BBA9D18480A /* EXZoneChecklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E126073531824567865A6E4 /* EXZoneChecklistViewController.m */; };
 		3E12658AB765C20C4A630F8E /* EXAuthenticationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E126FEC48B4BE801C9F6541 /* EXAuthenticationView.xib */; };
 		3E12698A1CD986562C3CE339 /* EXZoneMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1266BE722C20AA53C1F641 /* EXZoneMapViewController.m */; };
@@ -36,12 +36,11 @@
 		3E1267A1F79D673ADC5C0FA3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3E126813957BD9D267057570 /* EXZoneMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXZoneMapViewController.h; sourceTree = "<group>"; };
 		3E12688077B7E3004A46836A /* EXZoneChecklistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXZoneChecklistViewController.h; sourceTree = "<group>"; };
-		3E126C2714E706A16D9FDE8C /* EXAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXAuthenticationViewController.m; sourceTree = "<group>"; };
+		3E126C2714E706A16D9FDE8C /* ExAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExAuthenticationViewController.m; sourceTree = "<group>"; };
 		3E126E7C4A5B6B3BB09D809C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3E126EE9955E8345DBEE3ECD /* EXAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXAuthenticationViewController.h; sourceTree = "<group>"; };
 		3E126FEC48B4BE801C9F6541 /* EXAuthenticationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EXAuthenticationView.xib; sourceTree = "<group>"; };
 		832D483A19515A6C00DC29A9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		8363BF0B1AC0DF17005CC098 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		838DD2E5194BF316003B5942 /* BDPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838DD2E8194BF316003B5942 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		838DD2EA194BF316003B5942 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -92,7 +91,7 @@
 				3E126073531824567865A6E4 /* EXZoneChecklistViewController.m */,
 				3E126813957BD9D267057570 /* EXZoneMapViewController.h */,
 				3E1266BE722C20AA53C1F641 /* EXZoneMapViewController.m */,
-				3E126C2714E706A16D9FDE8C /* EXAuthenticationViewController.m */,
+				3E126C2714E706A16D9FDE8C /* ExAuthenticationViewController.m */,
 				3E126EE9955E8345DBEE3ECD /* EXAuthenticationViewController.h */,
 				3E126202E37AB4EB9190EA47 /* EXNotificationStrings.h */,
 				3E126130CA255C267FD74252 /* BDStyles.h */,
@@ -120,7 +119,6 @@
 		8363BEE61AC0DF17005CC098 /* PointSDK */ = {
 			isa = PBXGroup;
 			children = (
-				8363BF0B1AC0DF17005CC098 /* README */,
 			);
 			path = PointSDK;
 			sourceTree = "<group>";
@@ -264,7 +262,7 @@
 				838DD2F5194BF316003B5942 /* main.m in Sources */,
 				3E12636A113A6BBA9D18480A /* EXZoneChecklistViewController.m in Sources */,
 				3E12698A1CD986562C3CE339 /* EXZoneMapViewController.m in Sources */,
-				3E12635CBB8C138F23481872 /* EXAuthenticationViewController.m in Sources */,
+				3E12635CBB8C138F23481872 /* ExAuthenticationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

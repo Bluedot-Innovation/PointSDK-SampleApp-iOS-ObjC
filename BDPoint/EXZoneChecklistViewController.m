@@ -17,8 +17,9 @@
 static NSString  *fenceCellReuseIdentifier = @"BDFenceCellReuseIdentifier";
 
 static const float  rowHeight = 48.0f;
-static const float  showOnMapButtonTitlePadding = 6.0f;
+static const float  buttonInset = 6.0f;
 static const float  buttonFontSize = 13.0f;
+static const float  switchWidth = 20.0f;
 
 
 /*
@@ -40,6 +41,7 @@ static const float  buttonFontSize = 13.0f;
 
 
 @implementation EXZoneChecklistViewController
+
 
 - (id)init
 {
@@ -74,6 +76,7 @@ static const float  buttonFontSize = 13.0f;
  */
 - (void)loadView
 {
+    float  statusBarHeight = [ [ UIApplication sharedApplication ] statusBarFrame ].size.height;
     UITableView  *tableView = [ UITableView new ];
 
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -81,7 +84,8 @@ static const float  buttonFontSize = 13.0f;
     //  Set the delegate for the table as this class
     tableView.dataSource = self;
     tableView.delegate   = self;
-    
+
+    tableView.contentInset = UIEdgeInsetsMake( statusBarHeight, 0.0f, 0.0f, 0.0f );
     self.view = tableView;
 }
 
@@ -187,7 +191,7 @@ static const float  buttonFontSize = 13.0f;
     [ showOnMapButton setTitleColor: UIColor.whiteColor forState: UIControlStateNormal ];
     
     showOnMapButton.backgroundColor = BDBlueColor;
-    showOnMapButton.contentEdgeInsets = UIEdgeInsetsMake( showOnMapButtonTitlePadding, showOnMapButtonTitlePadding, showOnMapButtonTitlePadding, showOnMapButtonTitlePadding );
+    showOnMapButton.contentEdgeInsets = UIEdgeInsetsMake( buttonInset, buttonInset, buttonInset, buttonInset );
     showOnMapButton.layer.cornerRadius = BDButtonCornerRadii;
 
     [ showOnMapButton sizeToFit ];
@@ -240,11 +244,35 @@ static const float  buttonFontSize = 13.0f;
 }
 
 
-- (NSString *)tableView: (UITableView *)tableView titleForHeaderInSection: (NSInteger)section
+/*
+ *  Create a view for the table headers to allow a switch to be embedded within.
+ */
+- (UIView *)tableView: (UITableView *)tableView viewForHeaderInSection: (NSInteger)section
 {
     BDZoneInfo  *zone = _orderedZones[ (NSUInteger)section ];
+    CGRect frame = tableView.frame;
+    float  height = rowHeight - ( buttonInset * 2.0f );
 
-    return zone.name;
+    //  Instantiate a switch with a standard size
+    UISwitch *zoneSwitch = [ [ UISwitch alloc ] initWithFrame: CGRectZero ];
+    [ zoneSwitch addTarget: self action: @selector( switchToggled: ) forControlEvents: UIControlEventTouchUpInside ];
+    zoneSwitch.tag = section;
+
+    CGRect  switchPosition = CGRectMake( frame.size.width - zoneSwitch.frame.size.width - buttonInset, buttonInset,
+                                         zoneSwitch.frame.size.width, zoneSwitch.frame.size.height );
+    zoneSwitch.frame = switchPosition;
+    zoneSwitch.onTintColor = [ UIColor redColor ];
+
+    UILabel *title = [ [ UILabel alloc ] initWithFrame: CGRectMake( buttonInset, buttonInset,
+                                                                    frame.size.width - switchWidth - ( buttonInset * 2.0f ), height ) ];
+    title.text = zone.name;
+
+    UIView *headerView = [ [ UIView alloc ] initWithFrame: CGRectMake( 0, 0, frame.size.width, rowHeight ) ];
+    headerView.backgroundColor = [ UIColor cyanColor ];
+    [ headerView addSubview: title ];
+    [ headerView addSubview: zoneSwitch ];
+
+    return headerView;
 }
 
 #pragma mark UITableViewDataSource implementation end
@@ -274,4 +302,16 @@ static const float  buttonFontSize = 13.0f;
 
 #pragma mark UITableViewDelegate implementation end
 
+/*
+ *  Process the selected switch state to determine if the zone is to be disabled or re-enabled.
+ */
+- (void)switchToggled: (id)sender
+{
+    UISwitch  *zoneSwitch = (UISwitch *)sender;
+    BDZoneInfo  *zone = _orderedZones[ (NSUInteger)zoneSwitch.tag ];
+
+
+    //  If the switch is set to on, then the zone is to be disabled
+    [ [ BDLocationManager sharedLocationManager ] setZone: zone.ID disableByApplication: [ zoneSwitch isOn ] ];
+}
 @end

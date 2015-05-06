@@ -41,7 +41,7 @@
     
     //  Assign the delegates to this class
     locationManager.locationDelegate = self;
-    locationManager.authenticationDelegate = self;
+    locationManager.sessionDelegate = self;
 
     [ self initializeUserInterface ];
 
@@ -150,7 +150,7 @@
 
     _authenticationViewController = [ EXAuthenticationViewController new ];
     _zoneMapViewController        = [ [ EXZoneMapViewController alloc ] initWithHeight: viewHeight ];
-    _zoneChecklistViewController  = [ EXZoneChecklistViewController  new ];
+    _zoneChecklistViewController  = [ EXZoneChecklistViewController new ];
 
     _authenticationViewController.tabBarItem.image = [ UIImage imageNamed: @"Authenticate" ];
     _zoneMapViewController.tabBarItem.image = [ UIImage imageNamed: @"Map" ];
@@ -170,7 +170,7 @@
 
 
 /**
- * Switches tab-bar controller to the Map view, whenever a BDShowFencesOnMap notification is received.
+ * Switches tab-bar controller to the Map view, whenever a EXShowFencesOnMap notification is received.
  */
 -(void)startObservingShowFencesOnMapNotifications
 {
@@ -251,7 +251,7 @@
 }
 
 
-- (void)didLogOut
+- (void)didEndSession
 {
     NSLog( @"Logged out" );
 }
