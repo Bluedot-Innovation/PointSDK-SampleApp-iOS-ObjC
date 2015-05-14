@@ -268,24 +268,29 @@ EXAuthenticationViewControllerAltAction;
     [ defaults setValue: username    forKey: BDPointUsernameKey ];
     
     BDLocationManager  *locationManager = BDLocationManager.sharedLocationManager;
-    
-    if ( _customEndpointURL != nil )
+
+    /*
+     *  The default method to connect to the Bluedot Innovations back-end is utilising the method below.
+     *
+     *  Should a specific Bluedot back-end be required, then a custom URL can be utilised to authenticate the app.
+     */
+    if ( _customEndpointURL == nil )
+    {
+        [ locationManager authenticateWithApiKey: apiKey
+                                     packageName: packageName
+                                        username: username ];
+    }
+    else
     {
         NSAssert( [ _customEndpointURL isKindOfClass:NSURL.class ], NSInternalInconsistencyException );
 
         NSString  *customEndpointURLString = [ _customEndpointURL absoluteString ];
         [ defaults setValue: customEndpointURLString forKey: BDPointEndpointKey ];
-        
+
         [ locationManager authenticateWithApiKey: apiKey
                                      packageName: packageName
                                         username: username
                                      endpointURL: _customEndpointURL ];
-    }
-    else
-    {
-        [ locationManager authenticateWithApiKey: apiKey
-                                     packageName: packageName
-                                        username: username ];
     }
 }
 
