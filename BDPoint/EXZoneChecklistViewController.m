@@ -268,7 +268,7 @@ static const float  switchWidth = 20.0f;
     title.text = zone.name;
 
     UIView *headerView = [ [ UIView alloc ] initWithFrame: CGRectMake( 0, 0, frame.size.width, rowHeight ) ];
-    headerView.backgroundColor = [ UIColor cyanColor ];
+    headerView.backgroundColor = UIColorFromRGB( 0x8AB8d5 );
     [ headerView addSubview: title ];
     [ headerView addSubview: zoneSwitch ];
 
