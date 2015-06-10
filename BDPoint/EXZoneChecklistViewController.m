@@ -312,6 +312,6 @@ static const float  switchWidth = 20.0f;
 
 
     //  If the switch is set to on, then the zone is to be disabled
-    [ [ BDLocationManager sharedLocationManager ] setZone: zone.ID disableByApplication: [ zoneSwitch isOn ] ];
+    [ [ BDLocationManager instance ] setZone: zone.ID disableByApplication: [ zoneSwitch isOn ] ];
 }
 @end

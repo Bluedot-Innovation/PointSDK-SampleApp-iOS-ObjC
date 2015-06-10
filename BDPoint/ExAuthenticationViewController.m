@@ -192,7 +192,7 @@ EXAuthenticationViewControllerAltAction;
 
 - (IBAction)loginButtonTouchUpInside
 {
-    BDLocationManager  *locationManager = BDLocationManager.sharedLocationManager;
+    BDLocationManager  *locationManager = BDLocationManager.instance;
 
     //  Determine the authetication state
     switch( locationManager.authenticationState )
@@ -216,7 +216,7 @@ EXAuthenticationViewControllerAltAction;
  */
 - (IBAction)resetButtonTouchUpInside
 {
-    BDLocationManager  *locationManager = BDLocationManager.sharedLocationManager;
+    BDLocationManager  *locationManager = BDLocationManager.instance;
 
     if ( locationManager.authenticationState == BDAuthenticationStateAuthenticated )
     {
@@ -267,7 +267,7 @@ EXAuthenticationViewControllerAltAction;
     [ defaults setValue: packageName forKey: BDPointPackageNameKey ];
     [ defaults setValue: username    forKey: BDPointUsernameKey ];
     
-    BDLocationManager  *locationManager = BDLocationManager.sharedLocationManager;
+    BDLocationManager  *locationManager = BDLocationManager.instance;
 
     /*
      *  The default method to connect to the Bluedot Innovations back-end is utilising the method below.
@@ -304,7 +304,7 @@ EXAuthenticationViewControllerAltAction;
 {
     NSAssert( _authenticationStateObservation == nil, NSInternalInconsistencyException );
 
-    BDLocationManager  *locationManager = BDLocationManager.sharedLocationManager;
+    BDLocationManager  *locationManager = BDLocationManager.instance;
 
     /*
      *  Create a block to handle authentication changes.
@@ -413,7 +413,7 @@ EXAuthenticationViewControllerAltAction;
     /*
      *  Stop observing and reset the token to nil.
      */
-    [ BDLocationManager.sharedLocationManager removeBlockKVObservation: _authenticationStateObservation ];
+    [ BDLocationManager.instance removeBlockKVObservation: _authenticationStateObservation ];
     _authenticationStateObservation = nil;
 }
 

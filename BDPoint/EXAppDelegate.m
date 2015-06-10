@@ -37,7 +37,7 @@
 
 - (BOOL)application: (UIApplication *)application didFinishLaunchingWithOptions: (NSDictionary *)launchOptions
 {
-    BDLocationManager  *locationManager = [ BDLocationManager sharedLocationManager ];
+    BDLocationManager  *locationManager = [ BDLocationManager instance ];
     
     //  Assign the delegates to this class
     locationManager.locationDelegate = self;
@@ -176,7 +176,7 @@
 {
     void ( ^showFencesNotificationHandler )(NSNotification *) = ^( NSNotification *showFencesNotification )
     {
-        NSAssert( BDLocationManager.sharedLocationManager.authenticationState == BDAuthenticationStateAuthenticated, NSInternalInconsistencyException );
+        NSAssert( BDLocationManager.instance.authenticationState == BDAuthenticationStateAuthenticated, NSInternalInconsistencyException );
 
         [ _tabBarController setSelectedViewController: _zoneMapViewController ];
     };
@@ -284,7 +284,7 @@
  */
 - (void)didCheckIntoFence: (BDFence *)fence
                    inZone: (BDZoneInfo *)zone
-             atCoordinate: (CLLocationCoordinate2D)coordinate
+             atCoordinate: (BDLocationCoordinate2D)coordinate
                    onDate: (NSDate *)date
 {
     UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
