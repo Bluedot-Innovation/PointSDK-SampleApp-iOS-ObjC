@@ -23,11 +23,11 @@ static float  minButtonHeight = 44.0f;
 @interface EXZoneMapViewController () <MKMapViewDelegate>
 
 @property (nonatomic, readonly) MKMapView  *mapView;
-@property (nonatomic) BDFenceOverlayRendererFactory  *fenceRendererFactory;
+@property (nonatomic) BDGeometryRendererFactory  *geometryRendererFactory;
 
-@property (nonatomic) NSMapTable  *fenceRendererCache;
-@property (nonatomic) NSMapTable  *fenceCheckInStatuses;
-@property (nonatomic) BDFence  *lastCheckedInFence;
+@property (nonatomic) NSMapTable  *geometryRendererCache;
+@property (nonatomic) NSMapTable  *spatialObjectCheckInStatuses;
+@property (nonatomic) id<BDPSpatialObject> lastCheckedInSpatialObject;
 
 @property (nonatomic) UIEdgeInsets  fenceMapInsets;
 
@@ -66,15 +66,15 @@ static float  minButtonHeight = 44.0f;
         fenceColourCheckedIn = UIColor.cyanColor;
         fenceColourCheckedInLast = UIColor.greenColor;
 
-        _fenceCheckInStatuses = [ [ NSMapTable alloc ] initWithKeyOptions: NSPointerFunctionsStrongMemory|NSPointerFunctionsObjectPointerPersonality
+        _spatialObjectCheckInStatuses = [ [ NSMapTable alloc ] initWithKeyOptions: NSPointerFunctionsStrongMemory|NSPointerFunctionsObjectPointerPersonality
                                                              valueOptions: NSPointerFunctionsStrongMemory|NSPointerFunctionsObjectPersonality
                                                                  capacity: 8 ];
 
-        _fenceRendererFactory = [ [ BDFenceOverlayRendererFactory alloc ] initWithFillColor: UIColor.cyanColor
-                                                                                strokeColor: UIColor.cyanColor
-                                                                                strokeWidth: 2.0f
-                                                                                      alpha: 0.6f ];
-        _fenceRendererCache   = [ NSMapTable weakToStrongObjectsMapTable ];
+        _geometryRendererFactory = [ [ BDGeometryRendererFactory alloc ] initWithFillColor: UIColor.cyanColor
+                                                                            strokeColor: UIColor.cyanColor
+                                                                            strokeWidth: 2.0f
+                                                                                  alpha: 0.6f ];
+        _geometryRendererCache = [ NSMapTable weakToStrongObjectsMapTable ];
 
         _fenceMapInsets = UIEdgeInsetsMake( fenceMapInset, fenceMapInset, fenceMapInset, fenceMapInset );
 
@@ -125,24 +125,25 @@ static float  minButtonHeight = 44.0f;
 {
     
     //  Remove all existing fence overlays
-    for( BDFence *fence in _fenceCheckInStatuses.keyEnumerator )
+    for( BDFence *fence in _spatialObjectCheckInStatuses.keyEnumerator )
     {
         [ self.mapView removeOverlay: fence ];
     }
 
-    [ _fenceCheckInStatuses removeAllObjects ];
+    [_spatialObjectCheckInStatuses removeAllObjects];
 
     //  Assign all of the fences in zone
     for( BDZoneInfo *zone in zones )
     {
         for( BDFence *fence in zone.fences )
         {
-            [ _fenceCheckInStatuses setObject: @(NO) forKey: fence ];
+            [_spatialObjectCheckInStatuses setObject:@(NO)
+                                              forKey:fence];
         }
     }
 
     //  Add the fences as overlays to the map view
-    [ self.mapView addOverlays: _fenceCheckInStatuses.keyEnumerator.allObjects ];
+    [ self.mapView addOverlays: _spatialObjectCheckInStatuses.keyEnumerator.allObjects ];
 
     [ self.mapView setRegionToFitAllOverlaysWithPadding: _fenceMapInsets
                                                animated: YES ];
@@ -156,9 +157,10 @@ static float  minButtonHeight = 44.0f;
 {
     
     //  Set the checked-in status for the fence to YES
-    [ _fenceCheckInStatuses setObject: @(YES) forKey: fence ];
+    [_spatialObjectCheckInStatuses setObject:@(YES)
+                                      forKey:fence];
 
-    [ self refreshFenceAppearance: fence ];
+    [self refreshSpatialOverlayAppearance:fence];
 }
 
 
@@ -178,18 +180,21 @@ static float  minButtonHeight = 44.0f;
 - (MKOverlayRenderer *)mapView: (MKMapView *)mapView
             rendererForOverlay: (id<MKOverlay>)overlay
 {
-    NSAssert( [ overlay isKindOfClass: BDFence.class ], NSInternalInconsistencyException );
-    
-    BDFence  *fence = (BDFence *)overlay;
-    MKOverlayRenderer  *renderer = [ _fenceRendererCache objectForKey: fence ];
+    NSAssert([overlay conformsToProtocol:@protocol(BDPSpatialObject)], NSInternalInconsistencyException );
 
-    
+    id<MKOverlay,BDPSpatialObject> spatialOverlay = (id<MKOverlay,BDPSpatialObject>)overlay;
+
+    BDGeometry *geometry = spatialOverlay.geometry;
+
+    MKOverlayRenderer  *renderer = [_geometryRendererCache objectForKey:geometry];
+
     if ( renderer == nil )
     {
-        renderer = [ _fenceRendererFactory rendererForFence: fence ];
-        [ _fenceRendererCache setObject: renderer forKey: fence ];
-        
-        [ self refreshFenceAppearance: fence ];
+        renderer = [_geometryRendererFactory rendererForGeometry:geometry];
+        [_geometryRendererCache setObject:renderer
+                                   forKey:geometry];
+
+        [self refreshSpatialOverlayAppearance:spatialOverlay];
     }
 
     return renderer;
@@ -201,39 +206,38 @@ static float  minButtonHeight = 44.0f;
 /*
  *  Determine if a fence has been checked in.
  */
-- (BOOL)hasCheckedIntoFence: (BDFence *)fence
+- (BOOL)hasCheckedIntoSpatialObject: (id<BDPSpatialObject>)spatialObject
 {
-    
-    _lastCheckedInFence = fence;
-    return [ (NSNumber *)[ _fenceCheckInStatuses objectForKey: fence ] boolValue ];
+    _lastCheckedInSpatialObject = spatialObject;
+    return [ (NSNumber *) [_spatialObjectCheckInStatuses objectForKey:spatialObject] boolValue ];
 }
 
 
 /*
- *  Refresh the fences.
+ *  A spatial overlay is currently either a BDBeacon or a BDFence.
  */
-- (void)refreshFenceAppearance:(BDFence*)fence
+- (void)refreshSpatialOverlayAppearance:(id<MKOverlay,BDPSpatialObject>)spatialOverlay
 {
-    MKOverlayPathRenderer  *fenceRenderer = (MKOverlayPathRenderer *)[ self mapView: self.mapView rendererForOverlay: fence ];
-    UIColor  *fenceColor;
+    MKOverlayPathRenderer  *renderer = (MKOverlayPathRenderer *) [self mapView:self.mapView
+                                                                 rendererForOverlay:spatialOverlay];
+    UIColor  *overlayColor;
 
-    
-    if ( fence == _lastCheckedInFence )
+    if ( spatialOverlay == _lastCheckedInSpatialObject)
     {
-        fenceColor = fenceColourCheckedInLast;
+        overlayColor = fenceColourCheckedInLast;
     }
-    else if ( [ self hasCheckedIntoFence: fence ] == YES )
+    else if ([self hasCheckedIntoSpatialObject:spatialOverlay] == YES )
     {
-        fenceColor = fenceColourCheckedIn;
+        overlayColor = fenceColourCheckedIn;
     }
     else
     {
-        fenceColor = fenceColourDefault;
+        overlayColor = fenceColourDefault;
     }
 
     //  Assign the colours to be rendered
-    fenceRenderer.fillColor = fenceColor;
-    fenceRenderer.strokeColor = fenceColor;
+    renderer.fillColor = overlayColor;
+    renderer.strokeColor = overlayColor;
 }
 
 
