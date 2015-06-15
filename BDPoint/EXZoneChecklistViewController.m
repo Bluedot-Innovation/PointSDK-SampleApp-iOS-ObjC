@@ -30,9 +30,9 @@ static const float  switchWidth = 20.0f;
 @property (nonatomic, readonly) UITableView  *tableView;
 @property (nonatomic) NSOrderedSet  *orderedZones;
 
-@property (nonatomic) NSMapTable  *orderedFencesByZone;
-@property (nonatomic) NSMapTable  *checkedInFencesByZone;
-@property (nonatomic) NSMapTable  *fencesForButton;
+@property (nonatomic) NSMapTable  *orderedSpatialObjectsByZone;
+@property (nonatomic) NSMapTable  *checkedInSpatialObjectsByZone;
+@property (nonatomic) NSMapTable  *spatialObjectsForButton;
 
 @property (nonatomic) UIImage  *mapIcon;
 @property (nonatomic,copy) NSComparator  nameComparator;
@@ -53,9 +53,9 @@ static const float  switchWidth = 20.0f;
 
         //  Instantiate the sets and tables
         _orderedZones          = [ NSMutableOrderedSet new ];
-        _orderedFencesByZone   = [ NSMapTable strongToStrongObjectsMapTable ];
-        _checkedInFencesByZone = [ NSMapTable strongToStrongObjectsMapTable ];
-        _fencesForButton       = [ NSMapTable strongToStrongObjectsMapTable ];
+        _orderedSpatialObjectsByZone = [ NSMapTable strongToStrongObjectsMapTable ];
+        _checkedInSpatialObjectsByZone = [ NSMapTable strongToStrongObjectsMapTable ];
+        _spatialObjectsForButton = [ NSMapTable strongToStrongObjectsMapTable ];
         
         //  Define a comparator block
         _nameComparator = ^( id<BDPNamedDescribed> namedA, id<BDPNamedDescribed> namedB )
@@ -109,24 +109,26 @@ static const float  switchWidth = 20.0f;
 
 - (void)setZones: (NSSet *)zoneInfos
 {
-    
     // Sort Zones
     NSMutableOrderedSet  *mutableOrderedZones = [ [ NSMutableOrderedSet alloc ] initWithSet: zoneInfos ];
     [ mutableOrderedZones sortUsingComparator: _nameComparator ];
     _orderedZones = [ mutableOrderedZones copy ];
 
     //  Remove all existing fences
-    [_orderedFencesByZone   removeAllObjects];
-    [_checkedInFencesByZone removeAllObjects];
+    [ _orderedSpatialObjectsByZone removeAllObjects ];
+    [ _checkedInSpatialObjectsByZone removeAllObjects ];
 
     // Sort Fences
     for( BDZoneInfo *zone in zoneInfos )
     {
         NSAssert( [ zone.fences isKindOfClass: NSSet.class ], NSInternalInconsistencyException );
 
-        NSMutableOrderedSet  *mutableOrderedFences = [ [ NSMutableOrderedSet alloc ] initWithSet: zone.fences ];
-        [ mutableOrderedFences sortUsingComparator: _nameComparator ];
-        [ _orderedFencesByZone setObject: [ mutableOrderedFences copy ] forKey: zone ];
+        NSMutableOrderedSet  *mutableOrderedSpatialObjects = [ [ NSMutableOrderedSet alloc ] initWithSet: zone.fences ];
+        [ mutableOrderedSpatialObjects addObjectsFromArray: zone.beacons.allObjects ];
+
+        [ mutableOrderedSpatialObjects sortUsingComparator: _nameComparator ];
+        [ _orderedSpatialObjectsByZone setObject: [mutableOrderedSpatialObjects copy]
+                                          forKey: zone ];
     }
     
     if ( self.isViewLoaded == YES )
@@ -145,19 +147,20 @@ static const float  switchWidth = 20.0f;
 }
 
 
-- (BDFence *)fenceAtIndexPath: (NSIndexPath *)indexPath
+- (id <BDPSpatialObject>)spatialObjectAtIndexPath: (NSIndexPath *)indexPath
 {
     BDZoneInfo  *zone = [ self zoneForTableSection: (NSUInteger)indexPath.section ];
-    NSOrderedSet  *fences = [ _orderedFencesByZone objectForKey: zone ];
+    NSOrderedSet  *spatialObjects = [ _orderedSpatialObjectsByZone objectForKey: zone ];
 
-    return fences[ (NSUInteger)indexPath.row ];
+    return spatialObjects[ (NSUInteger)indexPath.row ];
 }
 
-- (void)didCheckIntoFence: (BDFence *)fence inZone: (BDZoneInfo *)zone
+- (void)didCheckIntoSpatialObject: (id<BDPSpatialObject>)spatialObject
+                           inZone: (BDZoneInfo *)zone
 {
     
-    [ _checkedInFencesByZone setObject: fence
-                                forKey: zone ];
+    [ _checkedInSpatialObjectsByZone setObject: spatialObject
+                                        forKey: zone ];
 
     [ self.tableView reloadData ];
 }
@@ -206,9 +209,9 @@ static const float  switchWidth = 20.0f;
 
 - (void)showOnMapButtonPressed: (UIButton *)button
 {
-    NSSet  *fences = [ _fencesForButton objectForKey: button ];
+    id<BDPSpatialObject>  spatialObject = [_spatialObjectsForButton objectForKey: button ];
     NSNotification  *notification = [ NSNotification notificationWithName: EXShowFencesOnMapNotification
-                                                                   object: fences ];
+                                                                   object: spatialObject ];
 
     [ NSNotificationCenter.defaultCenter postNotification: notification ];
 }
@@ -232,13 +235,37 @@ static const float  switchWidth = 20.0f;
         cell.accessoryView = showOnMapButton;
     }
 
-    NSSet  *fenceSet = [ NSSet setWithObject: [ self fenceAtIndexPath: indexPath ] ];
-    [ _fencesForButton setObject: fenceSet forKey: showOnMapButton ];
+    id<BDPSpatialObject>  spatialObject = [self spatialObjectAtIndexPath:indexPath];
 
-    BDFence  *fence = [ self fenceAtIndexPath: indexPath ];
+    [ _spatialObjectsForButton setObject: spatialObject
+                                  forKey: showOnMapButton ];
 
-    cell.textLabel.text = fence.name;
-    cell.detailTextLabel.text = fence.description;
+    NSString  *name;
+    NSString  *description;
+
+    if( [ spatialObject isKindOfClass:BDFence.class ] == YES )
+    {
+        BDFence *fence = (BDFence*)spatialObject;
+
+        name        = fence.name;
+        description = fence.description;
+    }
+    else if( [ spatialObject isKindOfClass:BDBeacon.class ] == YES )
+    {
+        BDBeacon *beacon = (BDBeacon*)spatialObject;
+
+        name        = beacon.name;
+        description = beacon.description;
+    }
+    else
+    {
+        @throw [ NSException exceptionWithName: @"EXUnknownObjectException"
+                                        reason: @"Unsupported spatial object"
+                                      userInfo: nil ];
+    }
+
+    cell.textLabel.text       = name;
+    cell.detailTextLabel.text = description;
 
     return cell;
 }
@@ -262,6 +289,7 @@ static const float  switchWidth = 20.0f;
                                          zoneSwitch.frame.size.width, zoneSwitch.frame.size.height );
     zoneSwitch.frame = switchPosition;
     zoneSwitch.onTintColor = [ UIColor redColor ];
+    zoneSwitch.on = ![ BDLocationManager.instance isZoneDisabledByApplication:zone.ID ];
 
     UILabel *title = [ [ UILabel alloc ] initWithFrame: CGRectMake( buttonInset, buttonInset,
                                                                     frame.size.width - switchWidth - ( buttonInset * 2.0f ), height ) ];

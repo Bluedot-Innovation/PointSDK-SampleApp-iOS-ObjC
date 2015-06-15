@@ -13,7 +13,7 @@
 
 
 //  Declare constants
-static float  fenceMapInset = 10.0f;
+static float  mapInset = 10.0f;
 static float  minButtonHeight = 44.0f;
 
 
@@ -29,16 +29,16 @@ static float  minButtonHeight = 44.0f;
 @property (nonatomic) NSMapTable  *spatialObjectCheckInStatuses;
 @property (nonatomic) id<BDPSpatialObject> lastCheckedInSpatialObject;
 
-@property (nonatomic) UIEdgeInsets  fenceMapInsets;
+@property (nonatomic) UIEdgeInsets mapInsets;
 
 @end
 
 
 @implementation EXZoneMapViewController
 {
-    UIColor  *fenceColourDefault;
-    UIColor  *fenceColourCheckedIn;
-    UIColor  *fenceColourCheckedInLast;
+    UIColor  *spatialObjectColourDefault;
+    UIColor  *spatialObjectColourCheckedIn;
+    UIColor  *spatialObjectColourCheckedInLast;
     
     MKMapView  *_mapView;
     float  _windowHeight;
@@ -47,7 +47,6 @@ static float  minButtonHeight = 44.0f;
 
 - (id)init
 {
-    
     //  Create the view utilising the height of the main screen
     return( [ self initWithHeight: UIScreen.mainScreen.bounds.size.height ] );
 }
@@ -62,35 +61,35 @@ static float  minButtonHeight = 44.0f;
         _windowHeight = height;
         
         //  Set the colours to use for fences
-        fenceColourDefault = UIColor.grayColor;
-        fenceColourCheckedIn = UIColor.cyanColor;
-        fenceColourCheckedInLast = UIColor.greenColor;
+        spatialObjectColourDefault = UIColor.grayColor;
+        spatialObjectColourCheckedIn = UIColor.cyanColor;
+        spatialObjectColourCheckedInLast = UIColor.greenColor;
 
         _spatialObjectCheckInStatuses = [ [ NSMapTable alloc ] initWithKeyOptions: NSPointerFunctionsStrongMemory|NSPointerFunctionsObjectPointerPersonality
                                                              valueOptions: NSPointerFunctionsStrongMemory|NSPointerFunctionsObjectPersonality
                                                                  capacity: 8 ];
 
         _geometryRendererFactory = [ [ BDGeometryRendererFactory alloc ] initWithFillColor: UIColor.cyanColor
-                                                                            strokeColor: UIColor.cyanColor
-                                                                            strokeWidth: 2.0f
-                                                                                  alpha: 0.6f ];
+                                                                               strokeColor: UIColor.cyanColor
+                                                                               strokeWidth: 2.0f
+                                                                                     alpha: 0.6f ];
         _geometryRendererCache = [ NSMapTable weakToStrongObjectsMapTable ];
 
-        _fenceMapInsets = UIEdgeInsetsMake( fenceMapInset, fenceMapInset, fenceMapInset, fenceMapInset );
+        _mapInsets = UIEdgeInsetsMake( mapInset, mapInset, mapInset, mapInset );
 
-        void ( ^showFencesNotificationHandler)(NSNotification *) = ^( NSNotification *showFencesNotification )
+        void ( ^showZonesNotificationHandler)(NSNotification *) = ^( NSNotification *showZonesNotification )
         {
-            NSSet  *fences = showFencesNotification.object;
+            id<MKOverlay, BDPSpatialObject> spatialOverlayObject = showZonesNotification.object;
             
-            [ self.mapView setRegionToFitOverlays: fences
-                                      withPadding: _fenceMapInsets
+            [ self.mapView setRegionToFitOverlays: [ NSSet setWithObject: spatialOverlayObject ]
+                                      withPadding: _mapInsets
                                          animated: YES ];
         };
 
         [ NSNotificationCenter.defaultCenter addObserverForName: EXShowFencesOnMapNotification
                                                          object: nil
-                                                          queue: [ NSOperationQueue mainQueue ]
-                                                     usingBlock: showFencesNotificationHandler ];
+                                                          queue: NSOperationQueue.mainQueue
+                                                     usingBlock: showZonesNotificationHandler];
     }
     
     return self;
@@ -130,22 +129,22 @@ static float  minButtonHeight = 44.0f;
         [ self.mapView removeOverlay: fence ];
     }
 
-    [_spatialObjectCheckInStatuses removeAllObjects];
+    [ _spatialObjectCheckInStatuses removeAllObjects ];
 
     //  Assign all of the fences in zone
     for( BDZoneInfo *zone in zones )
     {
         for( BDFence *fence in zone.fences )
         {
-            [_spatialObjectCheckInStatuses setObject:@(NO)
-                                              forKey:fence];
+            [ _spatialObjectCheckInStatuses setObject: @(NO)
+                                               forKey: fence ];
         }
     }
 
     //  Add the fences as overlays to the map view
     [ self.mapView addOverlays: _spatialObjectCheckInStatuses.keyEnumerator.allObjects ];
 
-    [ self.mapView setRegionToFitAllOverlaysWithPadding: _fenceMapInsets
+    [ self.mapView setRegionToFitAllOverlaysWithPadding: _mapInsets
                                                animated: YES ];
 }
 
@@ -153,14 +152,16 @@ static float  minButtonHeight = 44.0f;
 /*
  *  The processing for when a fence has been checked into,.
  */
-- (void)didCheckIntoFence:(BDFence *)fence
+- (void)didCheckIntoSpatialObject: (id<BDPSpatialObject>)spatialObject
 {
     
-    //  Set the checked-in status for the fence to YES
-    [_spatialObjectCheckInStatuses setObject:@(YES)
-                                      forKey:fence];
+    //  Set the checked-in status for the spatial object to YES
+    [ _spatialObjectCheckInStatuses setObject: @(YES)
+                                       forKey: spatialObject ];
 
-    [self refreshSpatialOverlayAppearance:fence];
+    NSAssert( [ spatialObject conformsToProtocol: @protocol( MKOverlay ) ], NSInternalInconsistencyException );
+
+    [ self refreshSpatialOverlayAppearance: (id<MKOverlay,BDPSpatialObject>)spatialObject ];
 }
 
 
@@ -170,7 +171,7 @@ static float  minButtonHeight = 44.0f;
 - (void)zoomToFitZones
 {
     
-    [ self.mapView setRegionToFitAllOverlaysWithPadding: _fenceMapInsets
+    [ self.mapView setRegionToFitAllOverlaysWithPadding: _mapInsets
                                                animated: YES ];
 }
 
@@ -180,21 +181,20 @@ static float  minButtonHeight = 44.0f;
 - (MKOverlayRenderer *)mapView: (MKMapView *)mapView
             rendererForOverlay: (id<MKOverlay>)overlay
 {
-    NSAssert([overlay conformsToProtocol:@protocol(BDPSpatialObject)], NSInternalInconsistencyException );
+    NSAssert( [ overlay conformsToProtocol @protocol(BDPSpatialObject) ], NSInternalInconsistencyException );
 
-    id<MKOverlay,BDPSpatialObject> spatialOverlay = (id<MKOverlay,BDPSpatialObject>)overlay;
+    id<MKOverlay,BDPSpatialObject>  spatialOverlay = (id<MKOverlay,BDPSpatialObject>)overlay;
 
-    BDGeometry *geometry = spatialOverlay.geometry;
-
-    MKOverlayRenderer  *renderer = [_geometryRendererCache objectForKey:geometry];
+    BDGeometry  *geometry = spatialOverlay.geometry;
+    MKOverlayRenderer  *renderer = [ _geometryRendererCache objectForKey: geometry ];
 
     if ( renderer == nil )
     {
-        renderer = [_geometryRendererFactory rendererForGeometry:geometry];
-        [_geometryRendererCache setObject:renderer
-                                   forKey:geometry];
+        renderer = [ _geometryRendererFactory rendererForGeometry: geometry ];
+        [ _geometryRendererCache setObject: renderer
+                                    forKey: geometry ];
 
-        [self refreshSpatialOverlayAppearance:spatialOverlay];
+        [ self refreshSpatialOverlayAppearance: spatialOverlay ];
     }
 
     return renderer;
@@ -209,7 +209,7 @@ static float  minButtonHeight = 44.0f;
 - (BOOL)hasCheckedIntoSpatialObject: (id<BDPSpatialObject>)spatialObject
 {
     _lastCheckedInSpatialObject = spatialObject;
-    return [ (NSNumber *) [_spatialObjectCheckInStatuses objectForKey:spatialObject] boolValue ];
+    return [ (NSNumber *)[ _spatialObjectCheckInStatuses objectForKey: spatialObject ] boolValue ];
 }
 
 
@@ -218,21 +218,20 @@ static float  minButtonHeight = 44.0f;
  */
 - (void)refreshSpatialOverlayAppearance:(id<MKOverlay,BDPSpatialObject>)spatialOverlay
 {
-    MKOverlayPathRenderer  *renderer = (MKOverlayPathRenderer *) [self mapView:self.mapView
-                                                                 rendererForOverlay:spatialOverlay];
+    MKOverlayPathRenderer  *renderer = (MKOverlayPathRenderer *)[self mapView: self.mapView rendererForOverlay: spatialOverlay ];
     UIColor  *overlayColor;
 
-    if ( spatialOverlay == _lastCheckedInSpatialObject)
+    if ( spatialOverlay == _lastCheckedInSpatialObject )
     {
-        overlayColor = fenceColourCheckedInLast;
+        overlayColor = spatialObjectColourCheckedInLast;
     }
-    else if ([self hasCheckedIntoSpatialObject:spatialOverlay] == YES )
+    else if ( [ self hasCheckedIntoSpatialObject: spatialOverlay ] == YES )
     {
-        overlayColor = fenceColourCheckedIn;
+        overlayColor = spatialObjectColourCheckedIn;
     }
     else
     {
-        overlayColor = fenceColourDefault;
+        overlayColor = spatialObjectColourDefault;
     }
 
     //  Assign the colours to be rendered
@@ -258,11 +257,11 @@ static float  minButtonHeight = 44.0f;
     }
     
     //  Setup the button criteria
-    showLocationButton.frame = CGRectMake( fenceMapInset, _windowHeight - buttonHeight - fenceMapInset, self.view.frame.size.width - ( fenceMapInset * 2.0f ), buttonHeight );
+    showLocationButton.frame = CGRectMake( mapInset, _windowHeight - buttonHeight - mapInset, self.view.frame.size.width - ( mapInset * 2.0f ), buttonHeight );
 
     showLocationButton.layer.cornerRadius = 6.0f;
     showLocationButton.layer.borderWidth = 1.5f;
-    showLocationButton.layer.borderColor = [ [ UIColor colorWithRed: 66.0f / 255.0f
+    showLocationButton.layer.borderColor = [ [ UIColor colorWithRed:  66.0f / 255.0f
                                                               green: 155.0f / 255.0f
                                                                blue: 213.0f / 255.0f
                                                               alpha: 1.0f ] CGColor ];

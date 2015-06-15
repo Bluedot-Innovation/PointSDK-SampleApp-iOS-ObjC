@@ -18,7 +18,7 @@
 //  Declare the available methods
 - (id)initWithHeight: (float)height;
 
-- (void)didCheckIntoFence: (BDFence *)fence;
+- (void)didCheckIntoSpatialObject: (id <BDPSpatialObject>)spatialObject;
 - (void)zoomToFitZones;
 
 @end

@@ -18,6 +18,7 @@
 @property (nonatomic) NSSet  *zones;
 
 //  Declare the available methods
-- (void)didCheckIntoFence: (BDFence *)fence inZone: (BDZoneInfo *)zone;
+- (void)didCheckIntoSpatialObject:(id <BDPSpatialObject>)spatialObject
+                           inZone: (BDZoneInfo *)zone;
 
 @end

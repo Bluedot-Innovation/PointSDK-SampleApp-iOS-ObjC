@@ -194,7 +194,7 @@ EXAuthenticationViewControllerAltAction;
 {
     BDLocationManager  *locationManager = BDLocationManager.instance;
 
-    //  Determine the authetication state
+    //  Determine the authentication state
     switch( locationManager.authenticationState )
     {
         case BDAuthenticationStateNotAuthenticated:

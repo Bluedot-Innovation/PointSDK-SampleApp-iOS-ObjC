@@ -174,7 +174,7 @@
  */
 -(void)startObservingShowFencesOnMapNotifications
 {
-    void ( ^showFencesNotificationHandler )(NSNotification *) = ^( NSNotification *showFencesNotification )
+    void ( ^showZonesNotificationHandler )(NSNotification *) = ^( NSNotification *showFencesNotification )
     {
         NSAssert( BDLocationManager.instance.authenticationState == BDAuthenticationStateAuthenticated, NSInternalInconsistencyException );
 
@@ -184,7 +184,7 @@
     [ NSNotificationCenter.defaultCenter addObserverForName: EXShowFencesOnMapNotification
                                                      object: nil
                                                       queue: [ NSOperationQueue mainQueue ]
-                                                 usingBlock: showFencesNotificationHandler ];
+                                                 usingBlock: showZonesNotificationHandler ];
 }
 
 
@@ -287,18 +287,43 @@
              atCoordinate: (BDLocationCoordinate2D)coordinate
                    onDate: (NSDate *)date
 {
+
+    NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@', at %@", fence.name, zone.name, date ];
+
     UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
-                                                            message: [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@', at %@",
-                                                                                                  fence.name, zone.name, date ]
+                                                            message: message
                                                            delegate: nil
                                                   cancelButtonTitle: @"Cancel"
                                                   otherButtonTitles: nil ];
     [ alertView show ];
 
-    [ _zoneMapViewController didCheckIntoFence: fence ];
+    [ _zoneMapViewController didCheckIntoSpatialObject: fence ];
 
-    [ _zoneChecklistViewController didCheckIntoFence: fence
-                                              inZone: zone ];
+    [_zoneChecklistViewController didCheckIntoSpatialObject: fence
+                                                     inZone: zone ];
+}
+
+
+/*
+ *  A fence has been checked into; display an alert to notify the user.
+ */
+- (void)didCheckIntoBeacon: (BDBeacon *)beacon
+                    inZone: (BDZoneInfo *)zoneInfo
+                    onDate: (NSDate *)date
+{
+    NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@', at %@", beacon.name, zoneInfo.name, date ];
+
+    UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
+                                                            message: message
+                                                           delegate: nil
+                                                  cancelButtonTitle: @"Cancel"
+                                                  otherButtonTitles: nil ];
+    [ alertView show ];
+
+    [ _zoneMapViewController didCheckIntoSpatialObject: beacon ];
+
+    [ _zoneChecklistViewController didCheckIntoSpatialObject: beacon
+                                                      inZone: zoneInfo ];
 }
 
 
