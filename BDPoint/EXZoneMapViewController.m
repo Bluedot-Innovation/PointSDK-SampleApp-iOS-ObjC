@@ -181,7 +181,7 @@ static float  minButtonHeight = 44.0f;
 - (MKOverlayRenderer *)mapView: (MKMapView *)mapView
             rendererForOverlay: (id<MKOverlay>)overlay
 {
-    NSAssert( [ overlay conformsToProtocol @protocol(BDPSpatialObject) ], NSInternalInconsistencyException );
+    NSAssert( [ overlay conformsToProtocol: @protocol(BDPSpatialObject) ], NSInternalInconsistencyException );
 
     id<MKOverlay,BDPSpatialObject>  spatialOverlay = (id<MKOverlay,BDPSpatialObject>)overlay;
 
