@@ -253,6 +253,7 @@
 
 - (void)didEndSession
 {
+    [ _tabBarController setViewControllers: _viewControllersNotRequiringZoneInfo animated: NO ];
     NSLog( @"Logged out" );
 }
 
