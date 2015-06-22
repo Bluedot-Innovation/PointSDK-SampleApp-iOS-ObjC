@@ -6,3 +6,4 @@ BDPointSampleApp.xcodeproj/project.xcworkspace/xcuserdata/Chris.xcuserdatad
 *.xcuserstate
 PointSDK/include
 *.a
+PointSDK/BDPointSDK.framework
