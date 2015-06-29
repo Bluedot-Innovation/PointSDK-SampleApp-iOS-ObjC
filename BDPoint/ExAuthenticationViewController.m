@@ -395,9 +395,9 @@ EXAuthenticationViewControllerAltAction;
      *  Add an observation on the authentication state of the Bluedot SDK.  A token is returned for use in
      *  stopping the observation.
      */
-    _authenticationStateObservation = [ locationManager addValueObserverBlock: authenticationStateChangeHandler
-                                                                   forKeyPath: EXAuthenticationState
-                                                                      initial: YES ];
+    _authenticationStateObservation = [ locationManager addObserverForKeyPath: EXAuthenticationState
+                                                                      initial: YES
+                                                                  withHandler: authenticationStateChangeHandler ];
 
     NSAssert( _authenticationStateObservation, NSInternalInconsistencyException );
 }
