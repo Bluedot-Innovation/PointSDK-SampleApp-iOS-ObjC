@@ -300,8 +300,8 @@
 
     [ _zoneMapViewController didCheckIntoSpatialObject: fence ];
 
-    [_zoneChecklistViewController didCheckIntoSpatialObject: fence
-                                                     inZone: zone ];
+    [ _zoneChecklistViewController didCheckIntoSpatialObject: fence
+                                                      inZone: zone ];
 }
 
 
@@ -310,9 +310,21 @@
  */
 - (void)didCheckIntoBeacon: (BDBeacon *)beacon
                     inZone: (BDZoneInfo *)zoneInfo
+             withProximity: (CLProximity)proximity
                     onDate: (NSDate *)date
 {
-    NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@', at %@", beacon.name, zoneInfo.name, date ];
+    NSString *proximityString;
+
+    switch(proximity)
+    {
+        default:
+        case CLProximityUnknown:   proximityString = @"Unknown";   break;
+        case CLProximityImmediate: proximityString = @"Immediate"; break;
+        case CLProximityNear:      proximityString = @"Near";      break;
+        case CLProximityFar:       proximityString = @"Far";       break;
+    }
+
+    NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@' with proximity %@ at %@", beacon.name, zoneInfo.name, proximityString, date ];
 
     UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
                                                             message: message
