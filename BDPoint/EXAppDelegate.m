@@ -103,6 +103,10 @@
 {
 }
 
+- (void)applicationWillResignActive:(nonnull UIApplication *)application
+{
+}
+
 - (NSDictionary *)parseURLParameters: (NSString *)parameters
 {
     NSMutableDictionary  *parameterDictionary = [ NSMutableDictionary new ];

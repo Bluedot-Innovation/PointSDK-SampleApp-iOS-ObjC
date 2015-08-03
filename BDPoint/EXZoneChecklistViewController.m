@@ -114,11 +114,11 @@ static const float  switchWidth = 20.0f;
     [ mutableOrderedZones sortUsingComparator: _nameComparator ];
     _orderedZones = [ mutableOrderedZones copy ];
 
-    //  Remove all existing fences
+    //  Remove all existing spatial objects
     [ _orderedSpatialObjectsByZone removeAllObjects ];
     [ _checkedInSpatialObjectsByZone removeAllObjects ];
 
-    // Sort Fences
+    // Sort spatial objects
     for( BDZoneInfo *zone in zoneInfos )
     {
         NSAssert( [ zone.fences isKindOfClass: NSSet.class ], NSInternalInconsistencyException );
@@ -127,7 +127,7 @@ static const float  switchWidth = 20.0f;
         [ mutableOrderedSpatialObjects addObjectsFromArray: zone.beacons.allObjects ];
 
         [ mutableOrderedSpatialObjects sortUsingComparator: _nameComparator ];
-        [ _orderedSpatialObjectsByZone setObject: [mutableOrderedSpatialObjects copy]
+        [ _orderedSpatialObjectsByZone setObject: [ mutableOrderedSpatialObjects copy ]
                                           forKey: zone ];
     }
     
@@ -172,7 +172,7 @@ static const float  switchWidth = 20.0f;
 {
     BDZoneInfo  *zone = [ self zoneForTableSection: (NSUInteger)section ];
 
-    return zone.fences.count;
+    return( zone.fences.count + zone.beacons.count );
 }
 
 
