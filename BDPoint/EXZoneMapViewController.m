@@ -11,6 +11,8 @@
 #import "EXZoneMapViewController.h"
 #import "EXNotificationStrings.h"
 
+#import "BDBeaconOverlayRenderer.h"
+
 
 //  Declare constants
 static float  mapInset = 10.0f;
@@ -25,7 +27,7 @@ static float  minButtonHeight = 44.0f;
 @property (nonatomic, readonly) MKMapView  *mapView;
 @property (nonatomic) BDGeometryRendererFactory  *geometryRendererFactory;
 
-@property (nonatomic) NSMapTable  *geometryRendererCache;
+@property (nonatomic) NSMapTable  *overlayRendererCache;
 @property (nonatomic) NSMapTable  *spatialObjectCheckInStatuses;
 @property (nonatomic) id<BDPSpatialObject> lastCheckedInSpatialObject;
 
@@ -66,14 +68,14 @@ static float  minButtonHeight = 44.0f;
         spatialObjectColourCheckedInLast = UIColor.greenColor;
 
         _spatialObjectCheckInStatuses = [ [ NSMapTable alloc ] initWithKeyOptions: NSPointerFunctionsStrongMemory|NSPointerFunctionsObjectPointerPersonality
-                                                             valueOptions: NSPointerFunctionsStrongMemory|NSPointerFunctionsObjectPersonality
-                                                                 capacity: 8 ];
+                                                                     valueOptions: NSPointerFunctionsStrongMemory|NSPointerFunctionsObjectPersonality
+                                                                         capacity: 8 ];
 
         _geometryRendererFactory = [ [ BDGeometryRendererFactory alloc ] initWithFillColor: UIColor.cyanColor
                                                                                strokeColor: UIColor.cyanColor
                                                                                strokeWidth: 2.0f
                                                                                      alpha: 0.6f ];
-        _geometryRendererCache = [ NSMapTable weakToStrongObjectsMapTable ];
+        _overlayRendererCache = [ NSMapTable weakToStrongObjectsMapTable ];
 
         _mapInsets = UIEdgeInsetsMake( mapInset, mapInset, mapInset, mapInset );
 
@@ -139,9 +141,15 @@ static float  minButtonHeight = 44.0f;
             [ _spatialObjectCheckInStatuses setObject: @(NO)
                                                forKey: fence ];
         }
+        
+        for( BDFence *fence in zone.beacons )
+        {
+            [ _spatialObjectCheckInStatuses setObject: @(NO)
+                                               forKey: fence ];
+        }
     }
 
-    //  Add the fences as overlays to the map view
+    //  Add the beacons and fences as overlays to the map view
     [ self.mapView addOverlays: _spatialObjectCheckInStatuses.keyEnumerator.allObjects ];
 
     [ self.mapView setRegionToFitAllOverlaysWithPadding: _mapInsets
@@ -183,18 +191,33 @@ static float  minButtonHeight = 44.0f;
 {
     NSAssert( [ overlay conformsToProtocol: @protocol(BDPSpatialObject) ], NSInternalInconsistencyException );
 
-    id<MKOverlay,BDPSpatialObject>  spatialOverlay = (id<MKOverlay,BDPSpatialObject>)overlay;
-
-    BDGeometry  *geometry = spatialOverlay.geometry;
-    MKOverlayRenderer  *renderer = [ _geometryRendererCache objectForKey: geometry ];
-
-    if ( renderer == nil )
+    MKOverlayRenderer *renderer = [ _overlayRendererCache objectForKey: overlay ];
+    
+    if( renderer == nil )
     {
-        renderer = [ _geometryRendererFactory rendererForGeometry: geometry ];
-        [ _geometryRendererCache setObject: renderer
-                                    forKey: geometry ];
-
-        [ self refreshSpatialOverlayAppearance: spatialOverlay ];
+        MKOverlayRenderer *newRenderer;
+        
+        if( [overlay isMemberOfClass:BDBeacon.class] )
+        {
+            newRenderer = [ [ BDBeaconOverlayRenderer alloc ] initWithBeacon: (BDBeacon*)overlay ];
+        }
+        else
+        {
+            id<MKOverlay,BDPSpatialObject>  spatialOverlay = (id<MKOverlay,BDPSpatialObject>)overlay;
+            
+            BDGeometry *geometry = spatialOverlay.geometry;
+            
+            newRenderer = [ _geometryRendererFactory rendererForGeometry: geometry ];
+        }
+        
+        NSAssert( newRenderer!=nil, NSInternalInconsistencyException );
+        
+        [ _overlayRendererCache setObject: newRenderer
+                                   forKey: overlay ];
+        
+        [ self refreshSpatialOverlayAppearance: (id<MKOverlay,BDPSpatialObject>)overlay ];
+        
+        renderer = newRenderer;
     }
 
     return renderer;
@@ -218,25 +241,37 @@ static float  minButtonHeight = 44.0f;
  */
 - (void)refreshSpatialOverlayAppearance:(id<MKOverlay,BDPSpatialObject>)spatialOverlay
 {
-    MKOverlayPathRenderer  *renderer = (MKOverlayPathRenderer *)[self mapView: self.mapView rendererForOverlay: spatialOverlay ];
-    UIColor  *overlayColor;
-
+    MKOverlayRenderer *renderer = (MKOverlayPathRenderer *)[self mapView: self.mapView rendererForOverlay: spatialOverlay ];
+    
+    UIColor  *stateColor;
+    
     if ( spatialOverlay == _lastCheckedInSpatialObject )
     {
-        overlayColor = spatialObjectColourCheckedInLast;
+        stateColor = spatialObjectColourCheckedInLast;
     }
     else if ( [ self hasCheckedIntoSpatialObject: spatialOverlay ] == YES )
     {
-        overlayColor = spatialObjectColourCheckedIn;
+        stateColor = spatialObjectColourCheckedIn;
     }
     else
     {
-        overlayColor = spatialObjectColourDefault;
+        stateColor = spatialObjectColourDefault;
     }
-
-    //  Assign the colours to be rendered
-    renderer.fillColor = overlayColor;
-    renderer.strokeColor = overlayColor;
+    
+    //  Assign the colour to be rendered
+    if( [ renderer isKindOfClass: MKOverlayPathRenderer.class ] )
+    {
+        MKOverlayPathRenderer *pathRenderer = (MKOverlayPathRenderer *)renderer;
+        
+        pathRenderer.fillColor   = stateColor;
+        pathRenderer.strokeColor = stateColor;
+    }
+    else if( [renderer isKindOfClass: BDBeaconOverlayRenderer.class ] )
+    {
+        BDBeaconOverlayRenderer *beaconRenderer = (BDBeaconOverlayRenderer*)renderer;
+        
+        beaconRenderer.rangeColor = stateColor;
+    }
 }
 
 
