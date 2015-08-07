@@ -28,7 +28,8 @@
 @property (nonatomic) NSArray  *viewControllersNotRequiringZoneInfo;
 @property (nonatomic) NSArray  *viewControllersRequiringZoneInfo;
 
-@property (nonatomic) UIAlertView  *locationDeniedDialog;
+@property (nonatomic) UIAlertView  *userInterventionForBluetoothDialog;
+@property (nonatomic) UIAlertView  *userInterventionForLocationServicesDialog;
 
 @end
 
@@ -343,27 +344,49 @@
                                                       inZone: zoneInfo ];
 }
 
-
-/*
- *  User credentials have been rejected by the back-end.
- */
-- (void)userDeniedLocationServices
+- (void)didStartRequiringUserInterventionForBluetooth
 {
+    if ( _userInterventionForBluetoothDialog )
+    {
+        NSString  *title = @"Bluetooth Required";
+        NSString  *message = [ NSString stringWithFormat: @"There are nearby Beacons which cannot be detected because Bluetooth is disabled.  Re-enable Bluetooth to restore full functionality." ];
+        
+        _userInterventionForLocationServicesDialog = [ [ UIAlertView alloc ] initWithTitle: title
+                                                                                   message: message
+                                                                                  delegate: nil
+                                                                         cancelButtonTitle: @"Dismiss"
+                                                                         otherButtonTitles: nil ];
+    }
     
-    if ( _locationDeniedDialog == nil )
+    [ _userInterventionForBluetoothDialog show ];
+}
+
+- (void)didStopRequiringUserInterventionForBluetooth
+{
+    [ _userInterventionForBluetoothDialog dismissWithClickedButtonIndex:0 animated:YES ];
+}
+
+- (void)didStartRequiringUserInterventionForLocationServices
+{
+    if ( _userInterventionForLocationServicesDialog )
     {
         NSString  *appName = [ NSBundle.mainBundle objectForInfoDictionaryKey: @"CFBundleDisplayName" ];
         NSString  *title = @"Location Services Required";
-        NSString  *message = [ NSString stringWithFormat: @"You have disabled Location Services for this App.  For full functionality, enable this in:\nSettings → Privacy →\nLocation Settings →\n%@ ✓", appName ];
-
-        _locationDeniedDialog = [ [ UIAlertView alloc ] initWithTitle: title
-                                                              message: message
-                                                             delegate: nil
-                                                    cancelButtonTitle: @"OK"
-                                                    otherButtonTitles: nil ];
+        NSString  *message = [ NSString stringWithFormat: @"This App requires Location Services which are currently disabled.  To restore Location Services, go to :\nSettings → Privacy →\nLocation Settings →\n%@ ✓", appName ];
+        
+        _userInterventionForLocationServicesDialog = [ [ UIAlertView alloc ] initWithTitle: title
+                                                                                   message: message
+                                                                                  delegate: nil
+                                                                         cancelButtonTitle: nil
+                                                                         otherButtonTitles: nil ];
     }
     
-    [ _locationDeniedDialog show ];
+    [ _userInterventionForLocationServicesDialog show ];
+}
+
+- (void)didStopRequiringUserInterventionForLocationServices
+{
+    [ _userInterventionForLocationServicesDialog dismissWithClickedButtonIndex:0 animated:YES ];
 }
 
 #pragma mark BDPointDelegate implementation end

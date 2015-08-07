@@ -52,7 +52,7 @@ static const float  switchWidth = 20.0f;
         self.title = @"Checklist";
 
         //  Instantiate the sets and tables
-        _orderedZones          = [ NSMutableOrderedSet new ];
+        _orderedZones = [ NSMutableOrderedSet new ];
         _orderedSpatialObjectsByZone = [ NSMapTable strongToStrongObjectsMapTable ];
         _checkedInSpatialObjectsByZone = [ NSMapTable strongToStrongObjectsMapTable ];
         _spatialObjectsForButton = [ NSMapTable strongToStrongObjectsMapTable ];
@@ -92,7 +92,6 @@ static const float  switchWidth = 20.0f;
 
 - (UITableView *)tableView
 {
-    
     return (UITableView *)self.view;
 }
 
@@ -285,14 +284,15 @@ static const float  switchWidth = 20.0f;
     [ zoneSwitch addTarget: self action: @selector( switchToggled: ) forControlEvents: UIControlEventTouchUpInside ];
     zoneSwitch.tag = section;
 
-    CGRect  switchPosition = CGRectMake( frame.size.width - zoneSwitch.frame.size.width - buttonInset, buttonInset,
-                                         zoneSwitch.frame.size.width, zoneSwitch.frame.size.height );
+    CGRect  switchPosition = CGRectMake( frame.size.width - zoneSwitch.frame.size.width - buttonInset, buttonInset, zoneSwitch.frame.size.width, zoneSwitch.frame.size.height );
     zoneSwitch.frame = switchPosition;
     zoneSwitch.onTintColor = [ UIColor redColor ];
-    zoneSwitch.on = ![ BDLocationManager.instance isZoneDisabledByApplication:zone.ID ];
+    
+    BOOL isZoneDisabledByApplication = [ BDLocationManager.instance isZoneDisabledByApplication:zone.ID ];
+    zoneSwitch.on = !isZoneDisabledByApplication;
 
-    UILabel *title = [ [ UILabel alloc ] initWithFrame: CGRectMake( buttonInset, buttonInset,
-                                                                    frame.size.width - switchWidth - ( buttonInset * 2.0f ), height ) ];
+    CGRect titleRect = CGRectMake( buttonInset, buttonInset, frame.size.width - switchWidth - ( buttonInset * 2.0f ), height );
+    UILabel *title = [ [ UILabel alloc ] initWithFrame: titleRect ];
     title.text = zone.name;
 
     UIView *headerView = [ [ UIView alloc ] initWithFrame: CGRectMake( 0, 0, frame.size.width, rowHeight ) ];
@@ -310,21 +310,18 @@ static const float  switchWidth = 20.0f;
 
 - (CGFloat)tableView: (UITableView *)tableView heightForRowAtIndexPath: (NSIndexPath *)indexPath
 {
-    
     return rowHeight;
 }
 
 
 - (CGFloat)tableView: (UITableView *)tableView heightForHeaderInSection: (NSInteger)section
 {
-    
     return rowHeight;
 }
 
 
 - (void)tableView: (UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath
 {
-    
     [ tableView deselectRowAtIndexPath: indexPath animated: NO ];
 }
 
@@ -337,7 +334,6 @@ static const float  switchWidth = 20.0f;
 {
     UISwitch  *zoneSwitch = (UISwitch *)sender;
     BDZoneInfo  *zone = _orderedZones[ (NSUInteger)zoneSwitch.tag ];
-
 
     //  If the switch is set to on, then the zone is to be disabled
     [ [ BDLocationManager instance ] setZone: zone.ID disableByApplication: [ zoneSwitch isOn ] ];
