@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @class BDZoneInfo;
-@class BDFence;
+@class BDFenceInfo;
+@class BDBeaconInfo;
 
 
 @interface EXZoneChecklistViewController : UIViewController
@@ -18,7 +19,10 @@
 @property (nonatomic) NSSet  *zones;
 
 //  Declare the available methods
-- (void)didCheckIntoSpatialObject:(id <BDPSpatialObject>)spatialObject
-                           inZone: (BDZoneInfo *)zone;
+- (void)didCheckIntoFence:(BDFenceInfo *)fence
+                   inZone:(BDZoneInfo *)zone;
+
+- (void)didCheckIntoBeacon:(BDBeaconInfo *)beacon
+                    inZone:(BDZoneInfo *)zone;
 
 @end

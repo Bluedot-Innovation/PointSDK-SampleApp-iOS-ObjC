@@ -14,6 +14,7 @@
 static const float  cornerRadius = 5.0f;
 static const float  borderWidth = 1.5f;
 
+static char EXAuthenticationStateChangeHandlerContext = ' ';
 
 typedef enum
 {
@@ -29,7 +30,6 @@ EXAuthenticationViewControllerAltAction;
  */
 @interface EXAuthenticationViewController () <UITextFieldDelegate>
 
-@property (nonatomic) id  authenticationStateObservation;
 @property (nonatomic, assign) EXAuthenticationViewControllerAltAction  alternateAction;
 @property (nonatomic, assign) BOOL  firstAppearance;
 @property (nonatomic) NSURL  *customEndpointURL;
@@ -302,25 +302,40 @@ EXAuthenticationViewControllerAltAction;
  */
 - (void)startObservingAuthenticationState
 {
-    NSAssert( _authenticationStateObservation == nil, NSInternalInconsistencyException );
-
     BDLocationManager  *locationManager = BDLocationManager.instance;
-
+  
     /*
-     *  Create a block to handle authentication changes.
+     *  Add an observation on the authentication state of the Bluedot SDK.  A token is returned for use in
+     *  stopping the observation.
      */
-    BDKVOValueChangeHandler authenticationStateChangeHandler = ^( id source, NSString *keyPath, NSNumber *oldValue, NSNumber *newValue )
-    {
-        BDAuthenticationState state = (BDAuthenticationState)[ newValue unsignedIntegerValue ];
+    [ locationManager addObserver: self
+                       forKeyPath: EXAuthenticationState
+                          options: ( NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial )
+                          context: &EXAuthenticationStateChangeHandlerContext ];
+}
 
+/*
+ *  Create a KVO receiver to handle authentication changes.
+ */
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if( context == &EXAuthenticationStateChangeHandlerContext )
+    {
+        NSNumber *newValue = change[ NSKeyValueChangeNewKey ];
+       
+        BDAuthenticationState state = (BDAuthenticationState)[ newValue unsignedIntegerValue ];
+        
         BOOL  resetButtonEnabled;
         BOOL  loginButtonEnabled;
         BOOL  inputFieldsEnabled;
-
+        
         NSString  *buttonTitle;
         NSString  *newPromptTitle;
         NSString  *alternateActionTitle;
-
+        
         switch( state )
         {
             case BDAuthenticationStateNotAuthenticated:
@@ -331,7 +346,7 @@ EXAuthenticationViewControllerAltAction;
                 newPromptTitle     = @"Enter your account details";
                 _alternateAction   = authenticationViewControllerAltActionRegister;
                 break;
-
+                
             case BDAuthenticationStateAuthenticating:
                 buttonTitle        = @"Logging in...";
                 resetButtonEnabled = NO;
@@ -340,7 +355,7 @@ EXAuthenticationViewControllerAltAction;
                 newPromptTitle     = nil;
                 _alternateAction   = authenticationViewControllerAltActionNone;
                 break;
-
+                
             case BDAuthenticationStateAuthenticated:
                 buttonTitle        = @"Log out";
                 resetButtonEnabled = NO;
@@ -349,39 +364,39 @@ EXAuthenticationViewControllerAltAction;
                 newPromptTitle     = @"You are logged in as";
                 _alternateAction   = authenticationViewControllerAltActionIntegrate;
                 break;
-
+                
             default:
                 @throw [ NSException exceptionWithName: NSInternalInconsistencyException
                                                 reason: @"Unknown authentication authenticationState"
                                               userInfo: nil ];
         }
-
+        
         switch( _alternateAction )
         {
             case authenticationViewControllerAltActionNone:
                 alternateActionTitle = @"";
                 break;
-
+                
             case authenticationViewControllerAltActionRegister:
                 alternateActionTitle = @"Don't have an account?";
                 break;
-
+                
             case authenticationViewControllerAltActionIntegrate:
                 alternateActionTitle = @"About the Bluedot Point SDK";
                 break;
         }
-
+        
         self.resetButton.enabled         = resetButtonEnabled;
         self.resetButton.backgroundColor = resetButtonEnabled ? BDButtonEnabledColor : BDButtonDisabledColor;
-
+        
         self.loginButton.enabled         = loginButtonEnabled;
         self.loginButton.backgroundColor = loginButtonEnabled ? BDButtonEnabledColor : BDButtonDisabledColor;
-
+        
         self.inputFieldsEnabled = inputFieldsEnabled;
-
+        
         [ self.loginButton           setTitle: buttonTitle          forState: UIControlStateNormal ];
         [ self.alternateActionButton setTitle: alternateActionTitle forState: UIControlStateNormal ];
-
+        
         /*
          *  If a new prompt title has been assigned, then assign it to the label.
          */
@@ -389,48 +404,21 @@ EXAuthenticationViewControllerAltAction;
         {
             self.promptLabel.text = newPromptTitle;
         }
-    };
-
-    /*
-     *  Add an observation on the authentication state of the Bluedot SDK.  A token is returned for use in
-     *  stopping the observation.
-     */
-    _authenticationStateObservation = [ locationManager addObserverForKeyPath: EXAuthenticationState
-                                                                      initial: YES
-                                                                  withHandler: authenticationStateChangeHandler ];
-
-    NSAssert( _authenticationStateObservation, NSInternalInconsistencyException );
+    }
 }
-
 
 /*
  *  Stop observing the authentication state of the Bluepoint SDK with the back-end using the token provided on starting.
  */
 - (void)stopObservingAuthenticationState
 {
-    NSAssert( _authenticationStateObservation, NSInternalInconsistencyException );
-
     /*
      *  Stop observing and reset the token to nil.
      */
-    [ BDLocationManager.instance removeBlockKVObservation: _authenticationStateObservation ];
-    _authenticationStateObservation = nil;
+    [ BDLocationManager.instance removeObserver: self forKeyPath: EXAuthenticationState ];
 }
 
 #pragma mark Authentication state observation end
-
-
-/*
- *  Ensure the observation is stopped prior to exiting.
- */
--(void)dealloc
-{
-    
-    if ( _authenticationStateObservation != nil )
-    {
-        [ self stopObservingAuthenticationState ];
-    }
-}
 
 
 #pragma mark UITextFieldDelegate implementation begin

@@ -16,7 +16,6 @@
 		3E12698A1CD986562C3CE339 /* EXZoneMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1266BE722C20AA53C1F641 /* EXZoneMapViewController.m */; };
 		3E126DF1390BAA3EB0BB7249 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E12632BFE3EC769CE0D1D43 /* CoreMotion.framework */; };
 		832D483B19515A6C00DC29A9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832D483A19515A6C00DC29A9 /* MapKit.framework */; };
-		835ACFC01B72453200F88C27 /* BDBeaconOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 835ACFBF1B72453200F88C27 /* BDBeaconOverlayRenderer.m */; };
 		838DD2E9194BF316003B5942 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2E8194BF316003B5942 /* Foundation.framework */; };
 		838DD2EB194BF316003B5942 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2EA194BF316003B5942 /* CoreGraphics.framework */; };
 		838DD2ED194BF316003B5942 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838DD2EC194BF316003B5942 /* UIKit.framework */; };
@@ -42,8 +41,6 @@
 		3E126EE9955E8345DBEE3ECD /* EXAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXAuthenticationViewController.h; sourceTree = "<group>"; };
 		3E126FEC48B4BE801C9F6541 /* EXAuthenticationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EXAuthenticationView.xib; sourceTree = "<group>"; };
 		832D483A19515A6C00DC29A9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		835ACFBE1B72453200F88C27 /* BDBeaconOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDBeaconOverlayRenderer.h; sourceTree = "<group>"; };
-		835ACFBF1B72453200F88C27 /* BDBeaconOverlayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDBeaconOverlayRenderer.m; sourceTree = "<group>"; };
 		838DD2E5194BF316003B5942 /* BDPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838DD2E8194BF316003B5942 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		838DD2EA194BF316003B5942 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -107,8 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				3E126FEC48B4BE801C9F6541 /* EXAuthenticationView.xib */,
-				835ACFBE1B72453200F88C27 /* BDBeaconOverlayRenderer.h */,
-				835ACFBF1B72453200F88C27 /* BDBeaconOverlayRenderer.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -264,7 +259,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				838DD2F9194BF316003B5942 /* EXAppDelegate.m in Sources */,
-				835ACFC01B72453200F88C27 /* BDBeaconOverlayRenderer.m in Sources */,
 				838DD2F5194BF316003B5942 /* main.m in Sources */,
 				3E12636A113A6BBA9D18480A /* EXZoneChecklistViewController.m in Sources */,
 				3E12698A1CD986562C3CE339 /* EXZoneMapViewController.m in Sources */,

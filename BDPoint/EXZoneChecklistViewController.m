@@ -58,7 +58,7 @@ static const float  switchWidth = 20.0f;
         _spatialObjectsForButton = [ NSMapTable strongToStrongObjectsMapTable ];
         
         //  Define a comparator block
-        _nameComparator = ^( id<BDPNamedDescribed> namedA, id<BDPNamedDescribed> namedB )
+        _nameComparator = ^( id<BDPSpatialObjectInfo> namedA, id<BDPSpatialObjectInfo> namedB )
         {
             return [ namedA.name compare: namedB.name ];
         };
@@ -146,7 +146,7 @@ static const float  switchWidth = 20.0f;
 }
 
 
-- (id <BDPSpatialObject>)spatialObjectAtIndexPath: (NSIndexPath *)indexPath
+- (id)spatialObjectAtIndexPath: (NSIndexPath *)indexPath
 {
     BDZoneInfo  *zone = [ self zoneForTableSection: (NSUInteger)indexPath.section ];
     NSOrderedSet  *spatialObjects = [ _orderedSpatialObjectsByZone objectForKey: zone ];
@@ -154,13 +154,23 @@ static const float  switchWidth = 20.0f;
     return spatialObjects[ (NSUInteger)indexPath.row ];
 }
 
-- (void)didCheckIntoSpatialObject: (id<BDPSpatialObject>)spatialObject
-                           inZone: (BDZoneInfo *)zone
+
+- (void)didCheckIntoFence:(BDFenceInfo *)fence
+                   inZone:(BDZoneInfo *)zone
 {
     
-    [ _checkedInSpatialObjectsByZone setObject: spatialObject
+    [ _checkedInSpatialObjectsByZone setObject: fence
                                         forKey: zone ];
 
+    [ self.tableView reloadData ];
+}
+
+- (void)didCheckIntoBeacon:(BDBeaconInfo *)beacon
+                    inZone:(BDZoneInfo *)zone
+{
+    [ _checkedInSpatialObjectsByZone setObject: beacon
+                                        forKey: zone ];
+    
     [ self.tableView reloadData ];
 }
 
@@ -208,7 +218,7 @@ static const float  switchWidth = 20.0f;
 
 - (void)showOnMapButtonPressed: (UIButton *)button
 {
-    id<BDPSpatialObject>  spatialObject = [_spatialObjectsForButton objectForKey: button ];
+    id  spatialObject = [ _spatialObjectsForButton objectForKey: button ];
     NSNotification  *notification = [ NSNotification notificationWithName: EXShowFencesOnMapNotification
                                                                    object: spatialObject ];
 
@@ -234,37 +244,13 @@ static const float  switchWidth = 20.0f;
         cell.accessoryView = showOnMapButton;
     }
 
-    id<BDPSpatialObject>  spatialObject = [self spatialObjectAtIndexPath:indexPath];
+    id<BDPSpatialObjectInfo>  spatialObject = [self spatialObjectAtIndexPath:indexPath];
 
     [ _spatialObjectsForButton setObject: spatialObject
                                   forKey: showOnMapButton ];
 
-    NSString  *name;
-    NSString  *description;
-
-    if( [ spatialObject isKindOfClass:BDFence.class ] == YES )
-    {
-        BDFence *fence = (BDFence*)spatialObject;
-
-        name        = fence.name;
-        description = fence.description;
-    }
-    else if( [ spatialObject isKindOfClass:BDBeacon.class ] == YES )
-    {
-        BDBeacon *beacon = (BDBeacon*)spatialObject;
-
-        name        = beacon.name;
-        description = beacon.description;
-    }
-    else
-    {
-        @throw [ NSException exceptionWithName: @"EXUnknownObjectException"
-                                        reason: @"Unsupported spatial object"
-                                      userInfo: nil ];
-    }
-
-    cell.textLabel.text       = name;
-    cell.detailTextLabel.text = description;
+    cell.textLabel.text       = spatialObject.name;
+    cell.detailTextLabel.text = spatialObject.description;
 
     return cell;
 }

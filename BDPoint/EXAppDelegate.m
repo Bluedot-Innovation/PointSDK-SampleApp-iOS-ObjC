@@ -288,7 +288,7 @@
 /*
  *  A fence has been checked into; display an alert to notify the user.
  */
-- (void)didCheckIntoFence: (BDFence *)fence
+- (void)didCheckIntoFence: (BDFenceInfo *)fence
                    inZone: (BDZoneInfo *)zone
              atCoordinate: (BDLocationCoordinate2D)coordinate
                    onDate: (NSDate *)date
@@ -303,17 +303,17 @@
                                                   otherButtonTitles: nil ];
     [ alertView show ];
 
-    [ _zoneMapViewController didCheckIntoSpatialObject: fence ];
+    [ _zoneMapViewController didCheckIntoFence: fence ];
 
-    [ _zoneChecklistViewController didCheckIntoSpatialObject: fence
-                                                      inZone: zone ];
+    [ _zoneChecklistViewController didCheckIntoFence: fence
+                                              inZone: zone ];
 }
 
 
 /*
  *  A fence has been checked into; display an alert to notify the user.
  */
-- (void)didCheckIntoBeacon: (BDBeacon *)beacon
+- (void)didCheckIntoBeacon: (BDBeaconInfo *)beacon
                     inZone: (BDZoneInfo *)zoneInfo
              withProximity: (CLProximity)proximity
                     onDate: (NSDate *)date
@@ -338,10 +338,10 @@
                                                   otherButtonTitles: nil ];
     [ alertView show ];
 
-    [ _zoneMapViewController didCheckIntoSpatialObject: beacon ];
+    [ _zoneMapViewController didCheckIntoBeacon: beacon ];
 
-    [ _zoneChecklistViewController didCheckIntoSpatialObject: beacon
-                                                      inZone: zoneInfo ];
+    [ _zoneChecklistViewController didCheckIntoBeacon: beacon
+                                               inZone: zoneInfo ];
 }
 
 - (void)didStartRequiringUserInterventionForBluetooth
