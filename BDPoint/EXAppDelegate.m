@@ -89,10 +89,14 @@
     // when integrating Bluedot Point SDK v1.x, even if it is empty.
 }
 
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+- (void)applicationWillResignActive: (UIApplication *)application
 {
     // This method implementation must be present in AppDelegate
     // when integrating Bluedot Point SDK v1.x, even if it is empty.
+}
+
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

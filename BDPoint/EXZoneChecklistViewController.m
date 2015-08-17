@@ -262,6 +262,7 @@ static const float  switchWidth = 20.0f;
                                          zoneSwitch.frame.size.width, zoneSwitch.frame.size.height );
     zoneSwitch.frame = switchPosition;
     zoneSwitch.onTintColor = [ UIColor redColor ];
+    zoneSwitch.on = ![ BDLocationManager.sharedLocationManager isZoneDisabledByApplication: zone.ID ];
 
     UILabel *title = [ [ UILabel alloc ] initWithFrame: CGRectMake( buttonInset, buttonInset,
                                                                     frame.size.width - switchWidth - ( buttonInset * 2.0f ), height ) ];
@@ -309,7 +310,6 @@ static const float  switchWidth = 20.0f;
 {
     UISwitch  *zoneSwitch = (UISwitch *)sender;
     BDZoneInfo  *zone = _orderedZones[ (NSUInteger)zoneSwitch.tag ];
-
 
     //  If the switch is set to on, then the zone is to be disabled
     [ [ BDLocationManager sharedLocationManager ] setZone: zone.ID disableByApplication: [ zoneSwitch isOn ] ];
