@@ -104,7 +104,7 @@
 {
 }
 
-- (void)applicationWillResignActive:(nonnull UIApplication *)application
+- (void)applicationWillResignActive:(UIApplication *)application
 {
 }
 
@@ -346,7 +346,7 @@
 
 - (void)didStartRequiringUserInterventionForBluetooth
 {
-    if ( _userInterventionForBluetoothDialog )
+    if ( _userInterventionForBluetoothDialog == nil )
     {
         NSString  *title = @"Bluetooth Required";
         NSString  *message = [ NSString stringWithFormat: @"There are nearby Beacons which cannot be detected because Bluetooth is disabled.  Re-enable Bluetooth to restore full functionality." ];
@@ -368,7 +368,7 @@
 
 - (void)didStartRequiringUserInterventionForLocationServices
 {
-    if ( _userInterventionForLocationServicesDialog )
+    if ( _userInterventionForLocationServicesDialog == nil )
     {
         NSString  *appName = [ NSBundle.mainBundle objectForInfoDictionaryKey: @"CFBundleDisplayName" ];
         NSString  *title = @"Location Services Required";
