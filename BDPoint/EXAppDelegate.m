@@ -31,6 +31,8 @@
 @property (nonatomic) UIAlertView  *userInterventionForBluetoothDialog;
 @property (nonatomic) UIAlertView  *userInterventionForLocationServicesDialog;
 
+@property (nonatomic) NSDateFormatter  *dateFormatter;
+
 @end
 
 
@@ -92,8 +94,6 @@
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
-    // This method implementation must be present in AppDelegate
-    // when integrating Bluedot Point SDK v1.x, even if it is empty.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -106,6 +106,8 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    // For iOS9 (currently Beta) this method implementation must be present in AppDelegate
+    // when integrating Bluedot Point SDK v1.x, even if it is empty.
 }
 
 - (NSDictionary *)parseURLParameters: (NSString *)parameters
@@ -143,6 +145,10 @@
 
 - (void)initializeUserInterface
 {
+    
+    //  Setup a generic date formatter
+    _dateFormatter = [ NSDateFormatter new ];
+    [ _dateFormatter setDateFormat: @"dd-MMM-yyyy HH:mm" ];
 
     //  Create the tab bar controller
     _tabBarController = [ UITabBarController new ];
@@ -188,7 +194,7 @@
 
     [ NSNotificationCenter.defaultCenter addObserverForName: EXShowFencesOnMapNotification
                                                      object: nil
-                                                      queue: [ NSOperationQueue mainQueue ]
+                                                      queue: NSOperationQueue.mainQueue
                                                  usingBlock: showZonesNotificationHandler ];
 }
 
@@ -277,9 +283,11 @@
         viewControllers = _viewControllersNotRequiringZoneInfo;
     }
 
+    //  Enable the view controllers when zone information has been received
     [ _tabBarController setViewControllers: viewControllers
                                   animated: YES ];
 
+    //  Assign the zone information to the Checklist and Map for display
     _zoneChecklistViewController.zones = zones;
     _zoneMapViewController.zones       = zones;
 }
@@ -294,24 +302,27 @@
                    onDate: (NSDate *)date
 {
 
-    NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@', at %@", fence.name, zone.name, date ];
+    NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@', at %@",
+                         fence.name, zone.name, [ _dateFormatter stringFromDate: date ] ];
 
     UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
                                                             message: message
                                                            delegate: nil
-                                                  cancelButtonTitle: @"Cancel"
+                                                  cancelButtonTitle: @"OK"
                                                   otherButtonTitles: nil ];
     [ alertView show ];
 
+    //  Update the status of a fence in the Map
     [ _zoneMapViewController didCheckIntoFence: fence ];
 
+    //  Update the status of a fence in the Checklist
     [ _zoneChecklistViewController didCheckIntoFence: fence
                                               inZone: zone ];
 }
 
 
 /*
- *  A fence has been checked into; display an alert to notify the user.
+ *  A beacon has been checked into; display an alert to notify the user.
  */
 - (void)didCheckIntoBeacon: (BDBeaconInfo *)beacon
                     inZone: (BDZoneInfo *)zoneInfo
@@ -329,21 +340,28 @@
         case CLProximityFar:       proximityString = @"Far";       break;
     }
 
-    NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@' with proximity %@ at %@", beacon.name, zoneInfo.name, proximityString, date ];
+    NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@' with proximity %@ at %@",
+                         beacon.name, zoneInfo.name, proximityString, [ _dateFormatter stringFromDate: date ] ];
 
     UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
                                                             message: message
                                                            delegate: nil
-                                                  cancelButtonTitle: @"Cancel"
+                                                  cancelButtonTitle: @"OK"
                                                   otherButtonTitles: nil ];
     [ alertView show ];
 
+    //  Update the state of a beacon on the Map
     [ _zoneMapViewController didCheckIntoBeacon: beacon ];
 
+    //  Update the state of a beacon on the Checklist
     [ _zoneChecklistViewController didCheckIntoBeacon: beacon
                                                inZone: zoneInfo ];
 }
 
+/*
+ *  This method is part of the Bluedot location delegate and is called when Bluetooth is required by the SDK but is not enabled
+ *  on the device; requiring user intervention.
+ */
 - (void)didStartRequiringUserInterventionForBluetooth
 {
     if ( _userInterventionForBluetoothDialog == nil )
@@ -351,21 +369,29 @@
         NSString  *title = @"Bluetooth Required";
         NSString  *message = [ NSString stringWithFormat: @"There are nearby Beacons which cannot be detected because Bluetooth is disabled.  Re-enable Bluetooth to restore full functionality." ];
         
-        _userInterventionForLocationServicesDialog = [ [ UIAlertView alloc ] initWithTitle: title
-                                                                                   message: message
-                                                                                  delegate: nil
-                                                                         cancelButtonTitle: @"Dismiss"
-                                                                         otherButtonTitles: nil ];
+        _userInterventionForBluetoothDialog = [ [ UIAlertView alloc ] initWithTitle: title
+                                                                            message: message
+                                                                           delegate: nil
+                                                                  cancelButtonTitle: @"Dismiss"
+                                                                  otherButtonTitles: nil ];
     }
     
     [ _userInterventionForBluetoothDialog show ];
 }
 
+/*
+ *  This method is part of the Bluedot location delegate; it is called if user intervention on the device had previously been
+ *  required to enable Bluetooth and either user intervention has enabled Bluetooth or the Bluetooth service is no longer required.
+ */
 - (void)didStopRequiringUserInterventionForBluetooth
 {
-    [ _userInterventionForBluetoothDialog dismissWithClickedButtonIndex:0 animated:YES ];
+    [ _userInterventionForBluetoothDialog dismissWithClickedButtonIndex: 0 animated: YES ];
 }
 
+/*
+ *  This method is part of the Bluedot location delegate and is called when Location Services are not enabled
+ *  on the device; requiring user intervention.
+ */
 - (void)didStartRequiringUserInterventionForLocationServices
 {
     if ( _userInterventionForLocationServicesDialog == nil )
@@ -384,9 +410,14 @@
     [ _userInterventionForLocationServicesDialog show ];
 }
 
+/*
+ *  This method is part of the Bluedot location delegate; it is called if user intervention on the device had previously been
+ *  required to enable Location Services and either Location Services has been enabled or the user is no longer within an
+ *  authenticated session, thereby no longer requiring Location Services.
+ */
 - (void)didStopRequiringUserInterventionForLocationServices
 {
-    [ _userInterventionForLocationServicesDialog dismissWithClickedButtonIndex:0 animated:YES ];
+    [ _userInterventionForLocationServicesDialog dismissWithClickedButtonIndex: 0 animated: YES ];
 }
 
 #pragma mark BDPointDelegate implementation end

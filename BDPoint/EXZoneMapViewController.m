@@ -60,11 +60,12 @@ static float  minButtonHeight = 44.0f;
         self.title = @"Map";
         _windowHeight = height;
         
-        //  Set the colours to use for fences
+        //  Set the colours to use for the Checked-In state of spatial objects (fences and beacons)
         spatialObjectColourDefault = UIColor.grayColor;
         spatialObjectColourCheckedIn = UIColor.cyanColor;
         spatialObjectColourCheckedInLast = UIColor.greenColor;
-
+        
+        //  Store the fences that have been checked into
         _fenceCheckInStatuses = [ [ NSMapTable alloc ] initWithKeyOptions: NSPointerFunctionsStrongMemory|NSPointerFunctionsObjectPointerPersonality
                                                              valueOptions: NSPointerFunctionsStrongMemory|NSPointerFunctionsObjectPersonality
                                                                  capacity: 8 ];
@@ -74,22 +75,21 @@ static float  minButtonHeight = 44.0f;
                                                                   capacity: 8 ];
 
         _pointOverlayRendererFactory = [ BDPointOverlayRendererFactory sharedInstance ];
-        
         _overlayRendererCache = [ NSCache new ];
 
         _mapInsets = UIEdgeInsetsMake( mapInset, mapInset, mapInset, mapInset );
 
+        //  Create the handler for dealing with notifications raised from other view controllers
         void ( ^showZonesNotificationHandler)(NSNotification *) = ^( NSNotification *showZonesNotification )
         {
-            id showObject = showZonesNotification.object;
-            
             MKMapRect showMapRect;
+            id showObject = showZonesNotification.object;
             
             if( [ showObject isKindOfClass: BDZoneInfo.class ] )
             {
                 showMapRect = [ self.mapView mapRectForZone: (BDZoneInfo*) showObject ];
             }
-            else if( [ showObject conformsToProtocol:@protocol(BDPSpatialObjectInfo) ] )
+            else if( [ showObject conformsToProtocol: @protocol(BDPSpatialObjectInfo) ] )
             {
                 showMapRect = [ self.mapView mapRectForSpatialObject: (id<BDPSpatialObjectInfo>) showObject ];
             }
@@ -168,11 +168,11 @@ static float  minButtonHeight = 44.0f;
     
     // Add new map overlays from the new Zones
     {
-        UIImage *beaconIconImage = [ UIImage imageNamed:@"BeaconIcon" ];
+        UIImage *beaconIconImage = [ UIImage imageNamed: @"BeaconIcon" ];
         
-        [ self.mapView addOverlaysForZones:zones
-                       withBeaconIconImage:beaconIconImage
-                           beaconIconScale:2.0 ];
+        [ self.mapView addOverlaysForZones: zones
+                       withBeaconIconImage: beaconIconImage
+                           beaconIconScale: 2.0 ];
     }
     
     [ self zoomToFitZones ];
@@ -180,33 +180,46 @@ static float  minButtonHeight = 44.0f;
 
 
 /*
- *  The processing for when a fence has been checked into,.
+ *  A beacon has been checked into; highlight the proximity range of the beacon as the latest check-in and
+ *  update the colour tinting of any previously checked-in beacon.
  */
 - (void)didCheckIntoBeacon: (BDBeaconInfo *)beacon
 {
-    [ _beaconCheckInStatuses setObject: @(YES) forKey: beacon ];
+    BDBeaconInfo  *prevCheckIn = _lastCheckedInSpatialObject;
     
+    [ _beaconCheckInStatuses setObject: @(YES) forKey: beacon ];
     _lastCheckedInSpatialObject = beacon;
     
-    UIColor *statusColor;
+    [ self.mapView setTintColor: [ self tintColorForSpatialObject: beacon ] forSpatialObject: beacon ];
     
-    [ self.mapView setTintColor: statusColor forSpatialObject: beacon ];
+    if ( prevCheckIn != nil )
+    {
+        [ self.mapView setTintColor: [ self tintColorForSpatialObject: prevCheckIn ] forSpatialObject: prevCheckIn ];
+    }
 }
 
+/*
+ *  A fence has been checked into; highlight this fence as the latest check-in and update the colour tinting of any
+ *  previously checked-in fence.
+ */
 - (void)didCheckIntoFence: (BDFenceInfo *)fence
 {
-    [ _fenceCheckInStatuses setObject: @(YES) forKey: fence ];
+    BDFenceInfo  *prevCheckIn = _lastCheckedInSpatialObject;
     
+    [ _fenceCheckInStatuses setObject: @(YES) forKey: fence ];
     _lastCheckedInSpatialObject = fence;
     
-    UIColor *statusColor;
+    [ self.mapView setTintColor: [ self tintColorForSpatialObject: fence ] forSpatialObject: fence ];
     
-    [ self.mapView setTintColor: statusColor forSpatialObject: fence ];
+    if ( prevCheckIn != nil )
+    {
+        [ self.mapView setTintColor: [ self tintColorForSpatialObject: prevCheckIn ] forSpatialObject: prevCheckIn ];
+    }
 }
 
 
 /*
- *  Zoom the map view to fit the zones.
+ *  Zoom to the level required to map view to encompass the configured zones.
  */
 - (void)zoomToFitZones
 {
@@ -245,7 +258,7 @@ static float  minButtonHeight = 44.0f;
 
 
 /*
- *  Determine if a fence has been checked in.
+ *  Determine if a fence has been checked into.
  */
 - (BOOL)hasCheckedIntoFence:(BDFenceInfo *)fence
 {
@@ -253,7 +266,7 @@ static float  minButtonHeight = 44.0f;
 }
 
 /*
- *  Determine if a beacon has been checked in.
+ *  Determine if a beacon has been checked into.
  */
 - (BOOL)hasCheckedIntoBeacon:(BDBeaconInfo *)beacon
 {
@@ -262,9 +275,9 @@ static float  minButtonHeight = 44.0f;
 
 
 /*
- *  A spatial overlay is currently either a BDBeaconInfo or a BDFenceInfo.
+ *  Determine the tint colour for a spatial object (either a BDBeaconInfo or a BDFenceInfo).
  */
-- (UIColor*)tintColorForSpatialObject:(id<BDPSpatialObjectInfo>)spatialObject
+- (UIColor*)tintColorForSpatialObject: (id<BDPSpatialObjectInfo>)spatialObject
 {
     UIColor  *stateColor;
     
@@ -272,11 +285,11 @@ static float  minButtonHeight = 44.0f;
     {
         stateColor = spatialObjectColourCheckedInLast;
     }
-    else if ( [ spatialObject isKindOfClass:BDFenceInfo.class ] && [ self hasCheckedIntoFence: (BDFenceInfo *)spatialObject ] == YES )
+    else if ( [ spatialObject isKindOfClass: BDFenceInfo.class ] && [ self hasCheckedIntoFence: (BDFenceInfo *)spatialObject ] == YES )
     {
         stateColor = spatialObjectColourCheckedIn;
     }
-    else if ( [ spatialObject isKindOfClass:BDBeaconInfo.class ] && [ self hasCheckedIntoBeacon: (BDBeaconInfo *)spatialObject ] == YES )
+    else if ( [ spatialObject isKindOfClass: BDBeaconInfo.class ] && [ self hasCheckedIntoBeacon: (BDBeaconInfo *)spatialObject ] == YES )
     {
         stateColor = spatialObjectColourCheckedIn;
     }
@@ -290,8 +303,7 @@ static float  minButtonHeight = 44.0f;
 
 
 /*
- *  Button processing.
- *  The button appears 
+ *  A button has been created to show the location of the device at the current accuracy.
  */
 - (UIButton *)createShowLocationButton
 {
@@ -329,7 +341,9 @@ static float  minButtonHeight = 44.0f;
     return showLocationButton;
 }
 
-
+/*
+ *  Set the property of the map to show the user location.  This invokes GPS and thereby increases the usage of the battery.
+ */
 - (void)showLocation
 {
     

@@ -19,10 +19,10 @@
 @property (nonatomic) NSSet  *zones;
 
 //  Declare the available methods
-- (void)didCheckIntoFence:(BDFenceInfo *)fence
-                   inZone:(BDZoneInfo *)zone;
+- (void)didCheckIntoFence: (BDFenceInfo *)fence
+                   inZone: (BDZoneInfo *)zone;
 
-- (void)didCheckIntoBeacon:(BDBeaconInfo *)beacon
-                    inZone:(BDZoneInfo *)zone;
+- (void)didCheckIntoBeacon: (BDBeaconInfo *)beacon
+                    inZone: (BDZoneInfo *)zone;
 
 @end

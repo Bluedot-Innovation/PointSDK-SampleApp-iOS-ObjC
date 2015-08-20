@@ -42,7 +42,6 @@ static const float  switchWidth = 20.0f;
 
 @implementation EXZoneChecklistViewController
 
-
 - (id)init
 {
 
@@ -106,6 +105,10 @@ static const float  switchWidth = 20.0f;
     return [ _orderedZones set ];
 }
 
+/*
+ *  Order the zone information into a set of zones ordered by name.
+ *  For each of the zones, order the fences by name and store the ordered set in a map, keyed by the zone object.
+ */
 - (void)setZones: (NSSet *)zoneInfos
 {
     // Sort Zones
@@ -117,7 +120,7 @@ static const float  switchWidth = 20.0f;
     [ _orderedSpatialObjectsByZone removeAllObjects ];
     [ _checkedInSpatialObjectsByZone removeAllObjects ];
 
-    // Sort spatial objects
+    // Sort spatial objects for each zone
     for( BDZoneInfo *zone in zoneInfos )
     {
         NSAssert( [ zone.fences isKindOfClass: NSSet.class ], NSInternalInconsistencyException );
@@ -130,6 +133,7 @@ static const float  switchWidth = 20.0f;
                                           forKey: zone ];
     }
     
+    //  If the table has already been loaded into memory, then reload the data
     if ( self.isViewLoaded == YES )
     {
         [ self.tableView reloadData ];
@@ -138,14 +142,17 @@ static const float  switchWidth = 20.0f;
 
 #pragma mark Zones Accessor end
 
-
+/*
+ *  Wrapper method to retrieve the zone for an specified index of the table.
+ */
 - (BDZoneInfo *)zoneForTableSection: (NSUInteger)index
 {
-    
     return _orderedZones[ index ];
 }
 
-
+/*
+ *  Wrapper method to retrieve the spatial object (fence or beacon) from a row of the table.
+ */
 - (id)spatialObjectAtIndexPath: (NSIndexPath *)indexPath
 {
     BDZoneInfo  *zone = [ self zoneForTableSection: (NSUInteger)indexPath.section ];
@@ -154,29 +161,66 @@ static const float  switchWidth = 20.0f;
     return spatialObjects[ (NSUInteger)indexPath.row ];
 }
 
-
-- (void)didCheckIntoFence:(BDFenceInfo *)fence
-                   inZone:(BDZoneInfo *)zone
+/*
+ *  Wrapper method to determine if a spatial object from a row of the table has been checked into.
+ */
+- (BOOL)isSpatialObjectCheckedIn: (id<BDPSpatialObject>)spatialObject atIndexPath: (NSIndexPath *)indexPath
 {
+    BDZoneInfo  *zone = [ self zoneForTableSection: (NSUInteger)indexPath.section ];
+    NSMutableSet  *objects = [ _checkedInSpatialObjectsByZone objectForKey: zone ];
     
-    [ _checkedInSpatialObjectsByZone setObject: fence
-                                        forKey: zone ];
+    return [ objects containsObject: spatialObject ];
+}
 
+/*
+ *  Add a fence that has been checked into to the map of Check-Ins.
+ */
+- (void)didCheckIntoFence: (BDFenceInfo *)fence
+                   inZone: (BDZoneInfo *)zone
+{
+    [ self addCheckedInSpatialObject: fence forZone: zone ];
+    
     [ self.tableView reloadData ];
 }
 
+/*
+ *  Add a beacon that has been checked into to the map of Check-Ins.
+ */
 - (void)didCheckIntoBeacon:(BDBeaconInfo *)beacon
                     inZone:(BDZoneInfo *)zone
 {
-    [ _checkedInSpatialObjectsByZone setObject: beacon
-                                        forKey: zone ];
+    [ self addCheckedInSpatialObject: beacon forZone: zone ];
     
     [ self.tableView reloadData ];
+}
+
+/*
+ *  Store the Check-Ins made into a set of spatial objects mapped to the zone.
+ */
+- (void)addCheckedInSpatialObject: (id<BDPSpatialObject>)spatialObject forZone: (BDZoneInfo *)zone
+{
+    NSMutableSet  *objects = [ _checkedInSpatialObjectsByZone objectForKey: zone ];
+    
+    //  Create a set of fences for the zone if none yet exists
+    if (  objects == nil )
+    {
+        objects = [ NSMutableSet new ];
+    }
+    
+    [ objects addObject: spatialObject ];
+    
+    //  Update the fences set for the mapped zone
+    [ _checkedInSpatialObjectsByZone setObject: objects
+                                        forKey: zone ];
+    
 }
 
 
 #pragma mark UITableViewDataSource implementation begin
 
+/*
+ *  Determine the number of rows in the table; ensure that both fences and beacons are counted.
+ */
 - (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger)section
 {
     BDZoneInfo  *zone = [ self zoneForTableSection: (NSUInteger)section ];
@@ -184,14 +228,17 @@ static const float  switchWidth = 20.0f;
     return( zone.fences.count + zone.beacons.count );
 }
 
-
+/*
+ *  A zone is used for each section of the table.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    
     return _orderedZones.count;
 }
 
-
+/*
+ *  Create a button to show the location of a spatial object (fence or beacon) on the map.
+ */
 - (UIButton *)createShowOnMapButton
 {
     UIButton  *showOnMapButton = [ UIButton buttonWithType: UIButtonTypeRoundedRect ];
@@ -215,7 +262,9 @@ static const float  switchWidth = 20.0f;
     return showOnMapButton;
 }
 
-
+/*
+ *  When the button is pressed, show the location on the map of the associated spatial object.
+ */
 - (void)showOnMapButtonPressed: (UIButton *)button
 {
     id  spatialObject = [ _spatialObjectsForButton objectForKey: button ];
@@ -244,14 +293,24 @@ static const float  switchWidth = 20.0f;
         cell.accessoryView = showOnMapButton;
     }
 
-    id<BDPSpatialObjectInfo>  spatialObject = [self spatialObjectAtIndexPath:indexPath];
+    //  Obtain the spatial object for this cell
+    id<BDPSpatialObjectInfo>  spatialObject = [ self spatialObjectAtIndexPath: indexPath ];
 
+    //  Map this spatial object to the button
     [ _spatialObjectsForButton setObject: spatialObject
                                   forKey: showOnMapButton ];
 
-    cell.textLabel.text       = spatialObject.name;
     cell.detailTextLabel.text = spatialObject.description;
-
+    
+    if ( [ self isSpatialObjectCheckedIn: spatialObject atIndexPath: indexPath ] == YES )
+    {
+        cell.textLabel.text = [ NSString stringWithFormat: @"%@ ✓", spatialObject.name ];
+    }
+    else
+    {
+        cell.textLabel.text = spatialObject.name;
+    }
+    
     return cell;
 }
 
@@ -274,8 +333,8 @@ static const float  switchWidth = 20.0f;
     zoneSwitch.frame = switchPosition;
     zoneSwitch.onTintColor = [ UIColor redColor ];
     
-    BOOL isZoneDisabledByApplication = [ BDLocationManager.instance isZoneDisabledByApplication:zone.ID ];
-    zoneSwitch.on = !isZoneDisabledByApplication;
+    BOOL isZoneDisabledByApplication = [ BDLocationManager.instance isZoneDisabledByApplication: zone.ID ];
+    zoneSwitch.on = isZoneDisabledByApplication;
 
     CGRect titleRect = CGRectMake( buttonInset, buttonInset, frame.size.width - switchWidth - ( buttonInset * 2.0f ), height );
     UILabel *title = [ [ UILabel alloc ] initWithFrame: titleRect ];
