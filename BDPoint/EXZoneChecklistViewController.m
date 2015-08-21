@@ -107,7 +107,7 @@ static const float  switchWidth = 20.0f;
 
 /*
  *  Order the zone information into a set of zones ordered by name.
- *  For each of the zones, order the fences by name and store the ordered set in a map, keyed by the zone object.
+ *  For each of the zones, order the spatial objects by name and store the ordered set in a map, keyed by the zone object.
  */
 - (void)setZones: (NSSet *)zoneInfos
 {
@@ -164,7 +164,7 @@ static const float  switchWidth = 20.0f;
 /*
  *  Wrapper method to determine if a spatial object from a row of the table has been checked into.
  */
-- (BOOL)isSpatialObjectCheckedIn: (id<BDPSpatialObject>)spatialObject atIndexPath: (NSIndexPath *)indexPath
+- (BOOL)isSpatialObjectCheckedIn: (id<BDPSpatialObjectInfo>)spatialObject atIndexPath: (NSIndexPath *)indexPath
 {
     BDZoneInfo  *zone = [ self zoneForTableSection: (NSUInteger)indexPath.section ];
     NSMutableSet  *objects = [ _checkedInSpatialObjectsByZone objectForKey: zone ];
@@ -173,7 +173,7 @@ static const float  switchWidth = 20.0f;
 }
 
 /*
- *  Add a fence that has been checked into to the map of Check-Ins.
+ *  Add a fence with a Custom Action that has been checked into to the map of Check-Ins.
  */
 - (void)didCheckIntoFence: (BDFenceInfo *)fence
                    inZone: (BDZoneInfo *)zone
@@ -184,7 +184,7 @@ static const float  switchWidth = 20.0f;
 }
 
 /*
- *  Add a beacon that has been checked into to the map of Check-Ins.
+ *  Add a beacon with a Custom Action that has been checked into to the map of Check-Ins.
  */
 - (void)didCheckIntoBeacon:(BDBeaconInfo *)beacon
                     inZone:(BDZoneInfo *)zone
@@ -197,7 +197,7 @@ static const float  switchWidth = 20.0f;
 /*
  *  Store the Check-Ins made into a set of spatial objects mapped to the zone.
  */
-- (void)addCheckedInSpatialObject: (id<BDPSpatialObject>)spatialObject forZone: (BDZoneInfo *)zone
+- (void)addCheckedInSpatialObject: (id<BDPSpatialObjectInfo>)spatialObject forZone: (BDZoneInfo *)zone
 {
     NSMutableSet  *objects = [ _checkedInSpatialObjectsByZone objectForKey: zone ];
     
@@ -209,10 +209,9 @@ static const float  switchWidth = 20.0f;
     
     [ objects addObject: spatialObject ];
     
-    //  Update the fences set for the mapped zone
+    //  Update the spatial objects set for the mapped zone
     [ _checkedInSpatialObjectsByZone setObject: objects
                                         forKey: zone ];
-    
 }
 
 

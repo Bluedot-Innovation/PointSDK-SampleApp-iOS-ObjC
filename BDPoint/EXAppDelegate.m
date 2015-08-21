@@ -268,6 +268,9 @@
     NSLog( @"Logged out" );
 }
 
+/*
+ *  This method is passed the Zone information utilised by the Bluedot SDK.
+ */
 - (void)didUpdateZoneInfo: (NSSet *)zones
 {
     NSLog( @"Point service updated with %lu zones", (unsigned long)zones.count );
@@ -294,7 +297,7 @@
 
 
 /*
- *  A fence has been checked into; display an alert to notify the user.
+ *  A fence with a Custom Action has been checked into; display an alert to notify the user.
  */
 - (void)didCheckIntoFence: (BDFenceInfo *)fence
                    inZone: (BDZoneInfo *)zone
@@ -322,7 +325,7 @@
 
 
 /*
- *  A beacon has been checked into; display an alert to notify the user.
+ *  A beacon with a Custom Action has been checked into; display an alert to notify the user.
  */
 - (void)didCheckIntoBeacon: (BDBeaconInfo *)beacon
                     inZone: (BDZoneInfo *)zoneInfo
@@ -367,7 +370,7 @@
     if ( _userInterventionForBluetoothDialog == nil )
     {
         NSString  *title = @"Bluetooth Required";
-        NSString  *message = [ NSString stringWithFormat: @"There are nearby Beacons which cannot be detected because Bluetooth is disabled.  Re-enable Bluetooth to restore full functionality." ];
+        NSString  *message = @"There are nearby Beacons which cannot be detected because Bluetooth is disabled.  Re-enable Bluetooth to restore full functionality.";
         
         _userInterventionForBluetoothDialog = [ [ UIAlertView alloc ] initWithTitle: title
                                                                             message: message

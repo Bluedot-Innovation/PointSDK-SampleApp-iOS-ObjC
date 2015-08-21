@@ -303,7 +303,7 @@ static float  minButtonHeight = 44.0f;
 
 
 /*
- *  A button has been created to show the location of the device at the current accuracy.
+ *  Create a button to show the location of the device at the current accuracy.
  */
 - (UIButton *)createShowLocationButton
 {
