@@ -302,16 +302,10 @@ EXAuthenticationViewControllerAltAction;
  */
 - (void)startObservingAuthenticationState
 {
-    BDLocationManager  *locationManager = BDLocationManager.instance;
-  
-    /*
-     *  Add an observation on the authentication state of the Bluedot SDK.  A token is returned for use in
-     *  stopping the observation.
-     */
-    [ locationManager addObserver: self
-                       forKeyPath: EXAuthenticationState
-                          options: ( NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial )
-                          context: &EXAuthenticationStateChangeHandlerContext ];
+    [ BDLocationManager.instance addObserver: self
+                                  forKeyPath: EXAuthenticationState
+                                     options: ( NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial )
+                                     context: &EXAuthenticationStateChangeHandlerContext ];
 }
 
 /*
@@ -408,13 +402,10 @@ EXAuthenticationViewControllerAltAction;
 }
 
 /*
- *  Stop observing the authentication state of the Bluepoint SDK with the back-end using the token provided on starting.
+ *  Stop observing the authentication state of the Bluepoint SDK with the back-end.
  */
 - (void)stopObservingAuthenticationState
 {
-    /*
-     *  Stop observing and reset the token to nil.
-     */
     [ BDLocationManager.instance removeObserver: self forKeyPath: EXAuthenticationState ];
 }
 
