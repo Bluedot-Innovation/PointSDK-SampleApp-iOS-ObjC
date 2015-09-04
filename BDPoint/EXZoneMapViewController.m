@@ -336,7 +336,7 @@ static float  minButtonHeight = 44.0f;
     [ showLocationButton setTitleColor: [ UIColor whiteColor ] forState: UIControlStateNormal ];
 
     [ showLocationButton addTarget: self action: @selector(showLocation) forControlEvents: UIControlEventTouchDown ];
-    [ showLocationButton addTarget: self action: @selector(hideLocation) forControlEvents: UIControlEventTouchUpInside ];
+    [ showLocationButton addTarget: self action: @selector(hideLocation) forControlEvents: UIControlEventTouchUpInside | UIControlEventTouchUpOutside | UIControlEventTouchCancel ];
     
     return showLocationButton;
 }
