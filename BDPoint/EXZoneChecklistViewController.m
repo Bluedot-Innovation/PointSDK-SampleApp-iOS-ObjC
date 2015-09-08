@@ -35,7 +35,8 @@ static const float  switchWidth = 20.0f;
 @property (nonatomic) NSMapTable  *spatialObjectsForButton;
 
 @property (nonatomic) UIImage  *mapIcon;
-@property (nonatomic,copy) NSComparator  nameComparator;
+@property (nonatomic,copy) NSComparator  spatialNameComparator;
+@property (nonatomic,copy) NSComparator  zoneNameComparator;
 
 @end
 
@@ -56,10 +57,16 @@ static const float  switchWidth = 20.0f;
         _checkedInSpatialObjectsByZone = [ NSMapTable strongToStrongObjectsMapTable ];
         _spatialObjectsForButton = [ NSMapTable strongToStrongObjectsMapTable ];
         
-        //  Define a comparator block
-        _nameComparator = ^( id<BDPSpatialObjectInfo> namedA, id<BDPSpatialObjectInfo> namedB )
+        //  Define a comparator block for spatial objects
+        _spatialNameComparator = ^( id<BDPSpatialObjectInfo> nameA, id<BDPSpatialObjectInfo> nameB )
         {
-            return [ namedA.name compare: namedB.name ];
+            return [ nameA.name compare: nameB.name ];
+        };
+        
+        //  Define a comparator block for zone infos
+        _zoneNameComparator = ^( BDZoneInfo *zoneNameA, BDZoneInfo *zoneNameB )
+        {
+            return [ zoneNameA.name compare: zoneNameB.name ];
         };
 
         //  Load in the map icon image from the resources
@@ -113,7 +120,7 @@ static const float  switchWidth = 20.0f;
 {
     // Sort Zones
     NSMutableOrderedSet  *mutableOrderedZones = [ [ NSMutableOrderedSet alloc ] initWithSet: zoneInfos ];
-    [ mutableOrderedZones sortUsingComparator: _nameComparator ];
+    [ mutableOrderedZones sortUsingComparator: _zoneNameComparator ];
     _orderedZones = [ mutableOrderedZones copy ];
 
     //  Remove all existing spatial objects
@@ -128,7 +135,7 @@ static const float  switchWidth = 20.0f;
         NSMutableOrderedSet  *mutableOrderedSpatialObjects = [ [ NSMutableOrderedSet alloc ] initWithSet: zone.fences ];
         [ mutableOrderedSpatialObjects addObjectsFromArray: zone.beacons.allObjects ];
 
-        [ mutableOrderedSpatialObjects sortUsingComparator: _nameComparator ];
+        [ mutableOrderedSpatialObjects sortUsingComparator: _spatialNameComparator ];
         [ _orderedSpatialObjectsByZone setObject: [ mutableOrderedSpatialObjects copy ]
                                           forKey: zone ];
     }
