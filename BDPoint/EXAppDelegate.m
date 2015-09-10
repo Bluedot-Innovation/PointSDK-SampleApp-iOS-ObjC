@@ -18,7 +18,7 @@
 /*
  *  Anonymous category for local properties.
  */
-@interface EXAppDelegate() <BDPointDelegate, UITabBarControllerDelegate>
+@interface EXAppDelegate() <BDPointDelegate, UITabBarControllerDelegate, BDPRestartAlertDelegate>
 
 @property (nonatomic) EXZoneChecklistViewController  *zoneChecklistViewController;
 @property (nonatomic) EXZoneMapViewController        *zoneMapViewController;
@@ -424,6 +424,17 @@
 }
 
 #pragma mark BDPointDelegate implementation end
+
+
+#pragma mark App Restart delegate start
+
+- (NSString *)restartAlertTitle
+{
+    return( @"Restart BDPoint App by touching this message" );
+}
+
+#pragma mark App Restart delegate end
+
 
 
 #pragma mark UITabBarControllerDelegate implementation begin
