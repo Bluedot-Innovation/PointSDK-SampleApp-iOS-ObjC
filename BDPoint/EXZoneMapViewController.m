@@ -146,6 +146,8 @@ static float  minButtonHeight = 44.0f;
     {
         [ _fenceCheckInStatuses  removeAllObjects ];
         [ _beaconCheckInStatuses removeAllObjects ];
+        
+        _lastCheckedInSpatialObject = nil;
     }
     
     _zones = zones;
