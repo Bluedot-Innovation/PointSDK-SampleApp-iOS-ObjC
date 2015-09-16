@@ -57,7 +57,7 @@
 	<dict>
 	  <!--Include to allow all connections (DANGER)-->
 	  <key>NSAllowsArbitraryLoads</key>
-	      <true/>
+	      <false/>
 	</dict>
 </dict>
 </plist>
