@@ -92,10 +92,6 @@
     // when integrating Bluedot Point SDK v1.x, even if it is empty.
 }
 
-- (void)applicationWillResignActive: (UIApplication *)application
-{
-}
-
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
 }
