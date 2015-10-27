@@ -300,32 +300,10 @@
              atCoordinate: (BDLocationCoordinate2D)coordinate
                    onDate: (NSDate *)date
 {
-    UIApplicationState applicationState = UIApplication.sharedApplication.applicationState;
-
     NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@', at %@",
                                                      fence.name, zone.name, [ _dateFormatter stringFromDate: date ] ];
 
-    switch( applicationState )
-    {
-        case UIApplicationStateActive: // In the fore-ground, display notification directly to the user
-        {
-            UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
-                                                                    message: message
-                                                                   delegate: nil
-                                                          cancelButtonTitle: @"OK"
-                                                          otherButtonTitles: nil ];
-            [ alertView show ];
-        }
-        break;
-
-        default:
-        {
-            UILocalNotification *notification = [UILocalNotification new];
-            notification.alertBody = message;
-            [UIApplication.sharedApplication presentLocalNotificationNow:notification];
-        }
-        break;
-    }
+    [ self presentNotificationWithMessage: message ];
 
     //  Update the status of a fence in the Map
     [ _zoneMapViewController didCheckIntoFence: fence ];
@@ -358,12 +336,7 @@
     NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@' with proximity %@ at %@",
                          beacon.name, zoneInfo.name, proximityString, [ _dateFormatter stringFromDate: date ] ];
 
-    UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
-                                                            message: message
-                                                           delegate: nil
-                                                  cancelButtonTitle: @"OK"
-                                                  otherButtonTitles: nil ];
-    [ alertView show ];
+    [ self presentNotificationWithMessage: message ];
 
     //  Update the state of a beacon on the Map
     [ _zoneMapViewController didCheckIntoBeacon: beacon ];
@@ -371,6 +344,33 @@
     //  Update the state of a beacon on the Checklist
     [ _zoneChecklistViewController didCheckIntoBeacon: beacon
                                                inZone: zoneInfo ];
+}
+
+- (void)presentNotificationWithMessage:(NSString*)message
+{
+    UIApplicationState applicationState = UIApplication.sharedApplication.applicationState;
+
+    switch( applicationState )
+    {
+        case UIApplicationStateActive: // In the foreground: display notification directly to the user
+        {
+            UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
+                                                                    message: message
+                                                                   delegate: nil
+                                                          cancelButtonTitle: @"OK"
+                                                          otherButtonTitles: nil ];
+            [ alertView show ];
+        }
+        break;
+
+        default: // If in the background: deliver a local notification
+        {
+            UILocalNotification *notification = [UILocalNotification new];
+            notification.alertBody = message;
+            [UIApplication.sharedApplication presentLocalNotificationNow:notification];
+        }
+        break;
+    }
 }
 
 /*
