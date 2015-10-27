@@ -300,16 +300,32 @@
              atCoordinate: (BDLocationCoordinate2D)coordinate
                    onDate: (NSDate *)date
 {
+    UIApplicationState applicationState = UIApplication.sharedApplication.applicationState;
 
     NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@', at %@",
-                         fence.name, zone.name, [ _dateFormatter stringFromDate: date ] ];
+                                                     fence.name, zone.name, [ _dateFormatter stringFromDate: date ] ];
 
-    UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
-                                                            message: message
-                                                           delegate: nil
-                                                  cancelButtonTitle: @"OK"
-                                                  otherButtonTitles: nil ];
-    [ alertView show ];
+    switch( applicationState )
+    {
+        case UIApplicationStateActive: // In the fore-ground, display notification directly to the user
+        {
+            UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
+                                                                    message: message
+                                                                   delegate: nil
+                                                          cancelButtonTitle: @"OK"
+                                                          otherButtonTitles: nil ];
+            [ alertView show ];
+        }
+        break;
+
+        default:
+        {
+            UILocalNotification *notification = [UILocalNotification new];
+            notification.alertBody = message;
+            [UIApplication.sharedApplication presentLocalNotificationNow:notification];
+        }
+        break;
+    }
 
     //  Update the status of a fence in the Map
     [ _zoneMapViewController didCheckIntoFence: fence ];
