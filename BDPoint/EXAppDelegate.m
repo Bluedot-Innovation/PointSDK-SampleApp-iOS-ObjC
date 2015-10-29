@@ -40,11 +40,13 @@
 
 - (BOOL)application: (UIApplication *)application didFinishLaunchingWithOptions: (NSDictionary *)launchOptions
 {
-    BDLocationManager  *locationManager = [ BDLocationManager instance ];
+    BDLocationManager  *locationManager = BDLocationManager.instance;
     
-    //  Assign the delegates to this class
-    locationManager.locationDelegate = self;
+    /*
+     *  Assign the delegates for session handling and location updates to this class.
+     */
     locationManager.sessionDelegate = self;
+    locationManager.locationDelegate = self;
 
     [ self initializeUserInterface ];
 
@@ -102,7 +104,7 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    // For iOS9 (currently Beta) this method implementation must be present in AppDelegate
+    // For iOS9 this method implementation must be present in AppDelegate
     // when integrating Bluedot Point SDK v1.x, even if it is empty.
 }
 
