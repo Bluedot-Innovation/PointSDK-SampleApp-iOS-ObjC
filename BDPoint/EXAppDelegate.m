@@ -291,7 +291,6 @@
     _zoneMapViewController.zones       = zones;
 }
 
-
 /*
  *  A fence with a Custom Action has been checked into; display an alert to notify the user.
  */
@@ -312,7 +311,6 @@
     [ _zoneChecklistViewController didCheckIntoFence: fence
                                               inZone: zone ];
 }
-
 
 /*
  *  A beacon with a Custom Action has been checked into; display an alert to notify the user.
@@ -344,33 +342,6 @@
     //  Update the state of a beacon on the Checklist
     [ _zoneChecklistViewController didCheckIntoBeacon: beacon
                                                inZone: zoneInfo ];
-}
-
-- (void)presentNotificationWithMessage:(NSString*)message
-{
-    UIApplicationState applicationState = UIApplication.sharedApplication.applicationState;
-
-    switch( applicationState )
-    {
-        case UIApplicationStateActive: // In the foreground: display notification directly to the user
-        {
-            UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
-                                                                    message: message
-                                                                   delegate: nil
-                                                          cancelButtonTitle: @"OK"
-                                                          otherButtonTitles: nil ];
-            [ alertView show ];
-        }
-        break;
-
-        default: // If in the background: deliver a local notification
-        {
-            UILocalNotification *notification = [UILocalNotification new];
-            notification.alertBody = message;
-            [UIApplication.sharedApplication presentLocalNotificationNow:notification];
-        }
-        break;
-    }
 }
 
 /*
@@ -436,6 +407,40 @@
 }
 
 #pragma mark BDPointDelegate implementation end
+
+
+/*
+ *  Post a notifiction message.
+ */
+- (void)presentNotificationWithMessage: (NSString *)message
+{
+    UIApplicationState applicationState = UIApplication.sharedApplication.applicationState;
+    
+    switch( applicationState )
+    {
+            // In the foreground: display notification directly to the user
+        case UIApplicationStateActive:
+        {
+            UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
+                                                                    message: message
+                                                                   delegate: nil
+                                                          cancelButtonTitle: @"OK"
+                                                          otherButtonTitles: nil ];
+            [ alertView show ];
+        }
+            break;
+            
+            // If not in the foreground: deliver a local notification
+        default:
+        {
+            UILocalNotification *notification = [ UILocalNotification new ];
+            notification.alertBody = message;
+            
+            [ UIApplication.sharedApplication presentLocalNotificationNow: notification ];
+        }
+            break;
+    }
+}
 
 
 #pragma mark App Restart delegate start
