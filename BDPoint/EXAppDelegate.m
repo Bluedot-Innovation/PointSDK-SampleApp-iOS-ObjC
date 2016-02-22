@@ -431,7 +431,7 @@
 {
     if ( _userInterventionForPowerModeDialog == nil )
     {
-        NSString  *title = @"Low Energy Mode";
+        NSString  *title = @"Low Power Mode";
         NSString  *message = [ NSString stringWithFormat: @"Low Power Mode has been enabled on this device.  To restore full location precision, disable the setting at :\nSettings → Battery → Low Power Mode" ];
 
         _userInterventionForPowerModeDialog = [ [ UIAlertView alloc ] initWithTitle: title
