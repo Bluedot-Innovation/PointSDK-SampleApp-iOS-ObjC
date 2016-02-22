@@ -30,6 +30,7 @@
 
 @property (nonatomic) UIAlertView  *userInterventionForBluetoothDialog;
 @property (nonatomic) UIAlertView  *userInterventionForLocationServicesDialog;
+@property (nonatomic) UIAlertView  *userInterventionForPowerModeDialog;
 
 @property (nonatomic) NSDateFormatter  *dateFormatter;
 
@@ -262,9 +263,23 @@
 
 - (void)didEndSession
 {
-    [ _tabBarController setViewControllers: _viewControllersNotRequiringZoneInfo animated: NO ];
     NSLog( @"Logged out" );
+
+    [ self onDidEndSession ];
 }
+
+- (void)didEndSessionWithError: (NSError *)error
+{
+    NSLog( @"Logged out with error: %@", error.localizedDescription );
+
+    [ self onDidEndSession ];
+}
+
+- (void)onDidEndSession
+{
+    [ _tabBarController setViewControllers: _viewControllersNotRequiringZoneInfo animated: NO ];
+}
+
 
 /*
  *  This method is passed the Zone information utilised by the Bluedot SDK.
@@ -406,6 +421,34 @@
 - (void)didStopRequiringUserInterventionForLocationServices
 {
     [ _userInterventionForLocationServicesDialog dismissWithClickedButtonIndex: 0 animated: YES ];
+}
+
+/*
+ *  This method is part of the Bluedot location delegate and is called when Low Power mode is enabled
+ *  on the device; requiring user intervention to restore full SDK precision.
+ */
+- (void)didStartRequiringUserInterventionForPowerMode
+{
+    if ( _userInterventionForPowerModeDialog == nil )
+    {
+        NSString  *title = @"Low Energy Mode";
+        NSString  *message = [ NSString stringWithFormat: @"Low Power Mode has been enabled on this device.  To restore full location precision, disable the setting at :\nSettings → Battery → Low Power Mode" ];
+
+        _userInterventionForPowerModeDialog = [ [ UIAlertView alloc ] initWithTitle: title
+                                                                             message: message
+                                                                            delegate: nil
+                                                                   cancelButtonTitle: @"Dismiss"
+                                                                   otherButtonTitles: nil ];
+    }
+
+    [ _userInterventionForPowerModeDialog show ];
+}
+
+
+
+- (void)didStopRequiringUserInterventionForPowerMode
+{
+    [ _userInterventionForPowerModeDialog dismissWithClickedButtonIndex:0 animated:YES ];
 }
 
 #pragma mark BDPointDelegate implementation end

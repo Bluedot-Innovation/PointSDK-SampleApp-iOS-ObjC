@@ -8,10 +8,10 @@
 @class BDLocationManager;
 
 //  Declare the constants
-static NSString  *BDPointAPIKeyKey = @"BDPointAPIKey";
+static NSString  *BDPointAPIKeyKey      = @"BDPointAPIKey";
 static NSString  *BDPointPackageNameKey = @"BDPointPackageName";
-static NSString  *BDPointUsernameKey = @"BDPointUsername";
-static NSString  *BDPointEndpointKey = @"BDPointAPIUrl";
+static NSString  *BDPointUsernameKey    = @"BDPointUsername";
+static NSString  *BDPointEndpointKey    = @"BDPointAPIUrl";
 
 
 @interface EXAuthenticationViewController : UIViewController
