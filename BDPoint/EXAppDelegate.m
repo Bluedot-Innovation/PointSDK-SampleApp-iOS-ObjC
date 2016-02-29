@@ -312,12 +312,13 @@
  *  A fence with a Custom Action has been checked into; display an alert to notify the user.
  */
 - (void)didCheckIntoFence: (BDFenceInfo *)fence
-                   inZone: (BDZoneInfo *)zone
+                   inZone: (BDZoneInfo *)zoneInfo
              atCoordinate: (BDLocationCoordinate2D)coordinate
                    onDate: (NSDate *)date
+             willCheckOut: (BOOL)willCheckOut
 {
     NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@', at %@",
-                                                     fence.name, zone.name, [ _dateFormatter stringFromDate: date ] ];
+                                                     fence.name, zoneInfo.name, [ _dateFormatter stringFromDate: date ] ];
 
     [ self presentNotificationWithMessage: message ];
 
@@ -326,7 +327,21 @@
 
     //  Update the status of a fence in the Checklist
     [ _zoneChecklistViewController didCheckIntoFence: fence
-                                              inZone: zone ];
+                                              inZone: zoneInfo ];
+}
+
+/*
+ *  A fence with a Custom Action has been checked out from; display an alert to notify the user.
+ */
+- (void)didCheckOutFromFence: (BDFenceInfo *)fence
+                      inZone: (BDZoneInfo *)zoneInfo
+                      onDate: (NSDate *)date
+                withDuration: (NSTimeInterval)checkedInDuration
+{
+    NSString *message = [ NSString stringWithFormat: @"You left '%@' in zone '%@' after %lf seconds",
+                                                     fence.name, zoneInfo.name, checkedInDuration ];
+    
+    [ self presentNotificationWithMessage: message ];
 }
 
 /*
@@ -336,6 +351,7 @@
                     inZone: (BDZoneInfo *)zoneInfo
              withProximity: (CLProximity)proximity
                     onDate: (NSDate *)date
+              willCheckOut: (BOOL)willCheckOut
 {
     NSString *proximityString;
 
@@ -359,6 +375,22 @@
     //  Update the state of a beacon on the Checklist
     [ _zoneChecklistViewController didCheckIntoBeacon: beacon
                                                inZone: zoneInfo ];
+}
+
+/*
+ *  A beacon with a Custom Action has been checked out from; display an alert to notify the user.
+ */
+- (void)didCheckOutFromBeacon: (BDBeaconInfo *)beacon
+                       inZone: (BDZoneInfo *)zoneInfo
+                withProximity: (CLProximity)proximity
+                       onDate: (NSDate *)date
+                 withDuration: (NSTimeInterval)checkedInDuration
+{
+    
+    NSString *message = [ NSString stringWithFormat: @"You left beacon '%@' in zone '%@', after %lf seconds",
+                                                     beacon.name, zoneInfo.name, (double)checkedInDuration ];
+    
+    [ self presentNotificationWithMessage: message ];
 }
 
 /*
