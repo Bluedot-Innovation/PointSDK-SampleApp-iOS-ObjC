@@ -336,10 +336,10 @@
 - (void)didCheckOutFromFence: (BDFenceInfo *)fence
                       inZone: (BDZoneInfo *)zoneInfo
                       onDate: (NSDate *)date
-                withDuration: (NSTimeInterval)checkedInDuration
+                withDuration: (NSUInteger)checkedInDuration
 {
-    NSString *message = [ NSString stringWithFormat: @"You left '%@' in zone '%@' after %lf seconds",
-                                                     fence.name, zoneInfo.name, checkedInDuration ];
+    NSString *message = [ NSString stringWithFormat: @"You left '%@' in zone '%@' after %lu minutes",
+                                                     fence.name, zoneInfo.name, (unsigned long)checkedInDuration ];
     
     [ self presentNotificationWithMessage: message ];
 }
@@ -384,11 +384,11 @@
                        inZone: (BDZoneInfo *)zoneInfo
                 withProximity: (CLProximity)proximity
                        onDate: (NSDate *)date
-                 withDuration: (NSTimeInterval)checkedInDuration
+                 withDuration: (NSUInteger)checkedInDuration
 {
     
-    NSString *message = [ NSString stringWithFormat: @"You left beacon '%@' in zone '%@', after %lf seconds",
-                                                     beacon.name, zoneInfo.name, (double)checkedInDuration ];
+    NSString *message = [ NSString stringWithFormat: @"You left beacon '%@' in zone '%@', after %lu minutes",
+                                                     beacon.name, zoneInfo.name, (unsigned long)checkedInDuration ];
     
     [ self presentNotificationWithMessage: message ];
 }
