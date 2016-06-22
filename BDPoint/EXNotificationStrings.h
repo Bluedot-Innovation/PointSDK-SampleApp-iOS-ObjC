@@ -1,10 +1,9 @@
-/****
- *    EXNotificationStrings.h
- *
- *    This header file lists the strings utilised in observation and notification.
- *    (c) 2015 Bluedot Innovations
- */
-
+//
+//  Created by Bluedot Innovation
+//  Copyright (c) 2016 Bluedot Innovation. All rights reserved.
+//
+//  List the strings utilised in observation and notification.
+//
 
 static NSString  *EXShowFencesOnMapNotification = @"EXShowFencesOnMapNotification";
 static NSString  *EXAuthenticationState = @"authenticationState";

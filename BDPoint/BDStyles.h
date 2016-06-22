@@ -1,3 +1,9 @@
+//
+//  Created by Bluedot Innovation
+//  Copyright (c) 2016 Bluedot Innovation. All rights reserved.
+//
+//  Style-related Marco defined across the project
+//
 
 #define UIColorFromRGB(hexValue) [UIColor colorWithRed:(( hexValue & 0xFF0000 ) >> 16 ) / 255.0f \
                                                  green:(( hexValue &   0xFF00 ) >> 8  ) / 255.0f \
