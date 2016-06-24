@@ -1,9 +1,8 @@
 //
-//  BDZoneMapViewController.h
-//  BDPoint
+//  Created by Bluedot Innovation
+//  Copyright (c) 2016 Bluedot Innovation. All rights reserved.
 //
-//  Created by Christopher Hatton on 14/06/2014.
-//  Copyright (c) 2014 Bluedot. All rights reserved.
+//  View Controller to display all the fences and user location in the map view.
 //
 
 #import <UIKit/UIKit.h>

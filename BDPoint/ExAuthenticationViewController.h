@@ -1,6 +1,8 @@
 //
-// Created by Chris Hatton on 12/03/2014.
-// Copyright (c) 2014 Chris Hatton. All rights reserved.
+//  Created by Bluedot Innovation
+//  Copyright (c) 2016 Bluedot Innovation. All rights reserved.
+//
+//  View Controller used to authenticate Point SDK with your username, package name and apiKey.
 //
 
 #import <Foundation/Foundation.h>

@@ -1,9 +1,8 @@
 //
-//  BDLocationChecklistViewController.h
-//  BDPoint
+//  Created by Bluedot Innovation
+//  Copyright (c) 2016 Bluedot Innovation. All rights reserved.
 //
-//  Created by Christopher Hatton on 14/06/2014.
-//  Copyright (c) 2014 Bluedot. All rights reserved.
+//  View Controller to list all the zones and spatial objects.
 //
 
 #import <UIKit/UIKit.h>

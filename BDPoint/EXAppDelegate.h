@@ -1,9 +1,8 @@
 //
-//  BDAppDelegate.h
-//  BDPointApp
+//  Created by Bluedot Innovation
+//  Copyright (c) 2016 Bluedot Innovation. All rights reserved.
 //
-//  Created by Christopher Hatton on 14/06/2014.
-//  Copyright (c) 2014 Bluedot. All rights reserved.
+//  Application delegate for Bluedot Demo App Project in Objective-C
 //
 
 #import <UIKit/UIKit.h>
