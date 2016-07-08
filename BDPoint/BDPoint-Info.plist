@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BDPointBackgroundLocationUpdateEnabled</key>
+	<false/>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>BDPointExceptionLoggingEnabled</key>
@@ -46,10 +48,11 @@
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Allow location-based actions to be triggered while in the background</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow location-based actions to be triggered only while in the foreground</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
-		<string>location</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
