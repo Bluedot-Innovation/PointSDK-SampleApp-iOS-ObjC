@@ -41,8 +41,6 @@
 
 - (BOOL)application: (UIApplication *)application didFinishLaunchingWithOptions: (NSDictionary *)launchOptions
 {
-    [BDPointService takeOff];
-    
     BDLocationManager  *locationManager = BDLocationManager.instance;
     
     /*
@@ -103,7 +101,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [BDPointService land];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -138,7 +135,7 @@
             break;
         }
 
-        parameterDictionary[ paramName ] = [ paramValue bluedotURLDecode ];
+        parameterDictionary[ paramName ] = [ paramValue urlDecode ];
     }
 
     return [ NSDictionary dictionaryWithDictionary: parameterDictionary ];
