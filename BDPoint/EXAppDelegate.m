@@ -41,8 +41,6 @@
 
 - (BOOL)application: (UIApplication *)application didFinishLaunchingWithOptions: (NSDictionary *)launchOptions
 {
-    [BDPointService takeOff];
-    
     BDLocationManager  *locationManager = BDLocationManager.instance;
     
     /*
@@ -103,7 +101,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [BDPointService land];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -138,7 +135,7 @@
             break;
         }
 
-        parameterDictionary[ paramName ] = [ paramValue bluedotURLDecode ];
+        parameterDictionary[ paramName ] = [ paramValue urlDecode ];
     }
 
     return [ NSDictionary dictionaryWithDictionary: parameterDictionary ];
@@ -319,10 +316,22 @@
              atCoordinate: (BDLocationCoordinate2D)coordinate
                    onDate: (NSDate *)date
              willCheckOut: (BOOL)willCheckOut
+           withCustomData:(NSDictionary *)customData
 {
-    NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@' with latitude %f and longitude %f, at %@",
-                                                     fence.name, zoneInfo.name, coordinate.latitude, coordinate.longitude, [ _dateFormatter stringFromDate: date ] ];
-
+    NSString *customDataString;
+    
+    if (customData)
+    {
+        customDataString = [ NSString stringWithFormat:@"with customData keys: %@ and values %@", customData.allKeys, customData.allValues ];
+    }
+    else
+    {
+        customDataString = @"with no customData";
+    }
+    
+    NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@' %@, at %@",
+                         fence.name, zoneInfo.name, customDataString, [ _dateFormatter stringFromDate: date ] ];
+    
     [ self presentNotificationWithMessage: message ];
 
     //  Update the status of a fence in the Map
@@ -342,7 +351,7 @@
                 withDuration: (NSUInteger)checkedInDuration
 {
     NSString *message = [ NSString stringWithFormat: @"You left '%@' in zone '%@' after %lu minutes",
-                                                     fence.name, zoneInfo.name, (unsigned long)checkedInDuration ];
+                         fence.name, zoneInfo.name, (unsigned long)checkedInDuration ];
     
     [ self presentNotificationWithMessage: message ];
 }
@@ -358,6 +367,7 @@
             withCustomData:(NSDictionary *)customData
 {
     NSString *proximityString;
+    NSString *customDataString;
 
     switch(proximity)
     {
@@ -368,8 +378,17 @@
         case CLProximityFar:       proximityString = @"Far";       break;
     }
 
-    NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@' with proximity %@ at %@",
-                         beacon.name, zoneInfo.name, proximityString, [ _dateFormatter stringFromDate: date ] ];
+    if (customData)
+    {
+        customDataString = [ NSString stringWithFormat:@"with customData keys: %@ and values %@", customData.allKeys, customData.allValues ];
+    }
+    else
+    {
+        customDataString = @"with no customData";
+    }
+
+    NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@' with proximity %@ and %@ at %@",
+                         beacon.name, zoneInfo.name, proximityString, customDataString, [ _dateFormatter stringFromDate: date ] ];
 
     [ self presentNotificationWithMessage: message ];
 

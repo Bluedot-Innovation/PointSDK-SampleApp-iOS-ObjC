@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>BDPointBackgroundLocationUpdateEnabled</key>
-	<false/>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>BDPointExceptionLoggingEnabled</key>
@@ -53,6 +51,7 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
+		<string>location</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
