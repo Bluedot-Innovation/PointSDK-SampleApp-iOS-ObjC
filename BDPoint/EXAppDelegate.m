@@ -316,9 +316,21 @@
              atCoordinate: (BDLocationCoordinate2D)coordinate
                    onDate: (NSDate *)date
              willCheckOut: (BOOL)willCheckOut
+           withCustomData:(NSDictionary *)customData
 {
-    NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@', at %@",
-                                                     fence.name, zoneInfo.name, [ _dateFormatter stringFromDate: date ] ];
+    NSString *customDataString;
+    
+    if (customData)
+    {
+        customDataString = [ NSString stringWithFormat:@"with customData keys: %@ and values %@", customData.allKeys, customData.allValues ];
+    }
+    else
+    {
+        customDataString = @"with no customData";
+    }
+
+    NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@' %@, at %@",
+                                                     fence.name, zoneInfo.name, customDataString, [ _dateFormatter stringFromDate: date ] ];
 
     [ self presentNotificationWithMessage: message ];
 
@@ -352,8 +364,10 @@
              withProximity: (CLProximity)proximity
                     onDate: (NSDate *)date
               willCheckOut: (BOOL)willCheckOut
+            withCustomData:(NSDictionary *)customData
 {
     NSString *proximityString;
+    NSString *customDataString;
 
     switch(proximity)
     {
@@ -363,9 +377,18 @@
         case CLProximityNear:      proximityString = @"Near";      break;
         case CLProximityFar:       proximityString = @"Far";       break;
     }
+    
+    if (customData)
+    {
+        customDataString = [ NSString stringWithFormat:@"with customData keys: %@ and values %@", customData.allKeys, customData.allValues ];
+    }
+    else
+    {
+        customDataString = @"with no customData";
+    }
 
-    NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@' with proximity %@ at %@",
-                         beacon.name, zoneInfo.name, proximityString, [ _dateFormatter stringFromDate: date ] ];
+    NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@' with proximity %@ and %@ at %@",
+                         beacon.name, zoneInfo.name, proximityString, customDataString, [ _dateFormatter stringFromDate: date ] ];
 
     [ self presentNotificationWithMessage: message ];
 
