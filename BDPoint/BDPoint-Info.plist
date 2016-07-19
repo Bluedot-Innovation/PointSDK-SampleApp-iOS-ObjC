@@ -4,8 +4,6 @@
 <dict>
 	<key>UIFileSharingEnabled</key>
 	<true/>
-	<key>BDPointBackgroundLocationUpdateEnabled</key>
-	<false/>
 	<key>BDPointExceptionLoggingEnabled</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -53,6 +51,7 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
+		<string>location</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>

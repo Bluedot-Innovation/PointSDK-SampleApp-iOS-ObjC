@@ -86,11 +86,11 @@ static float  minButtonHeight = 44.0f;
             
             if( [ showObject isKindOfClass: BDZoneInfo.class ] )
             {
-                showMapRect = [ self.mapView bluedotMapRectForZone: (BDZoneInfo*) showObject ];
+                showMapRect = [ self.mapView mapRectForZone: (BDZoneInfo*) showObject ];
             }
             else if( [ showObject conformsToProtocol: @protocol(BDPSpatialObjectInfo) ] )
             {
-                showMapRect = [ self.mapView bluedotMapRectForSpatialObject: (id<BDPSpatialObjectInfo>) showObject ];
+                showMapRect = [ self.mapView mapRectForSpatialObject: (id<BDPSpatialObjectInfo>) showObject ];
             }
             else
             {
@@ -139,7 +139,7 @@ static float  minButtonHeight = 44.0f;
 - (void)setZones: (NSSet *)zones
 {
     // Remove existing overlays from the previous Zones
-    [ self.mapView bluedotRemoveAllSpatialObjectOverlays];
+    [ self.mapView removeAllSpatialObjectOverlays];
     
     // Clear check-in statuses for the previous Fences and Beacons
     {
@@ -171,7 +171,7 @@ static float  minButtonHeight = 44.0f;
     {
         UIImage *beaconIconImage = [ UIImage imageNamed: @"BeaconIcon" ];
         
-        [ self.mapView bluedotAddOverlaysForZones: zones
+        [ self.mapView addOverlaysForZones: zones
                        withBeaconIconImage: beaconIconImage
                            beaconIconScale: 2.0 ];
     }
@@ -191,11 +191,11 @@ static float  minButtonHeight = 44.0f;
     [ _beaconCheckInStatuses setObject: @(YES) forKey: beacon ];
     _lastCheckedInSpatialObject = beacon;
     
-    [ self.mapView bluedotSetTintColor: [ self tintColorForSpatialObject: beacon ] forSpatialObject: beacon ];
+    [ self.mapView setTintColor: [ self tintColorForSpatialObject: beacon ] forSpatialObject: beacon ];
     
     if ( prevCheckIn != nil )
     {
-        [ self.mapView bluedotSetTintColor: [ self tintColorForSpatialObject: prevCheckIn ] forSpatialObject: prevCheckIn ];
+        [ self.mapView setTintColor: [ self tintColorForSpatialObject: prevCheckIn ] forSpatialObject: prevCheckIn ];
     }
 }
 
@@ -210,11 +210,11 @@ static float  minButtonHeight = 44.0f;
     [ _fenceCheckInStatuses setObject: @(YES) forKey: fence ];
     _lastCheckedInSpatialObject = fence;
     
-    [ self.mapView bluedotSetTintColor: [ self tintColorForSpatialObject: fence ] forSpatialObject: fence ];
+    [ self.mapView setTintColor: [ self tintColorForSpatialObject: fence ] forSpatialObject: fence ];
     
     if ( prevCheckIn != nil )
     {
-        [ self.mapView bluedotSetTintColor: [ self tintColorForSpatialObject: prevCheckIn ] forSpatialObject: prevCheckIn ];
+        [ self.mapView setTintColor: [ self tintColorForSpatialObject: prevCheckIn ] forSpatialObject: prevCheckIn ];
     }
 }
 
@@ -224,7 +224,7 @@ static float  minButtonHeight = 44.0f;
  */
 - (void)zoomToFitZones
 {
-    MKMapRect zonesMapRect = [ self.mapView bluedotMapRectForZones: _zones ];
+    MKMapRect zonesMapRect = [ self.mapView mapRectForZones: _zones ];
     
     [ self.mapView setVisibleMapRect: zonesMapRect
                          edgePadding: _mapInsets
