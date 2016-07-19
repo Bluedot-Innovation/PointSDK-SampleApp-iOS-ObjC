@@ -240,7 +240,7 @@ EXAuthenticationViewControllerAltAction;
     self.packageTextField.text  = [ defaults objectForKey: BDPointPackageNameKey] ?: @"";
 
     NSString  *encodedEndpointURLString = [ defaults objectForKey: BDPointEndpointKey ];
-    NSString  *endpointURLString        = [ encodedEndpointURLString urlDecode ];
+    NSString  *endpointURLString        = [ encodedEndpointURLString bluedotURLDecode ];
 
     _customEndpointURL = endpointURLString ? [ [ NSURL alloc ] initWithString: endpointURLString ] : nil;
 }
