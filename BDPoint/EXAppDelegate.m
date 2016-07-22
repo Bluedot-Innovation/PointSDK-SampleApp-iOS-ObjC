@@ -349,9 +349,21 @@
                       inZone: (BDZoneInfo *)zoneInfo
                       onDate: (NSDate *)date
                 withDuration: (NSUInteger)checkedInDuration
+              withCustomData:(NSDictionary *)customData
 {
-    NSString *message = [ NSString stringWithFormat: @"You left '%@' in zone '%@' after %lu minutes",
-                         fence.name, zoneInfo.name, (unsigned long)checkedInDuration ];
+    NSString *customDataString;
+    
+    if (customData)
+    {
+        customDataString = [ NSString stringWithFormat:@"with customData keys: %@ and values %@", customData.allKeys, customData.allValues ];
+    }
+    else
+    {
+        customDataString = @"with no customData";
+    }
+    
+    NSString *message = [ NSString stringWithFormat: @"You left '%@' in zone '%@' %@ after %lu minutes",
+                         fence.name, zoneInfo.name, customData, (unsigned long)checkedInDuration ];
     
     [ self presentNotificationWithMessage: message ];
 }
@@ -364,7 +376,7 @@
              withProximity: (CLProximity)proximity
                     onDate: (NSDate *)date
               willCheckOut: (BOOL)willCheckOut
-            withCustomData:(NSDictionary *)customData
+            withCustomData: (NSDictionary *)customData
 {
     NSString *proximityString;
     NSString *customDataString;
@@ -408,10 +420,21 @@
                 withProximity: (CLProximity)proximity
                        onDate: (NSDate *)date
                  withDuration: (NSUInteger)checkedInDuration
+               withCustomData: (NSDictionary *)customData
 {
+    NSString *customDataString;
     
-    NSString *message = [ NSString stringWithFormat: @"You left beacon '%@' in zone '%@', after %lu minutes",
-                                                     beacon.name, zoneInfo.name, (unsigned long)checkedInDuration ];
+    if (customData)
+    {
+        customDataString = [ NSString stringWithFormat:@"with customData keys: %@ and values %@", customData.allKeys, customData.allValues ];
+    }
+    else
+    {
+        customDataString = @"with no customData";
+    }
+    
+    NSString *message = [ NSString stringWithFormat: @"You left beacon '%@' in zone '%@' %@, after %lu minutes",
+                                                     beacon.name, zoneInfo.name, customDataString, (unsigned long)checkedInDuration ];
     
     [ self presentNotificationWithMessage: message ];
 }
