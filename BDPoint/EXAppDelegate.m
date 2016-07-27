@@ -318,19 +318,8 @@
              willCheckOut: (BOOL)willCheckOut
            withCustomData:(NSDictionary *)customData
 {
-    NSString *customDataString;
-    
-    if (customData)
-    {
-        customDataString = [ NSString stringWithFormat:@"with customData keys: %@ and values %@", customData.allKeys, customData.allValues ];
-    }
-    else
-    {
-        customDataString = @"with no customData";
-    }
-    
-    NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@' %@, at %@",
-                         fence.name, zoneInfo.name, customDataString, [ _dateFormatter stringFromDate: date ] ];
+    NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@', at %@",
+                         fence.name, zoneInfo.name, [ _dateFormatter stringFromDate: date ] ];
     
     [ self presentNotificationWithMessage: message ];
 
@@ -351,19 +340,8 @@
                 withDuration: (NSUInteger)checkedInDuration
               withCustomData:(NSDictionary *)customData
 {
-    NSString *customDataString;
-    
-    if (customData)
-    {
-        customDataString = [ NSString stringWithFormat:@"with customData keys: %@ and values %@", customData.allKeys, customData.allValues ];
-    }
-    else
-    {
-        customDataString = @"with no customData";
-    }
-    
-    NSString *message = [ NSString stringWithFormat: @"You left '%@' in zone '%@' %@ after %lu minutes",
-                         fence.name, zoneInfo.name, customData, (unsigned long)checkedInDuration ];
+    NSString *message = [ NSString stringWithFormat: @"You left '%@' in zone '%@' after %lu minutes",
+                         fence.name, zoneInfo.name, (unsigned long)checkedInDuration ];
     
     [ self presentNotificationWithMessage: message ];
 }
@@ -379,7 +357,6 @@
             withCustomData: (NSDictionary *)customData
 {
     NSString *proximityString;
-    NSString *customDataString;
 
     switch(proximity)
     {
@@ -390,17 +367,8 @@
         case CLProximityFar:       proximityString = @"Far";       break;
     }
 
-    if (customData)
-    {
-        customDataString = [ NSString stringWithFormat:@"with customData keys: %@ and values %@", customData.allKeys, customData.allValues ];
-    }
-    else
-    {
-        customDataString = @"with no customData";
-    }
-
-    NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@' with proximity %@ and %@ at %@",
-                         beacon.name, zoneInfo.name, proximityString, customDataString, [ _dateFormatter stringFromDate: date ] ];
+    NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@' with proximity %@ at %@",
+                         beacon.name, zoneInfo.name, proximityString, [ _dateFormatter stringFromDate: date ] ];
 
     [ self presentNotificationWithMessage: message ];
 
@@ -422,19 +390,8 @@
                  withDuration: (NSUInteger)checkedInDuration
                withCustomData: (NSDictionary *)customData
 {
-    NSString *customDataString;
-    
-    if (customData)
-    {
-        customDataString = [ NSString stringWithFormat:@"with customData keys: %@ and values %@", customData.allKeys, customData.allValues ];
-    }
-    else
-    {
-        customDataString = @"with no customData";
-    }
-    
-    NSString *message = [ NSString stringWithFormat: @"You left beacon '%@' in zone '%@' %@, after %lu minutes",
-                                                     beacon.name, zoneInfo.name, customDataString, (unsigned long)checkedInDuration ];
+    NSString *message = [ NSString stringWithFormat: @"You left beacon '%@' in zone '%@', after %lu minutes",
+                                                     beacon.name, zoneInfo.name, (unsigned long)checkedInDuration ];
     
     [ self presentNotificationWithMessage: message ];
 }
