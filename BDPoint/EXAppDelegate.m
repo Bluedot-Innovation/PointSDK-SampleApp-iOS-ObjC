@@ -18,7 +18,7 @@
 /*
  *  Anonymous category for local properties.
  */
-@interface EXAppDelegate() <BDPointDelegate, UITabBarControllerDelegate, BDPRestartAlertDelegate>
+@interface EXAppDelegate() <BDPointDelegate, UITabBarControllerDelegate, BDPRestartAlertDelegate, UIAlertViewDelegate>
 
 @property (nonatomic) EXZoneChecklistViewController  *zoneChecklistViewController;
 @property (nonatomic) EXZoneMapViewController        *zoneMapViewController;
@@ -31,6 +31,8 @@
 @property (nonatomic) UIAlertView  *userInterventionForBluetoothDialog;
 @property (nonatomic) UIAlertView  *userInterventionForLocationServicesDialog;
 @property (nonatomic) UIAlertView  *userInterventionForPowerModeDialog;
+
+@property (nonatomic) UIAlertView  *userInterventionForZoneDialog;
 
 @property (nonatomic) NSDateFormatter  *dateFormatter;
 
@@ -297,6 +299,15 @@
     else
     {
         viewControllers = _viewControllersNotRequiringZoneInfo;
+        if ( BDLocationManager.instance.authenticationState == BDAuthenticationStateAuthenticated && UIApplication.sharedApplication.applicationState != UIApplicationStateBackground )
+        {
+            if ( _userInterventionForZoneDialog == nil )
+            {
+                NSString *message = [ NSString stringWithFormat: @"No data available on the backend. To start testing, please create at least one zone with a fence and an action to trigger when the device enters the location on the backend using our friendly dashboard." ];
+                _userInterventionForZoneDialog = [[UIAlertView alloc] initWithTitle:@"Information" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Go to Point Access", nil];
+            }
+            [_userInterventionForZoneDialog show];
+        }
     }
 
     //  Enable the view controllers when zone information has been received
@@ -430,13 +441,14 @@
  *  This method is part of the Bluedot location delegate and is called when Location Services are not enabled
  *  on the device; requiring user intervention.
  */
-- (void)didStartRequiringUserInterventionForLocationServices
+- (void)didStartRequiringUserInterventionForLocationServicesAuthorizationStatus:(CLAuthorizationStatus)authorizationStatus
 {
     if ( _userInterventionForLocationServicesDialog == nil )
     {
+        NSString  *authorizationStatusString = (authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse ? @"while in using" : @"disabled");
         NSString  *appName = [ NSBundle.mainBundle objectForInfoDictionaryKey: @"CFBundleDisplayName" ];
         NSString  *title = @"Location Services Required";
-        NSString  *message = [ NSString stringWithFormat: @"This App requires Location Services which are currently disabled.  To restore Location Services, go to :\nSettings → Privacy →\nLocation Settings →\n%@ ✓", appName ];
+        NSString  *message = [ NSString stringWithFormat: @"This App requires Location Services which are currently set to %@.  To restore Location Services, go to :\nSettings → Privacy →\nLocation Settings →\n%@ ✓", authorizationStatusString, appName ];
         
         _userInterventionForLocationServicesDialog = [ [ UIAlertView alloc ] initWithTitle: title
                                                                                    message: message
@@ -453,7 +465,7 @@
  *  required to enable Location Services and either Location Services has been enabled or the user is no longer within an
  *  authenticated session, thereby no longer requiring Location Services.
  */
-- (void)didStopRequiringUserInterventionForLocationServices
+- (void)didStopRequiringUserInterventionForLocationServicesAuthorizationStatus:(CLAuthorizationStatus)authorizationStatus
 {
     [ _userInterventionForLocationServicesDialog dismissWithClickedButtonIndex: 0 animated: YES ];
 }
@@ -532,6 +544,19 @@
 
 #pragma mark App Restart delegate end
 
+
+#pragma mark UIAlertViewDelegate implementation start
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ( [alertView cancelButtonIndex] != buttonIndex )
+    {
+        NSURL *pointAccessURL = [ NSURL URLWithString:@"https://www.pointaccess.bluedot.com.au/pointaccess-v1/" ];
+        [ [ UIApplication sharedApplication ] openURL:pointAccessURL ];
+    }
+}
+
+#pragma mark UIAlertViewDelegate implementation end
 
 
 #pragma mark UITabBarControllerDelegate implementation begin
