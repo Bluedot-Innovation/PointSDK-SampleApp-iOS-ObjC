@@ -358,12 +358,18 @@ static float  minButtonHeight = 44.0f;
     
     if ( firstUsage == YES )
     {
-        UIAlertView *msg = [ [ UIAlertView alloc] initWithTitle: @"Power Consumption"
-                                                        message: @"Holding the button to show your location uses iOS Location Services which drain power at a high rate.\n\nWithout the button held, your actions will still trigger using the energy efficient Bluedot Point SDK."
-                                                       delegate: nil
-                                              cancelButtonTitle: @"OK"
-                                              otherButtonTitles: nil ];
-        [ msg show ];
+        UIAlertController *messageController = [ UIAlertController alertControllerWithTitle: @"Power Consumption"
+                                                                                    message: @"Holding the button to show your location uses iOS Location Services which drain power at a high rate.\n\nWithout the button held, your actions will still trigger using the energy efficient Bluedot Point SDK."
+                                                                             preferredStyle: UIAlertControllerStyleAlert ];
+        
+        UIAlertAction *OK = [ UIAlertAction actionWithTitle: @"OK"
+                                                      style: UIAlertActionStyleCancel
+                                                    handler: nil ];
+        
+        [ messageController addAction: OK];
+        
+        [self presentViewController: messageController animated: YES completion: nil];
+        
         firstUsage = NO;
     }
     

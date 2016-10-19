@@ -13,12 +13,13 @@
 #import "EXZoneChecklistViewController.h"
 #import "EXAuthenticationViewController.h"
 #import "EXNotificationStrings.h"
+#import "UIWindow+BDVisible.h"
 
 
 /*
  *  Anonymous category for local properties.
  */
-@interface EXAppDelegate() <BDPointDelegate, UITabBarControllerDelegate, BDPRestartAlertDelegate, UIAlertViewDelegate>
+@interface EXAppDelegate() <BDPointDelegate, UITabBarControllerDelegate, BDPRestartAlertDelegate>
 
 @property (nonatomic) EXZoneChecklistViewController  *zoneChecklistViewController;
 @property (nonatomic) EXZoneMapViewController        *zoneMapViewController;
@@ -28,11 +29,11 @@
 @property (nonatomic) NSArray  *viewControllersNotRequiringZoneInfo;
 @property (nonatomic) NSArray  *viewControllersRequiringZoneInfo;
 
-@property (nonatomic) UIAlertView  *userInterventionForBluetoothDialog;
-@property (nonatomic) UIAlertView  *userInterventionForLocationServicesDialog;
-@property (nonatomic) UIAlertView  *userInterventionForPowerModeDialog;
+@property (nonatomic) UIAlertController  *userInterventionForBluetoothDialog;
+@property (nonatomic) UIAlertController  *userInterventionForLocationServicesDialog;
+@property (nonatomic) UIAlertController  *userInterventionForPowerModeDialog;
 
-@property (nonatomic) UIAlertView  *userInterventionForZoneDialog;
+@property (nonatomic) UIAlertController  *userInterventionForZoneDialog;
 
 @property (nonatomic) NSDateFormatter  *dateFormatter;
 
@@ -221,13 +222,15 @@
 {
     NSLog( @"Authentication with Point service denied, with reason: %@", reason );
 
-    UIAlertView* alertView = [ [ UIAlertView alloc ] initWithTitle: @"Authentication Denied"
-                                                           message: reason
-                                                          delegate: nil
-                                                 cancelButtonTitle: @"OK"
-                                                 otherButtonTitles: nil ];
-
-    [ alertView show ];
+    UIAlertController *alertController = [ UIAlertController alertControllerWithTitle: @"Authentication Denied"
+                                                                              message: reason
+                                                                       preferredStyle: UIAlertControllerStyleAlert ];
+    
+    UIAlertAction *OK = [ UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleCancel handler: nil ];
+    
+    [ alertController addAction:OK ];
+    
+    [ _window.visibleViewController presentViewController: alertController animated: YES completion: nil ];
 }
 
 
@@ -252,14 +255,16 @@
         title = @"Authentication Failed";
         message = error.localizedDescription;
     }
-    
-    UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: title
-                                                            message: message
-                                                           delegate: nil
-                                                  cancelButtonTitle: @"OK"
-                                                  otherButtonTitles: nil ];
 
-    [ alertView show ];
+    UIAlertController *alertController = [ UIAlertController alertControllerWithTitle: title
+                                                                              message: message
+                                                                       preferredStyle: UIAlertControllerStyleAlert ];
+    
+    UIAlertAction *OK = [ UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleCancel handler: nil ];
+    
+    [ alertController addAction:OK ];
+    
+    [ _window.visibleViewController presentViewController: alertController animated: YES completion: nil ];
 }
 
 
@@ -304,9 +309,22 @@
             if ( _userInterventionForZoneDialog == nil )
             {
                 NSString *message = [ NSString stringWithFormat: @"No data available on the backend. To start testing, please create at least one zone with a fence and an action to trigger when the device enters the location on the backend using our friendly dashboard." ];
-                _userInterventionForZoneDialog = [[UIAlertView alloc] initWithTitle:@"Information" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Go to Point Access", nil];
+                
+                _userInterventionForZoneDialog = [ UIAlertController alertControllerWithTitle: @"Information"
+                                                                                      message: message
+                                                                               preferredStyle: UIAlertControllerStyleAlert ];
+                
+                UIAlertAction *OK = [ UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleCancel handler:nil ];
+                UIAlertAction *goToPointAccess = [ UIAlertAction actionWithTitle: @"Go to Point Access" style: UIAlertActionStyleDefault handler: ^(UIAlertAction *action) {
+                    NSURL *pointAccessURL = [ NSURL URLWithString: @"https://www.pointaccess.bluedot.com.au/pointaccess-v1/" ];
+                    [ [ UIApplication sharedApplication ] openURL: pointAccessURL ];
+                } ];
+                
+                [ _userInterventionForZoneDialog addAction: OK ];
+                [ _userInterventionForZoneDialog addAction: goToPointAccess ];
+                
             }
-            [_userInterventionForZoneDialog show];
+            [ _window.visibleViewController presentViewController: _userInterventionForZoneDialog animated: YES completion: nil ];
         }
     }
 
@@ -418,14 +436,15 @@
         NSString  *title = @"Bluetooth Required";
         NSString  *message = @"There are nearby Beacons which cannot be detected because Bluetooth is disabled.  Re-enable Bluetooth to restore full functionality.";
         
-        _userInterventionForBluetoothDialog = [ [ UIAlertView alloc ] initWithTitle: title
-                                                                            message: message
-                                                                           delegate: nil
-                                                                  cancelButtonTitle: @"Dismiss"
-                                                                  otherButtonTitles: nil ];
+        _userInterventionForBluetoothDialog = [ UIAlertController alertControllerWithTitle: title
+                                                                                   message: message
+                                                                            preferredStyle: UIAlertControllerStyleAlert ];
+        
+        UIAlertAction *dismiss = [ UIAlertAction actionWithTitle: @"Dismiss" style: UIAlertActionStyleCancel handler: nil ];
+        [ _userInterventionForBluetoothDialog addAction: dismiss ];
     }
     
-    [ _userInterventionForBluetoothDialog show ];
+    [ _window.visibleViewController presentViewController: _userInterventionForBluetoothDialog animated: YES completion: nil ];
 }
 
 /*
@@ -434,7 +453,7 @@
  */
 - (void)didStopRequiringUserInterventionForBluetooth
 {
-    [ _userInterventionForBluetoothDialog dismissWithClickedButtonIndex: 0 animated: YES ];
+    [ _userInterventionForBluetoothDialog dismissViewControllerAnimated: YES completion: nil ];
 }
 
 /*
@@ -449,15 +468,13 @@
         NSString  *appName = [ NSBundle.mainBundle objectForInfoDictionaryKey: @"CFBundleDisplayName" ];
         NSString  *title = @"Location Services Required";
         NSString  *message = [ NSString stringWithFormat: @"This App requires Location Services which are currently set to %@.  To restore Location Services, go to :\nSettings → Privacy →\nLocation Settings →\n%@ ✓", authorizationStatusString, appName ];
-        
-        _userInterventionForLocationServicesDialog = [ [ UIAlertView alloc ] initWithTitle: title
+
+        _userInterventionForLocationServicesDialog = [ UIAlertController alertControllerWithTitle: title
                                                                                    message: message
-                                                                                  delegate: nil
-                                                                         cancelButtonTitle: nil
-                                                                         otherButtonTitles: nil ];
+                                                                            preferredStyle: UIAlertControllerStyleAlert ];
     }
     
-    [ _userInterventionForLocationServicesDialog show ];
+    [ _window.visibleViewController presentViewController: _userInterventionForLocationServicesDialog animated: YES completion: nil ];
 }
 
 /*
@@ -467,7 +484,7 @@
  */
 - (void)didStopRequiringUserInterventionForLocationServicesAuthorizationStatus:(CLAuthorizationStatus)authorizationStatus
 {
-    [ _userInterventionForLocationServicesDialog dismissWithClickedButtonIndex: 0 animated: YES ];
+    [ _userInterventionForLocationServicesDialog dismissViewControllerAnimated: YES completion: nil ];
 }
 
 /*
@@ -481,21 +498,19 @@
         NSString  *title = @"Low Power Mode";
         NSString  *message = [ NSString stringWithFormat: @"Low Power Mode has been enabled on this device.  To restore full location precision, disable the setting at :\nSettings → Battery → Low Power Mode" ];
 
-        _userInterventionForPowerModeDialog = [ [ UIAlertView alloc ] initWithTitle: title
-                                                                             message: message
-                                                                            delegate: nil
-                                                                   cancelButtonTitle: @"Dismiss"
-                                                                   otherButtonTitles: nil ];
+        _userInterventionForPowerModeDialog = [ UIAlertController alertControllerWithTitle: title
+                                                                                   message: message
+                                                                            preferredStyle: UIAlertControllerStyleAlert ];
     }
 
-    [ _userInterventionForPowerModeDialog show ];
+    [ _window.visibleViewController presentViewController: _userInterventionForPowerModeDialog animated: YES completion: nil ];
 }
 
 
 
 - (void)didStopRequiringUserInterventionForPowerMode
 {
-    [ _userInterventionForPowerModeDialog dismissWithClickedButtonIndex:0 animated:YES ];
+    [ _userInterventionForPowerModeDialog dismissViewControllerAnimated: YES completion: nil ];
 }
 
 #pragma mark BDPointDelegate implementation end
@@ -513,12 +528,15 @@
             // In the foreground: display notification directly to the user
         case UIApplicationStateActive:
         {
-            UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: @"Application notification"
-                                                                    message: message
-                                                                   delegate: nil
-                                                          cancelButtonTitle: @"OK"
-                                                          otherButtonTitles: nil ];
-            [ alertView show ];
+            UIAlertController *alertController = [ UIAlertController alertControllerWithTitle: @"Application notification"
+                                                                                      message: message
+                                                                               preferredStyle: UIAlertControllerStyleAlert ];
+            
+            UIAlertAction *OK = [ UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleCancel handler: nil ];
+            
+            [ alertController addAction:OK ];
+            
+            [ _window.visibleViewController presentViewController: alertController animated: YES completion: nil ];
         }
             break;
             
@@ -543,21 +561,6 @@
 }
 
 #pragma mark App Restart delegate end
-
-
-#pragma mark UIAlertViewDelegate implementation start
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if ( [alertView cancelButtonIndex] != buttonIndex )
-    {
-        NSURL *pointAccessURL = [ NSURL URLWithString:@"https://www.pointaccess.bluedot.com.au/pointaccess-v1/" ];
-        [ [ UIApplication sharedApplication ] openURL:pointAccessURL ];
-    }
-}
-
-#pragma mark UIAlertViewDelegate implementation end
-
 
 #pragma mark UITabBarControllerDelegate implementation begin
 

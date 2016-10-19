@@ -24,6 +24,8 @@
 		838DD2F9194BF316003B5942 /* EXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F8194BF316003B5942 /* EXAppDelegate.m */; };
 		838DD2FB194BF316003B5942 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838DD2FA194BF316003B5942 /* Images.xcassets */; };
 		83E0621A19EF6AB7009BDF0D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E0621919EF6AB7009BDF0D /* AVFoundation.framework */; };
+		9A1082371D9CAF570047A510 /* UIWindow+BDVisible.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1082361D9CAF570047A510 /* UIWindow+BDVisible.m */; };
+		9AE62F391D751248005BE1B8 /* BDDataModel.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9AE62F381D751248005BE1B8 /* BDDataModel.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,9 @@
 		838DD2F8194BF316003B5942 /* EXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EXAppDelegate.m; sourceTree = "<group>"; };
 		838DD2FA194BF316003B5942 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		83E0621919EF6AB7009BDF0D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9A1082351D9CAF570047A510 /* UIWindow+BDVisible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+BDVisible.h"; sourceTree = "<group>"; };
+		9A1082361D9CAF570047A510 /* UIWindow+BDVisible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+BDVisible.m"; sourceTree = "<group>"; };
+		9AE62F381D751248005BE1B8 /* BDDataModel.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BDDataModel.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +100,8 @@
 				3E126EE9955E8345DBEE3ECD /* EXAuthenticationViewController.h */,
 				3E126202E37AB4EB9190EA47 /* EXNotificationStrings.h */,
 				3E126130CA255C267FD74252 /* BDStyles.h */,
+				9A1082351D9CAF570047A510 /* UIWindow+BDVisible.h */,
+				9A1082361D9CAF570047A510 /* UIWindow+BDVisible.m */,
 			);
 			name = Controller;
 			path = BDPoint;
@@ -119,6 +126,7 @@
 		8363BEE61AC0DF17005CC098 /* PointSDK */ = {
 			isa = PBXGroup;
 			children = (
+				9AE62F381D751248005BE1B8 /* BDDataModel.bundle */,
 			);
 			path = PointSDK;
 			sourceTree = "<group>";
@@ -212,6 +220,7 @@
 				TargetAttributes = {
 					838DD2E4194BF316003B5942 = {
 						DevelopmentTeam = 9H7C75E224;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -248,6 +257,7 @@
 				838DD2F3194BF316003B5942 /* InfoPlist.strings in Resources */,
 				838DD2FB194BF316003B5942 /* Images.xcassets in Resources */,
 				3E12658AB765C20C4A630F8E /* EXAuthenticationView.xib in Resources */,
+				9AE62F391D751248005BE1B8 /* BDDataModel.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +270,7 @@
 			files = (
 				838DD2F9194BF316003B5942 /* EXAppDelegate.m in Sources */,
 				838DD2F5194BF316003B5942 /* main.m in Sources */,
+				9A1082371D9CAF570047A510 /* UIWindow+BDVisible.m in Sources */,
 				3E12636A113A6BBA9D18480A /* EXZoneChecklistViewController.m in Sources */,
 				3E12698A1CD986562C3CE339 /* EXZoneMapViewController.m in Sources */,
 				3E12635CBB8C138F23481872 /* EXAuthenticationViewController.m in Sources */,
@@ -293,14 +304,18 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -318,7 +333,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"${PROJECT_DIR}/PointSDK/include/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PointSDK",
@@ -347,13 +362,17 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -365,7 +384,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"${PROJECT_DIR}/PointSDK/include/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PointSDK",
@@ -386,8 +405,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 9H7C75E224;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BDPoint/BDPoint-Prefix.pch";
@@ -400,6 +419,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "au.com.bluedot.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -409,8 +429,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 9H7C75E224;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BDPoint/BDPoint-Prefix.pch";
@@ -423,6 +443,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "au.com.bluedot.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

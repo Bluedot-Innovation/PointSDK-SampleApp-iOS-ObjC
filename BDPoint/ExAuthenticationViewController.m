@@ -180,13 +180,15 @@ EXAuthenticationViewControllerAltAction;
     NSString  *message = @"Your Application's details have been automatically entered and remembered.\n\n"
                          "When you have created one or more Zones in the Bluedot Point web interface, touch the 'Log In' button below, to enter your Application scenario.";
 
-    UIAlertView  *alertView = [ [ UIAlertView alloc ] initWithTitle: title
-                                                            message: message
-                                                           delegate: nil
-                                                  cancelButtonTitle: @"OK"
-                                                  otherButtonTitles: nil ];
+    UIAlertController *alertController = [ UIAlertController alertControllerWithTitle: title
+                                                                              message: message
+                                                                       preferredStyle: UIAlertControllerStyleAlert ];
+    
+    UIAlertAction *OK = [ UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleCancel handler: nil ];
+    
+    [ alertController addAction: OK ];
 
-    [ alertView show ];
+    [ self presentViewController: alertController animated: YES completion: nil ];
 }
 
 
