@@ -48,13 +48,10 @@
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Allow location-based actions to be triggered while in the background</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow location-based actions to be triggered only while in the foreground</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Allow the access to Bluetooth for Beacon detection</string>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>audio</string>
 		<string>location</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
