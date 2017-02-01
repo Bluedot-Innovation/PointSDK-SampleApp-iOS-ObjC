@@ -45,7 +45,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Allow location-based actions to be triggered while in the background</string>
+	<string>We need access to location in background to be able to trigger notifications when you arrive at a location. Your location is used to trigger the geofences that you added on the Bluedot UI, even when the app is in the background.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Allow the access to Bluetooth for Beacon detection</string>
 	<key>UIBackgroundModes</key>
