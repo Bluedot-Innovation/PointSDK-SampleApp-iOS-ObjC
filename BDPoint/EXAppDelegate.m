@@ -342,13 +342,12 @@
  */
 - (void)didCheckIntoFence: (BDFenceInfo *)fence
                    inZone: (BDZoneInfo *)zoneInfo
-             atCoordinate: (BDLocationCoordinate2D)coordinate
-                   onDate: (NSDate *)date
+               atLocation: (BDLocationInfo *)location
              willCheckOut: (BOOL)willCheckOut
-           withCustomData:(NSDictionary *)customData
+           withCustomData: (NSDictionary *)customData
 {
     NSString *message = [ NSString stringWithFormat: @"You have checked into fence '%@' in zone '%@', at %@",
-                         fence.name, zoneInfo.name, [ _dateFormatter stringFromDate: date ] ];
+                         fence.name, zoneInfo.name, [ _dateFormatter stringFromDate: location.timestamp ] ];
     
     [ self presentNotificationWithMessage: message ];
 
@@ -367,7 +366,7 @@
                       inZone: (BDZoneInfo *)zoneInfo
                       onDate: (NSDate *)date
                 withDuration: (NSUInteger)checkedInDuration
-              withCustomData:(NSDictionary *)customData
+              withCustomData: (NSDictionary *)customData
 {
     NSString *message = [ NSString stringWithFormat: @"You left '%@' in zone '%@' after %lu minutes",
                          fence.name, zoneInfo.name, (unsigned long)checkedInDuration ];
@@ -380,8 +379,8 @@
  */
 - (void)didCheckIntoBeacon: (BDBeaconInfo *)beacon
                     inZone: (BDZoneInfo *)zoneInfo
+                atLocation: (BDLocationInfo *)location
              withProximity: (CLProximity)proximity
-                    onDate: (NSDate *)date
               willCheckOut: (BOOL)willCheckOut
             withCustomData: (NSDictionary *)customData
 {
@@ -397,7 +396,7 @@
     }
 
     NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@' with proximity %@ at %@",
-                         beacon.name, zoneInfo.name, proximityString, [ _dateFormatter stringFromDate: date ] ];
+                         beacon.name, zoneInfo.name, proximityString, [ _dateFormatter stringFromDate: location.timestamp ] ];
 
     [ self presentNotificationWithMessage: message ];
 
