@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E12600A978753FBADC9934F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1263B9B2D55BF007404889 /* AudioToolbox.framework */; };
 		3E12602E16A46BB9C173A90F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1267A1F79D673ADC5C0FA3 /* CoreLocation.framework */; };
 		3E1260BB62CA2AD2E96C2B96 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E126E7C4A5B6B3BB09D809C /* SystemConfiguration.framework */; };
 		3E12635CBB8C138F23481872 /* EXAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E126C2714E706A16D9FDE8C /* EXAuthenticationViewController.m */; };
@@ -23,7 +22,6 @@
 		838DD2F5194BF316003B5942 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F4194BF316003B5942 /* main.m */; };
 		838DD2F9194BF316003B5942 /* EXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F8194BF316003B5942 /* EXAppDelegate.m */; };
 		838DD2FB194BF316003B5942 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838DD2FA194BF316003B5942 /* Images.xcassets */; };
-		83E0621A19EF6AB7009BDF0D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83E0621919EF6AB7009BDF0D /* AVFoundation.framework */; };
 		9A1082371D9CAF570047A510 /* UIWindow+BDVisible.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1082361D9CAF570047A510 /* UIWindow+BDVisible.m */; };
 		9AE62F391D751248005BE1B8 /* BDDataModel.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9AE62F381D751248005BE1B8 /* BDDataModel.bundle */; };
 /* End PBXBuildFile section */
@@ -33,7 +31,6 @@
 		3E126130CA255C267FD74252 /* BDStyles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDStyles.h; sourceTree = "<group>"; };
 		3E126202E37AB4EB9190EA47 /* EXNotificationStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXNotificationStrings.h; sourceTree = "<group>"; };
 		3E12632BFE3EC769CE0D1D43 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		3E1263B9B2D55BF007404889 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3E1266BE722C20AA53C1F641 /* EXZoneMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXZoneMapViewController.m; sourceTree = "<group>"; };
 		3E1267A1F79D673ADC5C0FA3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3E126813957BD9D267057570 /* EXZoneMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXZoneMapViewController.h; sourceTree = "<group>"; };
@@ -54,7 +51,6 @@
 		838DD2F7194BF316003B5942 /* EXAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EXAppDelegate.h; sourceTree = "<group>"; };
 		838DD2F8194BF316003B5942 /* EXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EXAppDelegate.m; sourceTree = "<group>"; };
 		838DD2FA194BF316003B5942 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		83E0621919EF6AB7009BDF0D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9A1082351D9CAF570047A510 /* UIWindow+BDVisible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+BDVisible.h"; sourceTree = "<group>"; };
 		9A1082361D9CAF570047A510 /* UIWindow+BDVisible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+BDVisible.m"; sourceTree = "<group>"; };
 		9AE62F381D751248005BE1B8 /* BDDataModel.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BDDataModel.bundle; sourceTree = "<group>"; };
@@ -65,7 +61,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83E0621A19EF6AB7009BDF0D /* AVFoundation.framework in Frameworks */,
 				838DD2EB194BF316003B5942 /* CoreGraphics.framework in Frameworks */,
 				832D483B19515A6C00DC29A9 /* MapKit.framework in Frameworks */,
 				838DD2ED194BF316003B5942 /* UIKit.framework in Frameworks */,
@@ -73,7 +68,6 @@
 				3E12602E16A46BB9C173A90F /* CoreLocation.framework in Frameworks */,
 				3E126DF1390BAA3EB0BB7249 /* CoreMotion.framework in Frameworks */,
 				3E1260BB62CA2AD2E96C2B96 /* SystemConfiguration.framework in Frameworks */,
-				3E12600A978753FBADC9934F /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +146,6 @@
 		838DD2E7194BF316003B5942 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				83E0621919EF6AB7009BDF0D /* AVFoundation.framework */,
 				832D483A19515A6C00DC29A9 /* MapKit.framework */,
 				838DD2E8194BF316003B5942 /* Foundation.framework */,
 				838DD2EA194BF316003B5942 /* CoreGraphics.framework */,
@@ -160,7 +153,6 @@
 				3E1267A1F79D673ADC5C0FA3 /* CoreLocation.framework */,
 				3E12632BFE3EC769CE0D1D43 /* CoreMotion.framework */,
 				3E126E7C4A5B6B3BB09D809C /* SystemConfiguration.framework */,
-				3E1263B9B2D55BF007404889 /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

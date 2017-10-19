@@ -30,7 +30,8 @@
 @property (nonatomic) NSArray  *viewControllersRequiringZoneInfo;
 
 @property (nonatomic) UIAlertController  *userInterventionForBluetoothDialog;
-@property (nonatomic) UIAlertController  *userInterventionForLocationServicesDialog;
+@property (nonatomic) UIAlertController  *userInterventionForLocationServicesNeverDialog;
+@property (nonatomic) UIAlertController  *userInterventionForLocationServicesWhileInUseDialog;
 @property (nonatomic) UIAlertController  *userInterventionForPowerModeDialog;
 
 @property (nonatomic) UIAlertController  *userInterventionForZoneDialog;
@@ -461,19 +462,61 @@
  */
 - (void)didStartRequiringUserInterventionForLocationServicesAuthorizationStatus:(CLAuthorizationStatus)authorizationStatus
 {
-    if ( _userInterventionForLocationServicesDialog == nil )
-    {
-        NSString  *authorizationStatusString = (authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse ? @"while in using" : @"disabled");
-        NSString  *appName = [ NSBundle.mainBundle objectForInfoDictionaryKey: @"CFBundleDisplayName" ];
-        NSString  *title = @"Location Services Required";
-        NSString  *message = [ NSString stringWithFormat: @"This App requires Location Services which are currently set to %@.  To restore Location Services, go to :\nSettings → Privacy →\nLocation Settings →\n%@ ✓", authorizationStatusString, appName ];
 
-        _userInterventionForLocationServicesDialog = [ UIAlertController alertControllerWithTitle: title
-                                                                                   message: message
-                                                                            preferredStyle: UIAlertControllerStyleAlert ];
+    if(authorizationStatus == kCLAuthorizationStatusDenied)
+    {
+        if ( _userInterventionForLocationServicesNeverDialog == nil )
+        {
+            NSString  *appName = [ NSBundle.mainBundle objectForInfoDictionaryKey: @"CFBundleDisplayName" ];
+            NSString  *title = @"Location Services Required";
+            NSString  *message = [ NSString stringWithFormat: @"This App requires Location Services which are currently set to disabled.  To restore Location Services, go to :\nSettings → Privacy →\nLocation Settings →\n%@ ✓", appName ];
+
+            _userInterventionForLocationServicesNeverDialog = [ UIAlertController alertControllerWithTitle: title
+                                                                                              message: message
+                                                                                       preferredStyle: UIAlertControllerStyleAlert ];
+
+        }
+
+        UIViewController *currentPresentedViewController = _window.rootViewController.presentedViewController;
+        if([currentPresentedViewController isKindOfClass:[UIAlertController class]])
+        {
+            [currentPresentedViewController dismissViewControllerAnimated:YES completion:^(void){
+                [ _window.visibleViewController presentViewController: _userInterventionForLocationServicesNeverDialog animated: YES completion: nil ];
+            }];
+        }
+        else
+        {
+            [ _window.visibleViewController presentViewController: _userInterventionForLocationServicesNeverDialog animated: YES completion: nil ];
+        }
+    }
+    else if(authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
+
+
+        if (_userInterventionForLocationServicesWhileInUseDialog == nil) {
+            NSString *title = @"Location Services set to 'While in Use'";
+            NSString *message = [NSString stringWithFormat:@"You can ask for further location permission from user via this delegate method"];
+
+            _userInterventionForLocationServicesWhileInUseDialog = [UIAlertController alertControllerWithTitle:title
+                                                                                                       message:message
+                                                                                                preferredStyle:UIAlertControllerStyleAlert];
+
+            UIAlertAction *dismiss = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil];
+            [_userInterventionForLocationServicesWhileInUseDialog addAction:dismiss];
+        }
+
+        UIViewController *currentPresentedViewController = _window.rootViewController.presentedViewController;
+        if([currentPresentedViewController isKindOfClass:[UIAlertController class]])
+        {
+            [currentPresentedViewController dismissViewControllerAnimated:YES completion:^(void){
+                [ _window.visibleViewController presentViewController: _userInterventionForLocationServicesWhileInUseDialog animated: YES completion: nil ];
+            }];
+        }
+        else
+        {
+            [ _window.visibleViewController presentViewController: _userInterventionForLocationServicesWhileInUseDialog animated: YES completion: nil ];
+        }
     }
     
-    [ _window.visibleViewController presentViewController: _userInterventionForLocationServicesDialog animated: YES completion: nil ];
 }
 
 /*
@@ -483,7 +526,11 @@
  */
 - (void)didStopRequiringUserInterventionForLocationServicesAuthorizationStatus:(CLAuthorizationStatus)authorizationStatus
 {
-    [ _userInterventionForLocationServicesDialog dismissViewControllerAnimated: YES completion: nil ];
+    UIViewController *currentPresentedViewController = _window.rootViewController.presentedViewController;
+    if([currentPresentedViewController isKindOfClass:[UIAlertController class]])
+    {
+        [currentPresentedViewController dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 /*

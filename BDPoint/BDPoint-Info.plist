@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIFileSharingEnabled</key>
-	<true/>
 	<key>BDPointExceptionLoggingEnabled</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -21,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.2</string>
+	<string>1.0.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -36,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.2</string>
+	<string>1.0.3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -44,14 +42,22 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need access to location in background to be able to trigger notifications when you arrive at a location. Your location is used to trigger the geofences that you added on the Bluedot UI, even when the app is in the background.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Allow the access to Bluetooth for Beacon detection</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need access to location in background to be able to trigger notifications when you arrive at a location. Your location is used to trigger the geofences that you added on the Bluedot UI.
+	</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need access to location in background to be able to trigger notifications when you arrive at a location. Your location is used to trigger the geofences that you added on the Bluedot UI, even when the app is in the background.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need access to location in background to be able to trigger notifications when you arrive at a location. Your location is used to trigger the geofences that you added on the Bluedot UI.
+	</string>	
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
 	</array>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
