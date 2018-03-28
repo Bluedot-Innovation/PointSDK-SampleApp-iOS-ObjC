@@ -4,6 +4,8 @@
 <dict>
 	<key>BDPointExceptionLoggingEnabled</key>
 	<true/>
+	<key>BDPointLocalNotificationEnabled</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -51,13 +53,15 @@
 	<string>We need access to location in background to be able to trigger notifications when you arrive at a location. Your location is used to trigger the geofences that you added on the Bluedot UI, even when the app is in the background.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need access to location in background to be able to trigger notifications when you arrive at a location. Your location is used to trigger the geofences that you added on the Bluedot UI.
-	</string>	
+	</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
 	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

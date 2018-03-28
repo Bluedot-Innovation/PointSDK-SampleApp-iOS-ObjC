@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CD3FB04204E547B0017FAD6 /* BDPointSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD3FB03204E547B0017FAD6 /* BDPointSDK.framework */; };
+		3CD3FB05204E547B0017FAD6 /* BDPointSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD3FB03204E547B0017FAD6 /* BDPointSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3CD3FB0B204E68610017FAD6 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CD3FB0A204E68610017FAD6 /* Launch Screen.storyboard */; };
 		3E12602E16A46BB9C173A90F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1267A1F79D673ADC5C0FA3 /* CoreLocation.framework */; };
 		3E1260BB62CA2AD2E96C2B96 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E126E7C4A5B6B3BB09D809C /* SystemConfiguration.framework */; };
 		3E12635CBB8C138F23481872 /* EXAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E126C2714E706A16D9FDE8C /* EXAuthenticationViewController.m */; };
@@ -23,10 +26,25 @@
 		838DD2F9194BF316003B5942 /* EXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 838DD2F8194BF316003B5942 /* EXAppDelegate.m */; };
 		838DD2FB194BF316003B5942 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838DD2FA194BF316003B5942 /* Images.xcassets */; };
 		9A1082371D9CAF570047A510 /* UIWindow+BDVisible.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1082361D9CAF570047A510 /* UIWindow+BDVisible.m */; };
-		9AE62F391D751248005BE1B8 /* BDDataModel.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9AE62F381D751248005BE1B8 /* BDDataModel.bundle */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3CD3FB06204E547C0017FAD6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3CD3FB05204E547B0017FAD6 /* BDPointSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		3CD3FB03204E547B0017FAD6 /* BDPointSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BDPointSDK.framework; sourceTree = "<group>"; };
+		3CD3FB0A204E68610017FAD6 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		3E126073531824567865A6E4 /* EXZoneChecklistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXZoneChecklistViewController.m; sourceTree = "<group>"; };
 		3E126130CA255C267FD74252 /* BDStyles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDStyles.h; sourceTree = "<group>"; };
 		3E126202E37AB4EB9190EA47 /* EXNotificationStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXNotificationStrings.h; sourceTree = "<group>"; };
@@ -53,7 +71,6 @@
 		838DD2FA194BF316003B5942 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9A1082351D9CAF570047A510 /* UIWindow+BDVisible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+BDVisible.h"; sourceTree = "<group>"; };
 		9A1082361D9CAF570047A510 /* UIWindow+BDVisible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+BDVisible.m"; sourceTree = "<group>"; };
-		9AE62F381D751248005BE1B8 /* BDDataModel.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BDDataModel.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +80,7 @@
 			files = (
 				838DD2EB194BF316003B5942 /* CoreGraphics.framework in Frameworks */,
 				832D483B19515A6C00DC29A9 /* MapKit.framework in Frameworks */,
+				3CD3FB04204E547B0017FAD6 /* BDPointSDK.framework in Frameworks */,
 				838DD2ED194BF316003B5942 /* UIKit.framework in Frameworks */,
 				838DD2E9194BF316003B5942 /* Foundation.framework in Frameworks */,
 				3E12602E16A46BB9C173A90F /* CoreLocation.framework in Frameworks */,
@@ -109,26 +127,11 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		8363BEE51AC0DF0C005CC098 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				8363BEE61AC0DF17005CC098 /* PointSDK */,
-			);
-			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		8363BEE61AC0DF17005CC098 /* PointSDK */ = {
-			isa = PBXGroup;
-			children = (
-				9AE62F381D751248005BE1B8 /* BDDataModel.bundle */,
-			);
-			path = PointSDK;
-			sourceTree = "<group>";
-		};
 		838DD2DC194BF316003B5942 = {
 			isa = PBXGroup;
 			children = (
-				8363BEE51AC0DF0C005CC098 /* Dependencies */,
+				3CD3FB0A204E68610017FAD6 /* Launch Screen.storyboard */,
+				3CD3FB03204E547B0017FAD6 /* BDPointSDK.framework */,
 				838DD2EE194BF316003B5942 /* BDPoint */,
 				838DD2E7194BF316003B5942 /* Frameworks */,
 				838DD2E6194BF316003B5942 /* Products */,
@@ -190,6 +193,8 @@
 				838DD2E1194BF316003B5942 /* Sources */,
 				838DD2E2194BF316003B5942 /* Frameworks */,
 				838DD2E3194BF316003B5942 /* Resources */,
+				3CD3FB06204E547C0017FAD6 /* Embed Frameworks */,
+				3CD3FB07204E54A20017FAD6 /* Strip Symbols */,
 			);
 			buildRules = (
 			);
@@ -207,7 +212,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = BD;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Bluedot;
 				TargetAttributes = {
 					838DD2E4194BF316003B5942 = {
@@ -248,12 +253,29 @@
 			files = (
 				838DD2F3194BF316003B5942 /* InfoPlist.strings in Resources */,
 				838DD2FB194BF316003B5942 /* Images.xcassets in Resources */,
+				3CD3FB0B204E68610017FAD6 /* Launch Screen.storyboard in Resources */,
 				3E12658AB765C20C4A630F8E /* EXAuthenticationView.xib in Resources */,
-				9AE62F391D751248005BE1B8 /* BDDataModel.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3CD3FB07204E54A20017FAD6 /* Strip Symbols */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Strip Symbols";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#/bin/bash\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		838DD2E1194BF316003B5942 /* Sources */ = {
@@ -291,14 +313,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -325,16 +353,10 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"${PROJECT_DIR}/PointSDK/include/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/PointSDK",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"-lBDPointSDK-${PLATFORM_NAME}",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7";
@@ -349,14 +371,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -376,15 +404,9 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"${PROJECT_DIR}/PointSDK/include/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/PointSDK",
-				);
-				OTHER_LDFLAGS = (
-					"-lBDPointSDK-${PLATFORM_NAME}",
-					"-ObjC",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -395,19 +417,26 @@
 		838DD312194BF316003B5942 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 9H7C75E224;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BDPoint/BDPoint-Prefix.pch";
-				INFOPLIST_FILE = "BDPoint/BDPoint-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = (
+				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/PointSDK",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
+				INFOPLIST_FILE = "BDPoint/BDPoint-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "au.com.bluedot.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -419,19 +448,27 @@
 		838DD313194BF316003B5942 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 9H7C75E224;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BDPoint/BDPoint-Prefix.pch";
-				INFOPLIST_FILE = "BDPoint/BDPoint-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = (
+				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/PointSDK",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
+				INFOPLIST_FILE = "BDPoint/BDPoint-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "au.com.bluedot.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

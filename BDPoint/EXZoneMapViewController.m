@@ -5,15 +5,13 @@
 //  View Controller to display all the fences and user location in the map view.
 //
 
-#import <BDPointSDK.h>
+@import BDPointSDK;
 
 #import "EXZoneMapViewController.h"
 #import "EXNotificationStrings.h"
 
 //  Declare constants
 static float  mapInset = 10.0f;
-static float  minButtonHeight = 44.0f;
-
 
 /*
  *  Anonymous category for local properties.
@@ -41,6 +39,8 @@ static float  minButtonHeight = 44.0f;
     
     MKMapView  *_mapView;
     float  _windowHeight;
+    
+    UIButton *showLocationButton;
 }
 
 
@@ -126,7 +126,9 @@ static float  minButtonHeight = 44.0f;
     _mapView.delegate = self;
 
     self.view = _mapView;
-    [ self.view addSubview: [ self createShowLocationButton ] ];
+    showLocationButton = [ self createShowLocationButton ];
+    [ self.view addSubview: showLocationButton ];
+    [ self addButtonConstraints ];
 }
 
 
@@ -308,26 +310,15 @@ static float  minButtonHeight = 44.0f;
  */
 - (UIButton *)createShowLocationButton
 {
-    float  buttonHeight = ( _windowHeight / 10.0f );
     UIButton  *showLocationButton = [ UIButton buttonWithType: UIButtonTypeRoundedRect ];
     
-    
-    //  Ensure the minimum button height
-    if ( buttonHeight < minButtonHeight )
-    {
-        buttonHeight = minButtonHeight;
-    }
-    
-    //  Setup the button criteria
-    showLocationButton.frame = CGRectMake( mapInset, _windowHeight - buttonHeight - mapInset, self.view.frame.size.width - ( mapInset * 2.0f ), buttonHeight );
-
     showLocationButton.layer.cornerRadius = 6.0f;
     showLocationButton.layer.borderWidth = 1.5f;
     showLocationButton.layer.borderColor = [ [ UIColor colorWithRed:  66.0f / 255.0f
                                                               green: 155.0f / 255.0f
                                                                blue: 213.0f / 255.0f
                                                               alpha: 1.0f ] CGColor ];
-
+    
     showLocationButton.backgroundColor = [ UIColor colorWithRed: 66.0f / 255.0f
                                                           green: 155.0f / 255.0f
                                                            blue: 213.0f / 255.0f
@@ -335,11 +326,54 @@ static float  minButtonHeight = 44.0f;
     
     [ showLocationButton setTitle: @"Hold to show device location" forState: UIControlStateNormal ];
     [ showLocationButton setTitleColor: [ UIColor whiteColor ] forState: UIControlStateNormal ];
-
+    showLocationButton.titleLabel.font = [ UIFont systemFontOfSize:20];
+    
     [ showLocationButton addTarget: self action: @selector(showLocation) forControlEvents: UIControlEventTouchDown ];
     [ showLocationButton addTarget: self action: @selector(hideLocation) forControlEvents: UIControlEventTouchUpInside | UIControlEventTouchUpOutside | UIControlEventTouchCancel ];
     
     return showLocationButton;
+}
+
+//MARK:- add constraints to show location button to adapt to various device sizes
+- (void)addButtonConstraints
+{
+    showLocationButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    //bottom constraint
+    if (@available(iOS 11, *)) {
+        
+        UILayoutGuide * guide = self.view.safeAreaLayoutGuide;
+        [showLocationButton.bottomAnchor constraintEqualToAnchor:guide.bottomAnchor constant:-20.0].active = YES;
+        
+    } else if (@available(iOS 9,*)) {
+        
+        UILayoutGuide *margins = self.view.layoutMarginsGuide;
+        [showLocationButton.bottomAnchor constraintEqualToAnchor:margins.bottomAnchor constant:-20.0].active = YES;
+        
+    }
+    
+    //leading edge constraint
+    if (@available(iOS 9,*)) {
+        
+        UILayoutGuide *margins = self.view.layoutMarginsGuide;
+        [showLocationButton.leadingAnchor constraintEqualToAnchor:margins.leadingAnchor].active = YES;
+        
+    }
+    
+    //trailing edge constraint
+    if (@available(iOS 9,*)) {
+        
+        UILayoutGuide *margins = self.view.layoutMarginsGuide;
+        [showLocationButton.trailingAnchor constraintEqualToAnchor:margins.trailingAnchor].active = YES;
+        
+    }
+    
+    //height constraint
+    if (@available(iOS 9,*)) {
+        
+        [showLocationButton.heightAnchor constraintEqualToAnchor:self.mapView.heightAnchor
+                                                      multiplier:0.1].active = YES;
+    }
 }
 
 /*

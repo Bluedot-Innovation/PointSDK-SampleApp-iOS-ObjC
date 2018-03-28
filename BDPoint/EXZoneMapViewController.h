@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <BDPointSDK.h>
+@import BDPointSDK;
 
 
 @interface EXZoneMapViewController : UIViewController

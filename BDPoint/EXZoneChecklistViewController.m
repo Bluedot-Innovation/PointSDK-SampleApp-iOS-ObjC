@@ -5,7 +5,7 @@
 //  View Controller to list all the zones and spatial objects.
 //
 
-#import <BDPointSDK.h>
+@import BDPointSDK;
 
 #import "EXZoneChecklistViewController.h"
 #import "EXNotificationStrings.h"
@@ -17,7 +17,7 @@ static NSString  *fenceCellReuseIdentifier = @"BDFenceCellReuseIdentifier";
 
 static const float  rowHeight = 48.0f;
 static const float  buttonInset = 6.0f;
-static const float  buttonFontSize = 13.0f;
+static const float  buttonFontSize = 20.0f;
 static const float  switchWidth = 20.0f;
 
 

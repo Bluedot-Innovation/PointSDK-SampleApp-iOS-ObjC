@@ -5,9 +5,9 @@
 //  View Controller used to authenticate Point SDK with your username, package name and apiKey.
 //
 
-#import <BDPointSDK.h>
+@import BDPointSDK;
 
-#import "EXAuthenticationViewController.h"
+#import "ExAuthenticationViewController.h"
 #import "EXNotificationStrings.h"
 #import "BDStyles.h"
 

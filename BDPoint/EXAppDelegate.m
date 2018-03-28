@@ -5,15 +5,16 @@
 //  Application delegate for Bluedot Demo App Project in Objective-C
 //
 
-#import <BDPointSDK.h>
+@import BDPointSDK;
 
 #import "EXAppDelegate.h"
 
 #import "EXZoneMapViewController.h"
 #import "EXZoneChecklistViewController.h"
-#import "EXAuthenticationViewController.h"
+#import "ExAuthenticationViewController.h"
 #import "EXNotificationStrings.h"
 #import "UIWindow+BDVisible.h"
+#import <UserNotifications/UserNotifications.h>
 
 
 /*
@@ -52,9 +53,25 @@
      */
     locationManager.sessionDelegate = self;
     locationManager.locationDelegate = self;
-
+    
     [ self initializeUserInterface ];
-
+    
+    if (@available(iOS 10, *)) {
+        
+        //request authorization for notification
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        UNAuthorizationOptions options = UNAuthorizationOptionAlert + UNAuthorizationOptionSound;
+        
+        [center requestAuthorizationWithOptions:options
+                              completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                                  if (!granted) {
+                                      NSLog(@"notification error");
+                                  }
+                              }];
+        
+    }
+    
+    
     return YES;
 }
 
@@ -66,24 +83,24 @@
 {
     NSString  *parameterString = [ url query ];
     NSDictionary  *parameters = [ self parseURLParameters: parameterString ];
-
+    
     NSString  *username = parameters[ BDPointUsernameKey ];
     NSString  *apiKey = parameters[ BDPointAPIKeyKey ];
     NSString  *packageName = parameters[ BDPointPackageNameKey ];
-
+    
     BOOL isURLValid = ( username && apiKey && packageName );
-
+    
     if ( isURLValid == YES )
     {
         NSString  *endpointURLString = parameters[ BDPointEndpointKey ];
         NSURL  *customEndpointURL = [ [ NSURL alloc ] initWithString: endpointURLString ];
-
+        
         [ _authenticationViewController didReceiveRegistrationWithUsername: username
                                                                     apiKey: apiKey
                                                             andPackageName: packageName
                                                                     andURL: customEndpointURL ];
     }
-
+    
     return isURLValid;
 }
 
@@ -117,31 +134,31 @@
 {
     NSMutableDictionary  *parameterDictionary = [ NSMutableDictionary new ];
     NSScanner  *scanner = [ NSScanner scannerWithString: parameters ];
-
+    
     NSCharacterSet  *controlCharacters = [ NSCharacterSet characterSetWithCharactersInString: @"&=" ];
-
+    
     scanner.charactersToBeSkipped = controlCharacters;
-
+    
     NSString  *paramName;
     NSString  *paramValue;
-
+    
     while( [ scanner isAtEnd ] == NO )
     {
         if ( [ scanner scanUpToCharactersFromSet: controlCharacters intoString: &paramName ] == NO )
         {
             break;
         }
-
+        
         [ scanner setScanLocation: scanner.scanLocation + 1 ];
-
+        
         if ( [ scanner scanUpToCharactersFromSet: controlCharacters intoString: &paramValue ] == NO )
         {
             break;
         }
-
+        
         parameterDictionary[ paramName ] = [ paramValue urlDecode ];
     }
-
+    
     return [ NSDictionary dictionaryWithDictionary: parameterDictionary ];
 }
 
@@ -152,7 +169,7 @@
     //  Setup a generic date formatter
     _dateFormatter = [ NSDateFormatter new ];
     [ _dateFormatter setDateFormat: @"dd-MMM-yyyy HH:mm" ];
-
+    
     //  Create the tab bar controller
     _tabBarController = [ UITabBarController new ];
     _tabBarController.delegate = self;
@@ -161,24 +178,26 @@
     self.window = [ [ UIWindow alloc ] initWithFrame: UIScreen.mainScreen.bounds ];
     self.window.backgroundColor = UIColor.whiteColor;
     float  viewHeight = UIScreen.mainScreen.bounds.size.height - _tabBarController.tabBar.frame.size.height;
-
+    
     _authenticationViewController = [ EXAuthenticationViewController new ];
     _zoneMapViewController        = [ [ EXZoneMapViewController alloc ] initWithHeight: viewHeight ];
     _zoneChecklistViewController  = [ EXZoneChecklistViewController new ];
-
+    
     _authenticationViewController.tabBarItem.image = [ UIImage imageNamed: @"Authenticate" ];
     _zoneMapViewController.tabBarItem.image = [ UIImage imageNamed: @"Map" ];
     _zoneChecklistViewController.tabBarItem.image = [ UIImage imageNamed: @"Checklist" ];
-
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, nil] forState:UIControlStateNormal];
+    
     _viewControllersNotRequiringZoneInfo = @[ _authenticationViewController ];
     _viewControllersRequiringZoneInfo = @[ _zoneMapViewController, _zoneChecklistViewController ];
     [ _tabBarController setViewControllers: _viewControllersNotRequiringZoneInfo ];
-
+    
     [ self startObservingShowFencesOnMapNotifications ];
-
+    
     [ self.window setRootViewController: _tabBarController ];
     [ self.window addSubview: _tabBarController.view ];
-
+    
     [ self.window makeKeyAndVisible ];
 }
 
@@ -191,10 +210,10 @@
     void ( ^showZonesNotificationHandler )(NSNotification *) = ^( NSNotification *showFencesNotification )
     {
         NSAssert( BDLocationManager.instance.authenticationState == BDAuthenticationStateAuthenticated, NSInternalInconsistencyException );
-
+        
         [ _tabBarController setSelectedViewController: _zoneMapViewController ];
     };
-
+    
     [ NSNotificationCenter.defaultCenter addObserverForName: EXShowFencesOnMapNotification
                                                      object: nil
                                                       queue: NSOperationQueue.mainQueue
@@ -222,7 +241,7 @@
 - (void)authenticationWasDeniedWithReason: (NSString *)reason
 {
     NSLog( @"Authentication with Point service denied, with reason: %@", reason );
-
+    
     UIAlertController *alertController = [ UIAlertController alertControllerWithTitle: @"Authentication Denied"
                                                                               message: reason
                                                                        preferredStyle: UIAlertControllerStyleAlert ];
@@ -238,10 +257,10 @@
 - (void)authenticationFailedWithError: (NSError *)error
 {
     NSLog( @"Authentication with Point service failed, with reason: %@", error.localizedDescription );
-
+    
     NSString  *title;
     NSString  *message;
-
+    
     //  BDResponseError will be more conveniently exposed in the next version
     BOOL isConnectionError = ( error.userInfo[ EXResponseError ] == NSURLErrorDomain );
     
@@ -249,14 +268,14 @@
     {
         title = @"No data connection?";
         message = @"Sorry, but there was a problem connecting to Bluedot servers.\n"
-                  "Please check you have a data connection, and that flight mode is disabled, and try again.";
+        "Please check you have a data connection, and that flight mode is disabled, and try again.";
     }
     else
     {
         title = @"Authentication Failed";
         message = error.localizedDescription;
     }
-
+    
     UIAlertController *alertController = [ UIAlertController alertControllerWithTitle: title
                                                                               message: message
                                                                        preferredStyle: UIAlertControllerStyleAlert ];
@@ -272,14 +291,14 @@
 - (void)didEndSession
 {
     NSLog( @"Logged out" );
-
+    
     [ self onDidEndSession ];
 }
 
 - (void)didEndSessionWithError: (NSError *)error
 {
     NSLog( @"Logged out with error: %@", error.localizedDescription );
-
+    
     [ self onDidEndSession ];
 }
 
@@ -295,9 +314,9 @@
 - (void)didUpdateZoneInfo: (NSSet *)zones
 {
     NSLog( @"Point service updated with %lu zones", (unsigned long)zones.count );
-
+    
     NSArray  *viewControllers;
-
+    
     if ( zones && zones.count > 0 )
     {
         viewControllers = [ _viewControllersNotRequiringZoneInfo arrayByAddingObjectsFromArray: _viewControllersRequiringZoneInfo ];
@@ -318,7 +337,14 @@
                 UIAlertAction *OK = [ UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleCancel handler:nil ];
                 UIAlertAction *goToPointAccess = [ UIAlertAction actionWithTitle: @"Go to Point Access" style: UIAlertActionStyleDefault handler: ^(UIAlertAction *action) {
                     NSURL *pointAccessURL = [ NSURL URLWithString: @"https://www.pointaccess.bluedot.com.au/pointaccess-v1/" ];
-                    [ [ UIApplication sharedApplication ] openURL: pointAccessURL ];
+                    
+                    if (@available(iOS 10, *)) {
+                        
+                        UIApplication *application = [UIApplication sharedApplication];
+                        [application openURL:pointAccessURL options:@{} completionHandler:nil];
+                        
+                    }
+                    
                 } ];
                 
                 [ _userInterventionForZoneDialog addAction: OK ];
@@ -328,11 +354,11 @@
             [ _window.visibleViewController presentViewController: _userInterventionForZoneDialog animated: YES completion: nil ];
         }
     }
-
+    
     //  Enable the view controllers when zone information has been received
     [ _tabBarController setViewControllers: viewControllers
                                   animated: YES ];
-
+    
     //  Assign the zone information to the Checklist and Map for display
     _zoneChecklistViewController.zones = zones;
     _zoneMapViewController.zones       = zones;
@@ -351,10 +377,10 @@
                          fence.name, zoneInfo.name, [ _dateFormatter stringFromDate: location.timestamp ] ];
     
     [ self presentNotificationWithMessage: message ];
-
+    
     //  Update the status of a fence in the Map
     [ _zoneMapViewController didCheckIntoFence: fence ];
-
+    
     //  Update the status of a fence in the Checklist
     [ _zoneChecklistViewController didCheckIntoFence: fence
                                               inZone: zoneInfo ];
@@ -386,7 +412,7 @@
             withCustomData: (NSDictionary *)customData
 {
     NSString *proximityString;
-
+    
     switch(proximity)
     {
         default:
@@ -395,15 +421,15 @@
         case CLProximityNear:      proximityString = @"Near";      break;
         case CLProximityFar:       proximityString = @"Far";       break;
     }
-
+    
     NSString *message = [ NSString stringWithFormat: @"You have checked into beacon '%@' in zone '%@' with proximity %@ at %@",
                          beacon.name, zoneInfo.name, proximityString, [ _dateFormatter stringFromDate: location.timestamp ] ];
-
+    
     [ self presentNotificationWithMessage: message ];
-
+    
     //  Update the state of a beacon on the Map
     [ _zoneMapViewController didCheckIntoBeacon: beacon ];
-
+    
     //  Update the state of a beacon on the Checklist
     [ _zoneChecklistViewController didCheckIntoBeacon: beacon
                                                inZone: zoneInfo ];
@@ -420,7 +446,7 @@
                withCustomData: (NSDictionary *)customData
 {
     NSString *message = [ NSString stringWithFormat: @"You left beacon '%@' in zone '%@', after %lu minutes",
-                                                     beacon.name, zoneInfo.name, (unsigned long)checkedInDuration ];
+                         beacon.name, zoneInfo.name, (unsigned long)checkedInDuration ];
     
     [ self presentNotificationWithMessage: message ];
 }
@@ -462,7 +488,7 @@
  */
 - (void)didStartRequiringUserInterventionForLocationServicesAuthorizationStatus:(CLAuthorizationStatus)authorizationStatus
 {
-
+    
     if(authorizationStatus == kCLAuthorizationStatusDenied)
     {
         if ( _userInterventionForLocationServicesNeverDialog == nil )
@@ -470,13 +496,13 @@
             NSString  *appName = [ NSBundle.mainBundle objectForInfoDictionaryKey: @"CFBundleDisplayName" ];
             NSString  *title = @"Location Services Required";
             NSString  *message = [ NSString stringWithFormat: @"This App requires Location Services which are currently set to disabled.  To restore Location Services, go to :\nSettings → Privacy →\nLocation Settings →\n%@ ✓", appName ];
-
+            
             _userInterventionForLocationServicesNeverDialog = [ UIAlertController alertControllerWithTitle: title
-                                                                                              message: message
-                                                                                       preferredStyle: UIAlertControllerStyleAlert ];
-
+                                                                                                   message: message
+                                                                                            preferredStyle: UIAlertControllerStyleAlert ];
+            
         }
-
+        
         UIViewController *currentPresentedViewController = _window.rootViewController.presentedViewController;
         if([currentPresentedViewController isKindOfClass:[UIAlertController class]])
         {
@@ -490,20 +516,20 @@
         }
     }
     else if(authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
-
-
+        
+        
         if (_userInterventionForLocationServicesWhileInUseDialog == nil) {
             NSString *title = @"Location Services set to 'While in Use'";
             NSString *message = [NSString stringWithFormat:@"You can ask for further location permission from user via this delegate method"];
-
+            
             _userInterventionForLocationServicesWhileInUseDialog = [UIAlertController alertControllerWithTitle:title
                                                                                                        message:message
                                                                                                 preferredStyle:UIAlertControllerStyleAlert];
-
+            
             UIAlertAction *dismiss = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil];
             [_userInterventionForLocationServicesWhileInUseDialog addAction:dismiss];
         }
-
+        
         UIViewController *currentPresentedViewController = _window.rootViewController.presentedViewController;
         if([currentPresentedViewController isKindOfClass:[UIAlertController class]])
         {
@@ -543,12 +569,12 @@
     {
         NSString  *title = @"Low Power Mode";
         NSString  *message = [ NSString stringWithFormat: @"Low Power Mode has been enabled on this device.  To restore full location precision, disable the setting at :\nSettings → Battery → Low Power Mode" ];
-
+        
         _userInterventionForPowerModeDialog = [ UIAlertController alertControllerWithTitle: title
                                                                                    message: message
                                                                             preferredStyle: UIAlertControllerStyleAlert ];
     }
-
+    
     [ _window.visibleViewController presentViewController: _userInterventionForPowerModeDialog animated: YES completion: nil ];
 }
 
@@ -589,10 +615,27 @@
             // If not in the foreground: deliver a local notification
         default:
         {
-            UILocalNotification *notification = [ UILocalNotification new ];
-            notification.alertBody = message;
             
-            [ UIApplication.sharedApplication presentLocalNotificationNow: notification ];
+            if (@available(iOS 10, *)) {
+                
+                UNMutableNotificationContent *content = [UNMutableNotificationContent new];
+                content.title = @"BDPoint Notification";
+                content.body = message;
+                content.sound = [UNNotificationSound defaultSound];
+                
+                NSString *identifier = @"BDPointNotification";
+                UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:identifier content:content trigger:nil];
+                
+                UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+                
+                [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+                    if (error != nil) {
+                        NSLog(@"Notification error: %@",error);
+                    }
+                }];
+                
+            }
+            
         }
             break;
     }
@@ -613,13 +656,13 @@
 - (BOOL)tabBarController: (UITabBarController *)tabBarController shouldSelectViewController: (UIViewController *)viewController
 {
     BOOL isDoubleTapOnMap = ( viewController == _zoneMapViewController ) && ( viewController == tabBarController.selectedViewController );
-
+    
     
     if ( isDoubleTapOnMap == YES )
     {
         [ _zoneMapViewController zoomToFitZones ];
     }
-
+    
     return YES;
 }
 
