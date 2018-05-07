@@ -1,6 +1,2 @@
-To use this sample project, you first need to obtain the Point SDK
-dynamic framework.
+Note: This sample app is deprecated and no longer maintained. Please refer to the new minimal integration app at https://github.com/Bluedot-Innovation/PointSDK-MinimalIntegrationExample-iOS.
 
-Request for an trail account on Point Access by visiting the Bluedot website. (https://bluedotinnovation.com/demo).
-
-Please refer to the documentation at docs.bluedotinnovation.com
